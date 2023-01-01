@@ -2,40 +2,12 @@
 <html lang="" xml:lang="">
 
 <head>
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Feature Engineering & Selection for Explainable Models</title>
-  <meta name="description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Feature Engineering & Selection for Explainable Models" />
-  <meta property="og:type" content="book" />
-
-  <meta property="og:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Feature Engineering & Selection for Explainable Models" />
-
-  <meta name="twitter:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="author" content="Christoph Molnar" />
-
-
-  <meta name="date" content="2022-12-14" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-
-
-  <link rel="next" href="preface-by-the-author.html" />
+  <title>Chapter 1.5 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+  </title>
+  <link rel="prev" href="index.html" />
+  <link rel="next" href="intro.html" />
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -139,10 +111,19 @@
       }
     }
   </style>
+
+
+
+
+
+
   <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
+
+
+
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
     <div class="book-summary">
       <nav role="navigation">
@@ -381,28 +362,204 @@
 
       </nav>
     </div>
-
-    <div class="book-body">
+        <div class="book-body">
       <div class="body-inner">
+
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
-            <div id="header">
-              <h1 class="title">Feature Engineering & Selection for Explainable Models</h1>
-              <p>&nbsp;</p>
-              <h2 class="subtitle"><em>A Second Course for Data Scientists</em></h2>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p class="author"><em>Md Azimul Haque</em></p>
-            </div>
+
+            <section class="normal" id="section-">
+              <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
+                <h1 style="font-size: 1.78em;"><span class="header-section-number">Chapter 1.5:</span> Datasets
+                  Used
+                </h1>
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>We will use 4 separate datasets
+                    throughout this book for regression and classification problems. We will
+                    benchmark model performance and compare the performance of different
+                    techniques. These datasets are explained in the first four datasets from
+                    sections 1.5.1 to 1.5.3. We will also use 2 datasets for signal processing in
+                    chapter 11. These datasets are explained in sections 1.5.4 and 1.5.5.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%'><a name="_heading=h.44sinio"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext'>1.5.1<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Hotel Booking
+                      Demand Datasets<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>This dataset<sup> [2]</sup> has
+                    demand data for 2 hotels. Hotel H1 is a resort hotel that attracts customers
+                    who will like to stay at the hotel for recreation purposes. Hotel H2 is a city
+                    hotel, that people visit for business purposes.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>We will use data from hotel H1 for
+                    developing classification models to predict the likelihood of cancellation for
+                    reservations. The objective of the classification model is to minimize losses
+                    from cancellations and increase profitability. Many customers cancel their
+                    reservations. This could mean a loss of revenue. If we know in advance which
+                    reservation is going to be canceled, we can try to resell the room, even though
+                    it is not canceled at the moment. However, it can lead to a situation when both
+                    guests arrive at the hotel and demand the room they have reserved. To avoid
+                    this situation, our modeling objective is to build a model which can predict
+                    cancellation with a high degree of accuracy. In other words, 'precision' will
+                    be our cost function. As a result, we might have a model which has a low
+                    recall, but high precision. We are fine with such a model, as long as it can
+                    predict cancellations with a low margin of error. Imagine a hypothetical model
+                    that has 95 precision and 30 recall. It simply means, for all predictions it
+                    makes for cancellations, 95 times out of 100 could actually be a cancellation.
+                    Although the precision is not the ideal 100, 95 precision is a good score for a
+                    statistician. A low recall of 30 means, out of all cancellations that happened,
+                    the model could only identify 30 percent of such cancellations. For a
+                    statistician or machine learning engineer, recall value of 30 is a less than
+                    ideal situation. However, for business owners, this is an acceptable situation.
+                    For a hotel revenue manager, recall value of 30 means that the hotel will be
+                    able to reduce their cancellation losses by 30 percent. This is still better
+                    than a situation where the hotel cannot save anything without the model. If not
+                    all, in many cases businesses desire a workable model. A perfect model which
+                    meets all criteria of theoretical statistics and theoretical machine learning
+                    is not always desired by real world businesses.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Data for hotel H2 will be used for
+                    developing a regression model to predict the total occupancy for rooms for
+                    future check-in dates. This dataset was not in the format where it could have
+                    been used for the regression model. The author has used his domain knowledge in
+                    the hotel industry to perform preprocessing and data cleaning to bring it into
+                    a usable format. Hotels have different types of customers. Two major groups are
+                    'transient' and 'group'. Transient customers often seek short hotel stays, such
+                    as people who travel to different cities for business purposes, or other
+                    customers who want short-term stays. We will like to develop a model to predict
+                    total transient bookings at the check-in date level, at each booking window
+                    between 0 to 100 days before the date of check-in for the city hotel H2.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Booking day is the day when
+                    customers book the room for the check-in date in advance. For example, if you
+                    want to visit Hawaii on Christmas of 2022 and you are reserving the room on the
+                    1st of October, 2022, then October 1st, 2022 will be the booking date and
+                    December 25th, 2022, the day of Christmas will be the check-in date. The number
+                    of days between these two dates is called lead time.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Sometimes customers book rooms, but
+                    they do not show up. We will remove these customers from our modeling problem,
+                    as these are very negligible. ADR is the average daily rate, for any check-in
+                    date it represents total revenue from bookings divided by total rooms sold. We
+                    will remove records for ADR which seem outliers, as we cannot get any
+                    explanation from the original authors about the nature of outliers.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>We will use ADR between the bottom
+                    5th percentile and the top 99.99 percentile. There were transactions for which
+                    no value was specified for the number of adults and children as guests. These
+                    will also be removed.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Some customers buy rooms for
+                    continuous stay. If a customer is reserving on the 1st of January for staying
+                    at the H2 hotel on the 7th and 8th of January, the lead time for the 7th of
+                    January will be 6 days and for the 8th of January will be 7 days.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>We assume that one room can
+                    accommodate 2 adults and 2 kids in a hotel. If a transaction has 2 adults and 2
+                    kids, it will be considered as 1 room. If a transaction has 1 adult and 2 kids,
+                    2 adults, and 1 kid, or 1 adult and 1 kid, it will be considered as 1 room.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>If there are more than 2 adults, the
+                    number of rooms will be calculated as the number of adults divided by 2. If the
+                    result is a decimal, it will be rounded to a higher number. For example, if
+                    there are 3 adults, 3 divided by 2 is 1.5. We will round 1.5 to a higher
+                    ceiling of 2. Hence concluding that 3 adults can stay in 2 rooms. Similarly,
+                    children are also considered for calculating the number of rooms.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%'><a name="_heading=h.2jxsxqh"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext'>1.5.2<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Car Sales</span></b><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman"'>
+                      <o:p></o:p>
+                    </span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>This is sourced from Kaggle<sup> [3]</sup>
+                    and has information about the attributes of used cars and its price in India.
+                    It will be used for developing regression models. We will use the 'Car details
+                    v3.csv' file from version 3 of the dataset. The original file has details of
+                    8128 cars. We have removed certain records which had inadequate data or missing
+                    data. These are mileage features for values of 0.0kmpl or left blank. Engine,
+                    torque, or seats are left blank. max_power as 0, 'bhp' or blank. km_driven as
+                    1. After removing these observations, 7905 observations remain. Mileage,
+                    engine, and max_power were converted to numeric features after removing string
+                    suffixes.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%'><a name="_heading=h.z337ya"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext'>1.5.3<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Coupon
+                      Recommendation</span></b><b><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                      <o:p></o:p>
+                    </span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>In-vehicle coupon recommendation
+                    Data Set <sup>[4]</sup> studies the behavior of individuals and whether they
+                    will accept or not accept coupons. This dataset was generated through a survey.
+                    This survey describes different driving scenarios and asks the person if they
+                    will accept the coupon.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%'><a name="_heading=h.3j2qqm3"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext'>1.5.4<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Raman
+                      Spectroscopy of Skimmed Milk Samples</span></b><b><span lang=EN
+                      style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman"'>
+                      <o:p></o:p>
+                    </span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>This dataset <sup>[5]</sup> has a
+                    Matrix of quantitative whole spectrum analysis of 45 spectra on 21451 on
+                    skimmed milk samples. We will use this for discussing Raman spectra in chapter
+                    11.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%'><a name="_heading=h.1y810tw"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext'>1.5.5<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Beaver Body
+                      Temperatures</span></b><b><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                      <o:p></o:p>
+                    </span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><a name="_heading=h.4i7ojhp"></a><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman"'>This dataset has body temperature of 2 beavers <sup>[6]</sup>,
+                    measured every 10 minutes by telemetry. This has data for less than a day for
+                    each of the two beavers. We will discuss this in chapter 11 for filtering
+                    method. <o:p></o:p></span></p>
+              </div>
             </section>
 
           </div>
         </div>
       </div>
-
-      <a href="preface-by-the-author.html" class="navigation navigation-next navigation-unique"
-        aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+      <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
     </div>
   </div>
   <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

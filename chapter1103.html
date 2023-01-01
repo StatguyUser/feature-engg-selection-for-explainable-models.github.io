@@ -2,40 +2,12 @@
 <html lang="" xml:lang="">
 
 <head>
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Feature Engineering & Selection for Explainable Models</title>
-  <meta name="description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Feature Engineering & Selection for Explainable Models" />
-  <meta property="og:type" content="book" />
-
-  <meta property="og:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Feature Engineering & Selection for Explainable Models" />
-
-  <meta name="twitter:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="author" content="Christoph Molnar" />
-
-
-  <meta name="date" content="2022-12-14" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-
-
-  <link rel="next" href="preface-by-the-author.html" />
+  <title>Chapter 11.3 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+  </title>
+  <link rel="prev" href="index.html" />
+  <link rel="next" href="intro.html" />
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -139,11 +111,21 @@
       }
     }
   </style>
+
+
+
+
+
+
   <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
+
+
+
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
     <div class="book-summary">
       <nav role="navigation">
 
@@ -381,28 +363,81 @@
 
       </nav>
     </div>
-
     <div class="book-body">
       <div class="body-inner">
+
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
-            <div id="header">
-              <h1 class="title">Feature Engineering & Selection for Explainable Models</h1>
-              <p>&nbsp;</p>
-              <h2 class="subtitle"><em>A Second Course for Data Scientists</em></h2>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p class="author"><em>Md Azimul Haque</em></p>
-            </div>
+
+            <section class="normal" id="section-">
+              <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
+                <h1><span class="header-section-number">Chapter 11.3:</span> Ensemble Learning</h1>
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>For the case of room booking
+                    prediction for hotels, let's imagine that linear regression predicts with a
+                    high degree of accuracy for December month and random forest for the first 6
+                    months of the year. Xgboost on the other hand outperforms for the remaining
+                    months of the year.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>If we can leverage the individual
+                    strength of different models, we can come up with a highly accurate model for
+                    predicting hotel booking. Ensemble learning helps us perform just that by
+                    leveraging the strength of different models to provide a highly reliable
+                    prediction.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>The simplest form of ensembling is
+                    called averaging, wherein we take the prediction from multiple models and take
+                    a mathematical average of prediction from all the models to arrive at the final
+                    prediction. If some modeling technique performs better than others, we can give
+                    weights to each model, which signifies the degree to which the model is
+                    accurate. This will allow us to perform weighted average ensembling. Ensembling
+                    by conditional averaging is another approach in which we take a simple average
+                    from 2 models based on some conditions laid upon output values. For example, if
+                    there are 2 models and model 1 predicts accurately values under 50 and model 2
+                    predicts values above 50. We can simply add an if-else condition for prediction
+                    on model 1.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Bagging is a useful form of
+                    ensembling for high-variance techniques. The high variance techniques are prone
+                    to overfitting, such as decision trees. We can create multiple models of the
+                    same techniques, simply by changing random seed, parameter tuning, changing the
+                    number of features and records in the dataset, etc. This can be impactful if we
+                    have a larger number of models. We can also use <span class=SpellE><span
+                        style='color:white;background:#333333'>BaggingClassifier</span></span> and <span
+                      class=SpellE><span style='color:white;background:#333333'>BaggingRegressor</span></span>
+                    in <span style='color:white;background:#333333'>Sklearn</span> to do the same
+                    task. In contrast, for boosting-based ensemble learning, newer models are added
+                    sequentially depending on how well the previous model performed. We can also
+                    give weight for performing boosting.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Another form of ensemble learning is
+                    called stacking. For stacking, training data is divided into two parts. One
+                    part is used for training models using a different diverse set of techniques.
+                    These individual models then predict values for the second part of the dataset.
+                    For the second part of the dataset, predictions obtained from individual models
+                    are used as features. By using the dependent variable in the second part of the
+                    training dataset, a final ensemble model is trained. For stacking to be
+                    successful, we should try a different diverse set of techniques, such as
+                    linear, non-linear, etc.<o:p></o:p></span></p>
+              </div>
             </section>
 
           </div>
         </div>
       </div>
-
-      <a href="preface-by-the-author.html" class="navigation navigation-next navigation-unique"
-        aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+      <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
     </div>
   </div>
   <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

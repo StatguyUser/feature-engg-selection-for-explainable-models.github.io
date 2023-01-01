@@ -2,40 +2,12 @@
 <html lang="" xml:lang="">
 
 <head>
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Feature Engineering & Selection for Explainable Models</title>
-  <meta name="description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Feature Engineering & Selection for Explainable Models" />
-  <meta property="og:type" content="book" />
-
-  <meta property="og:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Feature Engineering & Selection for Explainable Models" />
-
-  <meta name="twitter:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="author" content="Christoph Molnar" />
-
-
-  <meta name="date" content="2022-12-14" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-
-
-  <link rel="next" href="preface-by-the-author.html" />
+  <title>Chapter 7.1 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+  </title>
+  <link rel="prev" href="index.html" />
+  <link rel="next" href="intro.html" />
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -139,10 +111,19 @@
       }
     }
   </style>
+
+
+
+
+
+
   <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
+
+
+
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
     <div class="book-summary">
       <nav role="navigation">
@@ -381,28 +362,76 @@
 
       </nav>
     </div>
-
     <div class="book-body">
       <div class="body-inner">
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
-            <div id="header">
-              <h1 class="title">Feature Engineering & Selection for Explainable Models</h1>
-              <p>&nbsp;</p>
-              <h2 class="subtitle"><em>A Second Course for Data Scientists</em></h2>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p class="author"><em>Md Azimul Haque</em></p>
-            </div>
+
+            <section class="normal" id="section-">
+              <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
+                <h1><span class="header-section-number">Chapter 7.1:</span> Lasso,
+                  Ridge, and ElasticNet</h1>
+                  <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Least absolute shrinkage and
+                  selection operator (Lasso), Ridge, and ElasticNet are regularization techniques
+                  that prevent overfitting. Overfitting happens when the model performs poorly on
+                  unseen data in comparison to train/test data used during training. To fix this,
+                  a regularization parameter can be introduced in the model to suppress the bias
+                  in learned coefficients. It does so by reducing the size of the coefficients.
+                  Lasso, and Ridge, also known as L1 and L2 are two different regularization
+                  methods to regularize the linear model. These techniques can also be used for
+                  feature selection.<o:p></o:p></span></p>
+                  
+                  <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Let's discuss Lasso. Imagine there
+                  are 2 independent variables x1 and x2 with weights 11.1 and 10.5 respectively.
+                  Lasso will suppress the coefficient of either of the one variable to 0. So new
+                  weights might look like 11.1 or some different value for x1, and 0 for x2. Vice
+                  versa can also be true. As coefficients for some features become 0 in Lasso, it
+                  automatically means these variables are of no use for the outcome variable.
+                  Hence as a byproduct of L1 regularization, we can do feature selection to
+                  remove some features from the model and make it more robust, less complex, and
+                  computationally faster.<o:p></o:p></span></p>
+                  
+                  <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>There are a few limitations of the
+                  Lasso model. Firstly, Lasso is more appropriate when we have a handful
+                  variables. If we have a large number of features, for example, a huge number of
+                  dummy variables, it will randomly select one out of the many features. As a
+                  result, features that have very little bearing, based on business understanding
+                  can get selected. At the same time, variables that have a relatively higher
+                  impact might get rejected. It will select a useful set of features, not
+                  necessarily the most important features. Secondly, when features are collinear,
+                  it's not the best choice to use Lasso feature selection on collinear variables.
+                  However, if we standardize the features and perform feature extraction methods
+                  such as PCA on standardized features, we can perform Lasso feature selection on
+                  PCA components. The third limitation is that Lasso doesn't have any means of
+                  suggesting which feature is statistically significant. To know which variables
+                  are significant, we might have to feed the variables selected by Lasso and into
+                  a linear regression model.<o:p></o:p></span></p>
+                  
+                  <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Ridge regression shrinks
+                  coefficients towards zero but doesn't make the coefficients zero. New weights
+                  will reduce in magnitude and can become negligible but not zero. For structured
+                  data with sparse features, e.g. hundreds of thousands of dummy variables, ridge
+                  or ElasticNet with ridge weight can be used for feature selection. Although it
+                  will practically not 'remove' features, it will give higher weights for many
+                  useful features.<o:p></o:p></span></p>
+              </div>
             </section>
 
           </div>
         </div>
       </div>
-
-      <a href="preface-by-the-author.html" class="navigation navigation-next navigation-unique"
-        aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+      <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
     </div>
   </div>
   <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

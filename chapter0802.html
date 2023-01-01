@@ -2,40 +2,12 @@
 <html lang="" xml:lang="">
 
 <head>
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Feature Engineering & Selection for Explainable Models</title>
-  <meta name="description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Feature Engineering & Selection for Explainable Models" />
-  <meta property="og:type" content="book" />
-
-  <meta property="og:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Feature Engineering & Selection for Explainable Models" />
-
-  <meta name="twitter:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="author" content="Christoph Molnar" />
-
-
-  <meta name="date" content="2022-12-14" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-
-
-  <link rel="next" href="preface-by-the-author.html" />
+  <title>Chapter 8.2 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+  </title>
+  <link rel="prev" href="index.html" />
+  <link rel="next" href="intro.html" />
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -139,10 +111,19 @@
       }
     }
   </style>
+
+
+
+
+
+
   <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
+
+
+
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
     <div class="book-summary">
       <nav role="navigation">
@@ -384,25 +365,281 @@
 
     <div class="book-body">
       <div class="body-inner">
+
+
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
-            <div id="header">
-              <h1 class="title">Feature Engineering & Selection for Explainable Models</h1>
-              <p>&nbsp;</p>
-              <h2 class="subtitle"><em>A Second Course for Data Scientists</em></h2>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p class="author"><em>Md Azimul Haque</em></p>
-            </div>
+
+            <section class="normal" id="section-">
+              <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
+                <h1><span class="header-section-number">Chapter 8.2:</span> Genetic Algorithm</h1>
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:black;mso-color-alt:windowtext'>The genetic algorithm technique is an optimization
+                    technique. It is a population-based metaheuristics search algorithm, inspired
+                    by the natural phenomenon of evolution. Parents produce offspring, who inherit
+                    the strengths and abilities of both parents in the form of genes. This happens
+                    through a process called crossover. In the genetic algorithm, the crossover is
+                    carried out at one or more random cut-off points and the gene is swapped from
+                    both parents based on crossover probability. Figure 8.2.1 below illustrates the
+                    process of crossover. The cut-off point for the genes is kept in the 4th column
+                    for the parents and highlighted in red. Genes are swapped at the cut-off points
+                    and child 1 and child 2 have the swapped genes. Genes from the beginning until
+                    the cut-off point are the same as parents. From the 5th point onwards, genes
+                    are obtained from the other parents.</span><span lang=EN style='font-family:
+"Times New Roman",serif;mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:black;mso-color-alt:windowtext;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image47.png" o:spid="_x0000_i1077" type="#_x0000_t75" style='width:420.5pt;
+ height:140pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image083.png"
+  o:title="" cropleft="2730f"/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=561 height=187 src="images/image084.gif" v:shapes="image47.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:black;mso-color-alt:windowtext'>Figure 8.2.1: Crossover in genetic
+                    algorithm</span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:black;mso-color-alt:windowtext'>There is also a likelihood of genetic
+                    mutation when a gene is passed from parents to offspring. In the case of the
+                    genetic algorithm, a mutation is introduced in the form of new patterns to
+                    randomly refresh the population. This encourages the search for unexplored
+                    feature combinations. A small probability (1%�2%) is selected for each possible
+                    feature as mutation probability. A random number is generated. If the random
+                    number is less than the mutation probability, then the feature is mutated and
+                    its status is changed. If it was originally supposed to be included, it is
+                    excluded and vice versa. Figure 8.2.2 explains the mutation process in the
+                    genetic algorithm.</span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:black;mso-color-alt:windowtext'>Cells highlighted in red were mutated and
+                    values were changed. If the original value was 1, it was changed to 0, and vice
+                    versa.</span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:black;mso-color-alt:windowtext;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image73.png" o:spid="_x0000_i1076" type="#_x0000_t75" style='width:494pt;
+ height:163.5pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image085.png"
+  o:title=""/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=659 height=218 src="images/image086.gif" v:shapes="image73.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:black;mso-color-alt:windowtext'>Figure 8.2.2: Mutation in genetic
+                    algorithm</span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>An initial set of solutions are
+                    created, called population. Each solution in the population is called a
+                    �chromosome�. Each chromosome has a length equal to the total number of
+                    features. Individual features are represented as binary 0/1. 0 stands for a
+                    specific feature being removed from feature space and 1 stand for the feature
+                    being included. As explained previously, through the process of crossover, a
+                    list of the best chromosomes is selected and passed through mutation. This
+                    process is repeated several times, based on how many generations are defined by
+                    the user. Imagine there are 10 features x1 to x10 and we want to try 7
+                    solutions at a time. i.e., a population of 7. Figure 8.2.3 illustrates what the
+                    initial solution will look like for 10 features and a population of 7. Each row
+                    will be a chromosome and all chromosomes combined will be called population.
+                    Figure 8.2.4 illustrates the genetic algorithm flowchart.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image46.png" o:spid="_x0000_i1075" type="#_x0000_t75" style='width:466.5pt;
+ height:371pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image087.png"
+  o:title=""/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=622 height=495 src="images/image088.gif" v:shapes="image46.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Figure 8.2.3: Solution matrix for 10
+                    features and population of 7<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p>&nbsp;</o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p>&nbsp;</o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p>&nbsp;</o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p>&nbsp;</o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image45.png" o:spid="_x0000_i1074" type="#_x0000_t75" style='width:470pt;
+ height:255.5pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image089.png"
+  o:title="" cropleft="1680f"/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=627 height=341 src="images/image090.jpg" v:shapes="image45.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";color:#222222;background:white;
+mso-highlight:white'>Fig 8.2.4: Genetic algorithm flowchart<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><b style='mso-bidi-font-weight:normal'><i
+                      style='mso-bidi-font-style:normal'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>M</span></i></b><span lang=EN
+                    style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman"'>:
+                    Number of generations<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><b style='mso-bidi-font-weight:normal'><i
+                      style='mso-bidi-font-style:normal'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>N</span></i></b><span lang=EN
+                    style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman"'>:
+                    Population size<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><b style='mso-bidi-font-weight:normal'><i
+                      style='mso-bidi-font-style:normal'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>p<sub>c</sub></span></i></b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman"'>: Probability of crossover<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><b style='mso-bidi-font-weight:normal'><i
+                      style='mso-bidi-font-style:normal'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>p<sub>m</sub></span></i></b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman"'>: Probability of mutation<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><b style='mso-bidi-font-weight:normal'><i
+                      style='mso-bidi-font-style:normal'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>k</span></i></b><span lang=EN
+                    style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman"'>:
+                    Number of contestants<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Number of generations, population
+                    size, crossover, and mutation probability are some of the hyperparameters of
+                    genetic algorithm.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>This method tries to find the best
+                    possible feature combination by searching in a computationally efficient
+                    manner. This also means it does not search for all possible combinations. As a
+                    result, the best-performing features obtained from the genetic algorithm might
+                    not be the best combination of features. If the number of features are small,
+                    the genetic algorithm can be a really useful method. However, for high
+                    dimensional data in which the number of features is numerous, the genetic
+                    algorithm might not be computationally efficient, and the resultant features
+                    obtained from the genetic algorithm might not be useful either.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>We have earlier initialized a
+                    feature selection object in this chapter as <span class=SpellE><span
+                        style='color:white;background:#333333'>fsObj</span></span><span
+                      style='color:white;background:#333333'> = FeatureSelection</span>. We can use
+                    the object </span><span class=SpellE><span lang=EN style='font-family:Consolas;
+mso-fareast-font-family:Consolas;mso-bidi-font-family:Consolas;color:white;
+background:#333333'>fsObj</span></span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'> for performing the genetic
+                    algorithm by using the </span><span class=SpellE><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;mso-bidi-font-family:
+Consolas;color:white;background:#333333'>GeneticAlgorithm</span></span><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman"'> function in the object </span><span class=SpellE><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'>fsObj</span></span><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman"'>. Below is how the syntax will look like.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span class=SpellE><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;mso-bidi-font-family:
+Consolas;color:white;background:#333333'>best_columns</span></span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'> = <span
+                      class=SpellE>fsObj.GeneticAlgorithm</span>(generations=</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;mso-bidi-font-family:
+Consolas;color:#D36363;background:#333333'>20</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;mso-bidi-font-family:
+Consolas;color:white;background:#333333'>, population=</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;mso-bidi-font-family:
+Consolas;color:#D36363;background:#333333'>75</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;mso-bidi-font-family:
+Consolas;color:white;background:#333333'>, <span class=SpellE>run_time</span>=</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#D36363;background:#333333'>1200</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'>)</span><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>In this syntax example, we have used
+                    20 generations and 75 population for the genetic algorithm. We will execute
+                    genetic algorithm feature selection for 1200 minutes, i.e., 20 hours and will
+                    stop the execution after that.<o:p></o:p></span></p>
+              </div>
             </section>
 
           </div>
         </div>
       </div>
-
-      <a href="preface-by-the-author.html" class="navigation navigation-next navigation-unique"
-        aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+      <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
     </div>
   </div>
   <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

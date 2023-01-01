@@ -2,40 +2,12 @@
 <html lang="" xml:lang="">
 
 <head>
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Feature Engineering & Selection for Explainable Models</title>
-  <meta name="description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Feature Engineering & Selection for Explainable Models" />
-  <meta property="og:type" content="book" />
-
-  <meta property="og:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Feature Engineering & Selection for Explainable Models" />
-
-  <meta name="twitter:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="author" content="Christoph Molnar" />
-
-
-  <meta name="date" content="2022-12-14" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-
-
-  <link rel="next" href="preface-by-the-author.html" />
+  <title>Chapter 7.9 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+  </title>
+  <link rel="prev" href="index.html" />
+  <link rel="next" href="intro.html" />
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -139,10 +111,19 @@
       }
     }
   </style>
+
+
+
+
+
+
   <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
+
+
+
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
     <div class="book-summary">
       <nav role="navigation">
@@ -381,28 +362,225 @@
 
       </nav>
     </div>
-
     <div class="book-body">
       <div class="body-inner">
+
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
-            <div id="header">
-              <h1 class="title">Feature Engineering & Selection for Explainable Models</h1>
-              <p>&nbsp;</p>
-              <h2 class="subtitle"><em>A Second Course for Data Scientists</em></h2>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p class="author"><em>Md Azimul Haque</em></p>
-            </div>
+
+            <section class="normal" id="section-">
+              <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
+                <h1><span class="header-section-number">Chapter 7.9:</span> Putting
+                  Everything Together</h1>
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>For the 4 datasets, we will process
+                    all the feature selection methods discussed in the book. In this section, we
+                    will present the best results obtained for the dataset, across modeling
+                    techniques and feature selection methods in this chapter. The best performance
+                    will be briefly compared against the previously obtained best performance in
+                    previous chapters, we will be performing cross-validation. The methods
+                    discussed in this chapter return the list of features for each
+                    cross-validation. For ease of understanding, we will look at how many features
+                    are common across all cross-validation from among the selected features.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>For the tree feature importance, we
+                    have considered the top 90 percent of features. For linear regression, we have
+                    kept the top 95 percent of features based on the beta coefficient.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                  0cm;line-height:150%'><a name="_heading=h.319y80a"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                  color:windowtext'>7.9.1<span style='mso-tab-count:1'>��� </span>Hotel Total
+                      Room Booking<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>We tried different models and
+                    feature selection methods. For Lightgbm regression, when used with the feature
+                    importance for 90% of top features, gave the best performance of all the
+                    methods. For cross-validation test, and validation data RMSE was observed to be
+                    17.9, and 12.3 for external test data. The detailed results for each
+                    cross-validation can be seen in figure 7.9.1.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p>&nbsp;</o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image40.png" o:spid="_x0000_i1081" type="#_x0000_t75" style='width:513.5pt;
+                   height:270pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image075.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=685 height=360 src="images/image076.jpg" v:shapes="image40.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 7.9.1 performance of Lightgbm
+                    tree model with filter method for feature selection on cross-validation test,
+                    validation, and external test data for hotel total room booking prediction<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>This is worse than the previous
+                    results presented in chapter 6. In addition to this, the results are
+                    inconsistent across different cross-validations and different test, and
+                    validation sets. Hence, we will discard this method.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                  0cm;line-height:150%'><a name="_heading=h.1gf8i83"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                  color:windowtext'>7.9.2<span style='mso-tab-count:1'>��� </span>Hotel Booking
+                      Cancellation<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>We tried different models and
+                    feature selection methods. Of all the methods, the Xgboost classifier, when
+                    used with Boruta, gave the best performance. For the cross-validation test, and
+                    the validation data precision was recorded at 0.835, and 0.881 for external
+                    test data. The detailed results for each cross-validation can be seen in figure
+                    7.9.2.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>The results obtained are almost
+                    similar to the results obtained in the previous chapter. Although the precision
+                    improved very marginally, the recall worsened than previous levels. There is no
+                    additional advantage in the results, as the model suffers from the same
+                    inadequacies that the model in chapter 6 suffered from. In such a scenario, it
+                    is up to the judgment of the analyst whether the solution should be accepted or
+                    we should keep searching for other solutions. In our case, we will still like
+                    to try feature selection using metaheuristics techniques in chapter 8.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image44.png" o:spid="_x0000_i1080" type="#_x0000_t75" style='width:519pt;
+                   height:273.5pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image077.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=692 height=365 src="images/image078.jpg" v:shapes="image44.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 7.9.2 performance of Xgboost
+                    tree model with Boruta method for feature selection on cross-validation test,
+                    validation, and external test data for hotel total booking cancellation
+                    prediction<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                  0cm;line-height:150%'><a name="_heading=h.40ew0vw"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                  color:windowtext'>7.9.3<span style='mso-tab-count:1'>��� </span>Car Sales<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Lasso regression performed the best
+                    for car sales data. For cross-validation test and validation data, RMSE was
+                    233161, whereas for the external test data it is 260101. It is better than the
+                    results obtained in chapter 6.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 7.9.3 shows the model
+                    performance across different cross-validations. For the Lasso feature
+                    selection, results between external test data and other test and validation
+                    data are smaller than previously achieved results. It still suffers from 2
+                    issues. Firstly, the RMSE is still higher than acceptable limits. As 200000
+                    Indian rupees is still a very high error margin. Also, RMSE is not very
+                    consistent across all cross-validations. Hence, we might need more improvements
+                    to find a model with an acceptable RMSE.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image37.png" o:spid="_x0000_i1079" type="#_x0000_t75" style='width:532pt;
+                   height:273.5pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image079.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=709 height=365 src="images/image080.jpg" v:shapes="image37.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 7.9.3 performance of the
+                    Lasso regression model on cross-validation test, validation, and external test
+                    data for used car price prediction.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                  0cm;line-height:150%'><a name="_heading=h.2fk6b3p"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                  color:windowtext'>7.9.4<span style='mso-tab-count:1'>��� </span>Coupon
+                      Recommendation<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>We tried different models and
+                    feature selection methods. Of all the methods, the Xgboost classifier, when
+                    used with the feature importance for the top 90 percent of features method,
+                    gave the best performance. For the cross-validation test, validation data
+                    precision was recorded at 0.700, and 0.753 for external test data. This
+                    explains that the results are worse than the previously recorded best performance
+                    in chapter 6. In addition to this, recall worsened than previous results to a
+                    small extent. The detailed results for each cross-validation for precision can
+                    be seen in figure 7.9.4.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>We will like to try the
+                    metaheuristics feature selection methods to see if these methods can bring any
+                    improvements.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image42.png" o:spid="_x0000_i1078" type="#_x0000_t75" style='width:517pt;
+                   height:272.5pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image081.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=689 height=363 src="images/image082.jpg" v:shapes="image42.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><a name="_heading=h.upglbi"></a><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+                  "Times New Roman"'>Figure 7.9.4 performance of Xgboost tree model with feature
+                    importance feature selection for top 90 percent of features on cross-validation
+                    test, validation, and external test data for coupon recommendation dataset.<o:p></o:p></span></p>
+              </div>
             </section>
 
           </div>
         </div>
       </div>
-
-      <a href="preface-by-the-author.html" class="navigation navigation-next navigation-unique"
-        aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+      <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
     </div>
   </div>
   <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

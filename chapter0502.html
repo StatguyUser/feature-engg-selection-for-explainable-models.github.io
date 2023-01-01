@@ -2,40 +2,12 @@
 <html lang="" xml:lang="">
 
 <head>
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Feature Engineering & Selection for Explainable Models</title>
-  <meta name="description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Feature Engineering & Selection for Explainable Models" />
-  <meta property="og:type" content="book" />
-
-  <meta property="og:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Feature Engineering & Selection for Explainable Models" />
-
-  <meta name="twitter:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="author" content="Christoph Molnar" />
-
-
-  <meta name="date" content="2022-12-14" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-
-
-  <link rel="next" href="preface-by-the-author.html" />
+  <title>Chapter 5.2 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+  </title>
+  <link rel="prev" href="index.html" />
+  <link rel="next" href="intro.html" />
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -139,11 +111,21 @@
       }
     }
   </style>
+
+
+
+
+
+
   <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
+
+
+
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
     <div class="book-summary">
       <nav role="navigation">
 
@@ -386,23 +368,239 @@
       <div class="body-inner">
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
-            <div id="header">
-              <h1 class="title">Feature Engineering & Selection for Explainable Models</h1>
-              <p>&nbsp;</p>
-              <h2 class="subtitle"><em>A Second Course for Data Scientists</em></h2>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p class="author"><em>Md Azimul Haque</em></p>
-            </div>
+
+            <section class="normal" id="section-">
+              <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
+                <h1><span class="header-section-number">Chapter 5.2:</span> SHAP</h1>
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Shapley additive explanation (SHAP)<sup>[1]</sup>
+                    method can help us detect feature interactions. SHAP is a model explanation
+                    technique. For a specific data point, it can explain the extent of importance a
+                    feature has on a model for the data point. It uses game theory to quantify the
+                    contribution of each feature. Positive and negative SHAP values represent their
+                    impact in increasing or decreasing the prediction outcome. SHAP can be extended
+                    to find interaction amongst features. It does so by ascertaining the impact of
+                    the main effect and interaction effect.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>There are three steps for finding
+                    the interaction effect using SHAP. The first step is to create a model with
+                    available features. The second step is to calculate interaction values using
+                    the SHAP python package, for each record, using the model. The result from SHAP
+                    will be in the form of a matrix, which has interaction amongst all features,
+                    for each record. The third step is to aggregate interaction values across all
+                    records to get overall interaction across features. If the number of features
+                    is a handful, we can visually inspect to understand the overall feature
+                    interaction of features. If the number of features is numerous, we can instead
+                    do mathematical aggregation, such as mean value to finalize the extent of
+                    interaction. <o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>There are a few caveats with using
+                    SHAP feature interaction.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>1) The interactions identified by
+                    SHAP will be as good as the model. If the model is not of good performance,
+                    interaction effects detected by SHAP will not be reliable.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>2) Calculating SHAP interaction
+                    values is computationally expensive.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>3) There is no fixed cutoff value of
+                    the SHAP interaction value. For some interactions, it can be 0 or very close to
+                    0. If a cutoff is indeed needed to be established, it will be the discretion of
+                    the analyst. We put a cutoff of 0.1 for the sake of convenience. We will remove
+                    interactions for which SHAP mean score is less than 0.1.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>4) The method <span class=SpellE><span
+                        style='color:white;background:#333333'>shap_interaction_values</span></span> is
+                    available for <span class=SpellE><span
+                        style='color:white;background:#333333'>TreeExplainer</span></span>
+                    in SHAP python library. It can only be used for tree-based bagging and boosting
+                    technique for obtaining interactions. It cannot be used for models which do not
+                    use a decision tree at its core, such as linear regression, or logistic
+                    regression. etc.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>One advantage of using SHAP for
+                    interaction effects is that it can be used for both regression and
+                    classification. This is unlike the interaction plot method discussed earlier,
+                    which is useful only for regression.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Let&nbsp;s use this method for finding
+                    the interaction effect in the coupon recommendation dataset and car sales
+                    dataset.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%'><a name="_heading=h.2zbgiuw"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext'>5.2.1<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Car Sales<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>For the car sales dataset, we ran
+                    the experiment across all cross-validation training samples. Each
+                    cross-validation has a set of interactions discovered by SHAP. To avoid
+                    overfitting, we will consider only those interactions which are present across
+                    all cross-validations. We shortlisted 374 interactions that were present in all
+                    5 cross-validation samples and where the SHAP value was greater than or equal
+                    to 0.1. Also, SHAP values for the 374 features were obtained by averaging
+                    across 5 cross-validations. By looking at the interactions discovered by SHAP,
+                    we can infer that it was able to detect interaction only amongst higher-order
+                    features. Figure 5.2.1a is the plot for the bottom 5 interactions.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p>&nbsp;</o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="Picture_x0020_2" o:spid="_x0000_i1092" type="#_x0000_t75" style='width:468pt;
+ height:468pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image053.png"
+  o:title=""/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=624 height=624 src="images/image054.gif" v:shapes="Picture_x0020_2">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:
+"Times New Roman",serif;mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Figure 5.2.1a Bottom 5 interactions<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Higher-order features for fuel and owner
+                    have the lowest degree of interaction effect. For fuel, count encoding of
+                    different categories is a numerical variable. It has a weak interaction with
+                    the mean encoding for dependent variable for the owner feature. The rest of the
+                    bottom 5 interaction effects are amongst higher order features and none of
+                    these are original features.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Now let&nbsp;s understand the top 5
+                    interaction effects in figure 5.2.1b.<span style='mso-no-proof:yes'>
+                      <o:p></o:p>
+                    </span></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="Picture_x0020_1" o:spid="_x0000_i1091" type="#_x0000_t75" style='width:468pt;
+ height:468pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image055.png"
+  o:title=""/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=624 height=624 src="images/image056.gif" v:shapes="Picture_x0020_1">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:
+"Times New Roman",serif;mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Figure 5.2.1b Top 5 interactions<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Label encoding of 2 features namely
+                    torque and Above90 have the highest degree of interaction effect. Since both
+                    the features are categorical, we can do a simple concatenation between the two
+                    features to obtain an interaction effect feature. For the rest of the
+                    interactions in the top 5, all the features are label-encoded feature of a
+                    categorical feature. For such interaction between categorical encoded features
+                    and other higher-order features, we can simply perform concatenation between
+                    two features to obtain interaction effect feature.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%'><a name="_heading=h.1egqt2p"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext'>5.2.2<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Coupon
+                      Recommendation<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Now let&nbsp;s look at the coupon
+                    recommendation dataset. The interaction was detected amongst higher order
+                    encoded features of categorical features. Although the magnitude of the
+                    interaction effect is small, there were 6 interaction effects detected in this
+                    dataset. These interaction effects were present across all cross-validation
+                    samples. These are shown in figure 5.2.2.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="Picture_x0020_3" o:spid="_x0000_i1090" type="#_x0000_t75" style='width:468pt;
+ height:468pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image057.png"
+  o:title=""/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=624 height=624 src="images/image058.gif" v:shapes="Picture_x0020_3">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:
+"Times New Roman",serif;mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Figure 5.2.2 Interactions detected
+                    for coupon recommendation dataset<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>The smallest degree of interaction
+                    was detected between label encoding feature for bar, and label encoding for the
+                    type of coupon. Both features are numerical. For the rest of the detected
+                    interactions, at least one feature is label-encoded features of a categorical
+                    feature, while the other feature is a count or mean encoded feature. The only
+                    way to create interaction feature between these two types of features is by
+                    creating dummy variables of the label encoded feature and multiply it with the
+                    numerical feature.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>The next step will be to create new
+                    categorical or numerical features from these features. For newly created
+                    categorical features, these can't be used directly. To be able to use these
+                    features, we will need to further create higher order features from these
+                    categorical interaction effect features.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>For the rest of the datasets, the
+                    feature matrix is huge. It is computationally very expensive to detect
+                    interaction effects through SHAP. Also, most of the features are higher order
+                    features for either date of check-in, revenue, and booking patterns. Hence,
+                    there is a chance that very few interaction effects could be detected which are
+                    meaningful and could be explained to laymen.<o:p></o:p></span></p>
+              </div>
             </section>
 
           </div>
         </div>
       </div>
-
-      <a href="preface-by-the-author.html" class="navigation navigation-next navigation-unique"
-        aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+      <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
     </div>
   </div>
   <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

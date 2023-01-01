@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 10.2 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+  </title>
+  <link rel="prev" href="index.html" />
+  <link rel="next" href="intro.html" />
+  <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+  <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+  <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+  <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+  <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+  <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+  <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+  <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+  <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+  <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+  <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+  <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-110543840-1', 'https://christophm.github.io/interpretable-ml-book/', {
+      'anonymizeIp': true
+      , 'storage': 'none'
+      , 'clientId': window.localStorage.getItem('ga_clientId')
+    });
+    ga(function (tracker) {
+      window.localStorage.setItem('ga_clientId', tracker.get('clientId'));
+    });
+    ga('send', 'pageview');
+  </script>
+
+  <link rel="stylesheet" type="text/css" href="css/cookieconsent.min.css" />
+  <script src="javascript/cookieconsent.min.js"></script>
+  <script>
+    window.addEventListener("load", function () {
+      window.cookieconsent.initialise({
+        "palette": {
+          "popup": {
+            "background": "#000"
+          },
+          "button": {
+            "background": "#f1d600"
+          }
+        },
+        "position": "bottom-right",
+        "content": {
+          "message": "This website uses cookies for Google Analytics so that I know how many people are reading the book and which chapters are the most popular. The book website doesn't collect any personal data."
+        }
+      })
+    });
+  </script>
+
+  <style>
+    #cta-button-desktop:hover,
+    #cta-button-device:hover {
+      background-color: #ffc266;
+      border-color: #ffc266;
+      box-shadow: none;
+    }
+
+    #cta-button-desktop,
+    #cta-button-device {
+      color: white;
+      background-color: #ffa31a;
+      text-shadow: 1px 1px 0 #444;
+      text-decoration: none;
+      border: 2px solid #ffa31a;
+      border-radius: 10px;
+      position: fixed;
+      padding: 5px 10px;
+      z-index: 10;
+    }
+
+    #cta-button-device {
+      box-shadow: 0px 10px 10px -5px rgba(194, 180, 190, 1);
+      display: none;
+      right: 20px;
+      bottom: 20px;
+      font-size: 20px;
+    }
+
+    #cta-button-desktop {
+      box-shadow: 0px 20px 20px -10px rgba(194, 180, 190, 1);
+      display: display;
+      padding: 8px 16px;
+      right: 40px;
+      bottom: 40px;
+      font-size: 25px;
+    }
+
+    @media (max-width : 450px) {
+      #cta-button-device {
+        display: block;
+      }
+
+      #cta-button-desktop {
+        display: none;
+      }
+    }
+  </style>
+
+
+
+
+
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+        <ul class="summary">
+          <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i
+                class="fa fa-check"></i>Summary</a></li>
+          <li class="chapter" data-level="1" data-path="preface-by-the-author.html"><a href="foreward.html"><i
+                class="fa fa-check"></i>Foreward</a></li>
+          <li class="chapter" data-level="1" data-path="preface-by-the-author.html"><a
+              href="preface-by-the-author.html"><i class="fa fa-check"></i>Preface by the Author</a></li>
+          <li class="chapter" data-level="1" data-path="intro.html"><a href="before-we-start.html"><i
+                class="fa fa-check"></i>Before we start</a></li>
+          <li class="chapter" data-level="1"><a href="section01.html"><i class="fa fa-check"></i>Section 01:
+              Introduction</a>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter01.html"><i class="fa fa-check"></i>1: Introduction</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter0101.html"><i class="fa fa-check"></i>1.1:
+                  Terminology</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0102.html"><i class="fa fa-check"></i>1.2: Process of
+                  Training a Machine Learning Model</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0103.html"><i class="fa fa-check"></i>1.3: Preventing
+                  Overfitting</a></li>
+              <li class="chapter" data-level="2.4"><a href="chapter0104.html"><i class="fa fa-check"></i>1.4: Code
+                  Conventions</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0105.html"><i class="fa fa-check"></i>1.5: Datasets
+                  Used</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0106.html"><i class="fa fa-check"></i>1.6:
+                  References</a></li>
+            </ul>
+          </li>
+          <li class="chapter" data-level="1"><a href="section02.html"><i class="fa fa-check"></i>Section 02:
+              Feature Engineering</a>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter02.html"><i class="fa fa-check"></i>2: Domain Specific
+                  Feature Engineering </a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter02.html"><i class="fa fa-check"></i>2.1:
+                  Introduction</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0202.html"><i class="fa fa-check"></i>2.2:
+                  Domain-Specific Feature Engineering </a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0203.html"><i class="fa fa-check"></i>2.3:
+                  References</a></li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter03.html"><i class="fa fa-check"></i>3: EDA Feature
+                  Engineering </a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter03.html"><i class="fa fa-check"></i>3.1:
+                  Introduction</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0302.html"><i class="fa fa-check"></i>3.2: Car Sales
+                </a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0303.html"><i class="fa fa-check"></i>3.3: Coupon
+                  Recommendation</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0304.html"><i class="fa fa-check"></i>3.4:
+                  Conclusion</a></li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter04.html"><i class="fa fa-check"></i>4: Higher Order
+                  Feature Engineering </a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter0401.html"><i class="fa fa-check"></i>4.1:
+                  Engineering Categorical Features</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0402.html"><i class="fa fa-check"></i>4.2:
+                  Engineering Ordinal Features </a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0403.html"><i class="fa fa-check"></i>4.3:
+                  Engineering Numerical Features</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0404.html"><i class="fa fa-check"></i>4.4:
+                  Conclusion</a></li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter05.html"><i class="fa fa-check"></i>5: Interaction
+                  Effect Feature Engineering</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter0501.html"><i class="fa fa-check"></i>5.1:
+                  Interaction Plot</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0502.html"><i class="fa fa-check"></i>5.2: SHAP</a>
+              </li>
+              <li class="chapter" data-level="2.3"><a href="chapter0503.html"><i class="fa fa-check"></i>5.3: Putting
+                  Everything Together</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0504.html"><i class="fa fa-check"></i>5.4:
+                  Conclusion</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0505.html"><i class="fa fa-check"></i>5.5:
+                  References</a></li>
+            </ul>
+          </li>
+          <li class="chapter" data-level="1"><a href="section03.html"><i class="fa fa-check"></i>Section 03:
+              Feature Selection</a>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter06.html"><i class="fa fa-check"></i>6: Fundamentals of
+                  Feature Selection</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter06.html"><i class="fa fa-check"></i>6.1:
+                  Introduction</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0602.html"><i class="fa fa-check"></i>6.2: Different
+                  Feature Selection Methods</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0603.html"><i class="fa fa-check"></i>6.3: Filter
+                  Method</a></li>
+              <li class="chapter" data-level="2.4"><a href="chapter0604.html"><i class="fa fa-check"></i>6.4: Wrapper
+                  Method</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0605.html"><i class="fa fa-check"></i>6.5: Putting
+                  Everything Together</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0606.html"><i class="fa fa-check"></i>6.6:
+                  Conclusion</a></li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter07.html"><i class="fa fa-check"></i>7: Feature
+                  Selection Concerning Modeling Techniques</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter0701.html"><i class="fa fa-check"></i>7.1:
+                  Lasso, Ridge, and ElasticNet</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0702.html"><i class="fa fa-check"></i>7.2: Feature
+                  Importance of Tree Models</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0703.html"><i class="fa fa-check"></i>7.3: Boruta</a>
+              </li>
+              <li class="chapter" data-level="2.4"><a href="chapter0704.html"><i class="fa fa-check"></i>7.4: Using
+                  Tree-Based Feature Importance for Linear Model</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0705.html"><i class="fa fa-check"></i>7.5: Using
+                  Linear Model Feature Importance for Tree Models</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0706.html"><i class="fa fa-check"></i>7.6: Linear
+                  Regression</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0707.html"><i class="fa fa-check"></i>7.7: SVM</a>
+              </li>
+              <li class="chapter" data-level="2.5"><a href="chapter0708.html"><i class="fa fa-check"></i>7.8: PCA</a>
+              </li>
+              <li class="chapter" data-level="2.5"><a href="chapter0709.html"><i class="fa fa-check"></i>7.9: Putting
+                  Everything Together</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0710.html"><i class="fa fa-check"></i>7.10:
+                  Conclusion</a></li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter08.html"><i class="fa fa-check"></i>8: Feature
+                  Selection Using Metaheuristic Algorithms</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter0801.html"><i class="fa fa-check"></i>8.1: Exhaustive
+                  Feature Selection</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0802.html"><i class="fa fa-check"></i>8.2: Genetic
+                  Algorithm</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0803.html"><i class="fa fa-check"></i>8.3: Simulated
+                  Annealing</a></li>
+              <li class="chapter" data-level="2.4"><a href="chapter0804.html"><i class="fa fa-check"></i>8.4: Ant Colony
+                  Optimization</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0805.html"><i class="fa fa-check"></i>8.5: Particle
+                  Swarm Optimization</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0806.html"><i class="fa fa-check"></i>8.6: Putting
+                  Everything Together</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0807.html"><i class="fa fa-check"></i>8.7:
+                  Conclusion</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0809.html"><i class="fa fa-check"></i>8.8:
+                  References</a></li>
+            </ul>
+          </li>
+          <li class="chapter" data-level="1"><a href="section04.html"><i class="fa fa-check"></i>Section 04:
+              Model Explanation</a>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter09.html"><i class="fa fa-check"></i>9: Explaining Model
+                  and Model Predictions to Layman</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter09.html"><i class="fa fa-check"></i>9.1:
+                  Introduction</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0902.html"><i class="fa fa-check"></i>9.2:
+                  Explainable models</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0903.html"><i class="fa fa-check"></i>9.3:
+                  Explanation Techniques</a></li>
+              <li class="chapter" data-level="2.4"><a href="chapter0904.html"><i class="fa fa-check"></i>9.4: Putting
+                  Everything Together</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0905.html"><i class="fa fa-check"></i>9.5:
+                  Conclusion</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0906.html"><i class="fa fa-check"></i>9.6:
+                  References</a></li>
+            </ul>
+          </li>
+          <li class="chapter" data-level="1"><a href="section05.html"><i class="fa fa-check"></i>Section 05:
+              Special Chapters</a>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter10.html"><i class="fa fa-check"></i>10: Feature
+                  Engineering & Selection for Text Classification</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter10.html"><i class="fa fa-check"></i>10.1:
+                  Introduction</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter1002.html"><i class="fa fa-check"></i>10.2: Feature
+                  Construction</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter1003.html"><i class="fa fa-check"></i>10.3: Feature
+                  Selection</a></li>
+              <li class="chapter" data-level="2.4"><a href="chapter1004.html"><i class="fa fa-check"></i>10.4: Feature
+                  Extraction</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter1005.html"><i class="fa fa-check"></i>10.5: Feature
+                  Reduction</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter1006.html"><i class="fa fa-check"></i>10.6:
+                  Conclusion</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter1007.html"><i class="fa fa-check"></i>10.7:
+                  References</a></li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter11.html"><i class="fa fa-check"></i>11: Things That Can
+                  Give Additional Improvement</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter11.html"><i class="fa fa-check"></i>11.1:
+                  Introduction</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter1102.html"><i class="fa fa-check"></i>11.2:
+                  Hyperparameter Tuning</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter1103.html"><i class="fa fa-check"></i>11.3: Ensemble
+                  Learning</a></li>
+              <li class="chapter" data-level="2.4"><a href="chapter1104.html"><i class="fa fa-check"></i>11.4: Signal
+                  Processing</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter1105.html"><i class="fa fa-check"></i>11.5:
+                  Conclusion</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter1106.html"><i class="fa fa-check"></i>11.6:
+                  References</a></li>
+            </ul>
+          </li>
+        </ul>
+
+      </nav>
+    </div>
+    <div class="book-body">
+      <div class="body-inner">
+        
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+              <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
+                <h1><span class="header-section-number">Chapter 10.2:</span> Feature Construction</h1>
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>For text classification,
+                    the most common features used are 1) N-gram (Unigram, bigram, and trigram) 2)
+                    syntactic N-gram (SN-gram) 3) Domain-specific taxonomy features and 4) Meta
+                    features. This applies to both deep learning and traditional machine learning
+                    algorithms.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%;background:white'><a name="_heading=h.3u2rp3q"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-color-alt:windowtext'>10.2.1<span style='mso-tab-count:1'>&nbsp;
+                      </span>N-gram</span></b><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext;mso-color-alt:windowtext'>
+                      <o:p></o:p>
+                    </span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";color:#222222;background:white;
+mso-highlight:white'>In human language, words do not occur in isolation. Often,
+                    we need other supporting words to understand the whole situation. For example,
+                    if you want to invite your friend for coffee. You will not simply tell your
+                    friend 'Coffee'. Instead, you might say &nbsp;Let's go for coffee&nbsp;. Here we needed 3
+                    words: &nbsp;Let's go for&nbsp;, to be able to explain our core objective of inviting
+                    friends for 'coffee'. Similarly, in some situations, we will need words after
+                    the main context word to understand the situation. This is not always true
+                    however, let's imagine your friend is sitting at your house and you prepared
+                    coffee in your kitchen. You proceed towards your friend with an extra cup of
+                    coffee and offer him after saying only one word 'coffee'. Most likely your
+                    friend will understand that you are offering him coffee and will accept it
+                    gracefully.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";color:#222222;background:white;
+mso-highlight:white'>N-grams are a sequence of elements such as words,
+                    characters, part of speech, and dependency tags as they appear in the text. &nbsp;n&nbsp;
+                    in n-grams refers to the number of elements in the sequence.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";color:#222222;background:white;
+mso-highlight:white'>We can represent a text document in multiple ways in
+                    n-gram for feature construction while considering whether to include previous
+                    and next words. The most common types are unigram, bi-gram, and tri-gram<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";color:#222222;background:white;
+mso-highlight:white'>Uni-gram is a way of representing textual words in
+                    isolation. bi-gram represents texts by considering one surrounding word, in
+                    addition to the current word. tr-gram considers 2 previous words, in addition
+                    to the current word. We can similarly go for quad-gram and so on. However, the
+                    number of unique n-grams increases manifold and becomes difficult to represent
+                    as machine learning features embedding and training a classifier. Beyond <span
+                      class=SpellE>uni</span>-gram, in n-gram, words are concatenated with each other
+                    using a special character such as the underscore &nbsp;_&nbsp;.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";color:#222222;background:white;
+mso-highlight:white'>Example: For a sentence that reads &quot;You are so adorable!&quot;.
+                    Below is an example of n-grams.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span class=SpellE><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>uni</span></span><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman";color:#222222;background:white;mso-highlight:white'>-gram:
+                    [&quot;you&quot;, &quot;are&quot;, &quot;so&quot;, &quot;adorable&quot;,&nbsp;!&nbsp;]<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";color:#222222;background:white;
+mso-highlight:white'>bi-gram: [&quot;<span class=SpellE>you_are</span>&quot;,
+                    &quot;<span class=SpellE>are_so</span>&quot;, &quot;<span
+                      class=SpellE>so_adorable&quot;,&nbsp;adorable</span>_!&nbsp;]<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";color:#222222;background:white;
+mso-highlight:white'>tri-gram: [&quot;<span class=SpellE>you_are_so</span>&quot;,
+                    &quot;<span class=SpellE>are_so_adorable</span>&quot;, &quot;<span
+                      class=SpellE>so_adorable</span>_!&quot;]<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%;background:white'><a name="_heading=h.2981zbj"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-color-alt:windowtext'>10.2.2<span style='mso-tab-count:1'>&nbsp; </span>Syntactic
+                      N-gram</span></b><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext;mso-color-alt:windowtext'>
+                      <o:p></o:p>
+                    </span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>If n-grams are extracted by
+                    the order in which the elements are present in syntactic dependency trees that
+                    follow each other in the path of the syntactic tree, and not in the text. We
+                    call such n-grams syntactic n-grams (<span class=SpellE>sn</span>-grams) <sup>[1]</sup>.<o:p></o:p>
+                    </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>Human spoken and written
+                    languages typically follow a hierarchy structure, such as sentences, clauses,
+                    phrases, and words. The dependency tree is a visual representation of the
+                    linguistic structure, in which the grammatical hierarchy is graphically
+                    displayed. Connecting points in the tree diagram are called nodes, with one
+                    word being the head and the other being the dependent of the relation.
+                    Syntactic dependencies are obtained through dependency parsing.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>Consider the example
+                    sentence which can be a sarcastic remark to an obese person &nbsp;You should not run
+                    anymore&nbsp;. Figure 10.2.2 shows how the dependency parse tree will look like,
+                    along with.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;mso-no-proof:yes'><!--[if gte vml 1]><v:shape id="image50.png"
+ o:spid="_x0000_i1039" type="#_x0000_t75" style='width:468pt;height:111pt;
+ visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image160.png"
+  o:title=""/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=624 height=148 src="images/image161.gif" v:shapes="image50.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";color:#222222;background:white;
+mso-highlight:white'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";color:#222222;background:white;
+mso-highlight:white'>Fig 10.2.2: syntactic dependency tree for example.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>In this example, &nbsp;run&nbsp; is
+                    the root word. Below are the dependency relationships in this sentence.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>(run, You), connected by
+                    nominal subject relationship.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>(run, should), connected by
+                    an auxiliary.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>(run, not), connected by a
+                    negation modifier.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>(run, more), connected by
+                    an adverb modifier.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>(more, any), connected by
+                    an adverb modifier.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>We follow the arrow-marked path
+                    in the dependencies to obtain syntactic n-grams. In this example, all the
+                    relationships are between 2 words only, except for &nbsp;run&nbsp; -&gt; &nbsp;more&nbsp; -&gt;
+                    &nbsp;any&nbsp;, where the path exists between 3 words. This can be a candidate for
+                    syntactic tri-gram.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>We used the companion
+                    python library </span><span class=SpellE><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";color:white;background:#333333'>SNgramExtractor</span></span><span lang=EN
+                    style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman";color:#222222;background:white;mso-highlight:white'> for this
+                    book and extracted the below pairs of syntactic bi-grams and tri-grams from the
+                    example sentence.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>Syntactic bi-grams: &quot;<span class=SpellE>run_You</span>&quot;,
+                    &quot;<span class=SpellE>run_should</span>&quot;,
+                    &quot;<span class=SpellE>run_not</span>&quot;, &quot;<span class=SpellE>more_any</span>&quot;,
+                    &quot;<span class=SpellE>run_more</span>&quot;<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>Syntactic tri-gram: &quot;<span
+                      class=SpellE>run_more_any</span>&quot;<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span class=SpellE><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:white;background:#333333'>SngramExtractor</span></span><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'> uses </span><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:white;background:#333333'>Spacy</span><span lang=EN style='font-family:
+"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:#222222;
+background:white;mso-highlight:white'> language model for extracting <span class=SpellE>sn</span>-grams. We can also
+                    specify which language model we want
+                    to use. This allows us to use non-English language models and extract syntactic
+                    n-grams of non-English languages as well. </span><span class=SpellE><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman";color:white;background:#333333'>SngramExtractor</span></span><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman";color:#222222;background:white;mso-highlight:white'> follows
+                    object-oriented pattern. It can process one sentence at a time. For an example
+                    sentence </span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";color:#222222'>'You should not run
+                    any more', below syntax will help us extract bi-gram and tri-gram.<span
+                      style='background:white;mso-highlight:white'>
+                      <o:p></o:p>
+                    </span></span></p>
+
+                <p class=MsoNormal style='line-height:normal'><span lang=EN style='font-family:
+Consolas;mso-fareast-font-family:Consolas;mso-bidi-font-family:Consolas;
+color:white;background:#333333'>text = </span><span lang=EN style='font-family:
+Consolas;mso-fareast-font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#A2FCA2;background:#333333'>'You should not run any more'</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'><br>
+                    <span class=SpellE>SNgram_obj</span>=<span class=SpellE>SNgramExtractor</span>(text,<br>
+                    <span style='mso-spacerun:yes'>&nbsp;</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span
+                      class=SpellE>meta_tag</span>=</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#A2FCA2;background:#333333'>'original'</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'>,<br>
+                    <span style='mso-spacerun:yes'>&nbsp;</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span
+                      class=SpellE>trigram_flag</span>=</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#A2FCA2;background:#333333'>'yes'</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'>,<br>
+                    <span style='mso-spacerun:yes'>&nbsp;</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span
+                      class=SpellE>nlp_model</span>=</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#FCC28C;background:#333333'>None</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'>)<br>
+                    output=<span class=SpellE>SNgram_obj.get_SNgram</span>()<br>
+                    print(</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:
+Consolas;mso-bidi-font-family:Consolas;color:#A2FCA2;background:#333333'>'Original
+                    <span class=SpellE>Text:'<span style='color:white'>,text</span></span></span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'>)<br>
+                    print(</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:
+Consolas;mso-bidi-font-family:Consolas;color:#A2FCA2;background:#333333'>'<span class=SpellE>SNGram</span> <span
+                      class=SpellE>bigram:'<span style='color:white'>,output</span></span></span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'>[</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#A2FCA2;background:#333333'>'<span class=SpellE>SNBigram</span>'</span><span
+                    lang=EN style='font-family:Consolas;
+mso-fareast-font-family:Consolas;mso-bidi-font-family:Consolas;color:white;
+background:#333333'>])<br>
+                    print(</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:
+Consolas;mso-bidi-font-family:Consolas;color:#A2FCA2;background:#333333'>'<span class=SpellE>SNGram</span> <span
+                      class=SpellE>trigram:'<span style='color:white'>,output</span></span></span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'>[</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#A2FCA2;background:#333333'>'<span class=SpellE>SNTrigram</span>'</span><span
+                    lang=EN style='font-family:Consolas;
+mso-fareast-font-family:Consolas;mso-bidi-font-family:Consolas;color:white;
+background:#333333'>])</span><span lang=EN style='font-size:12.0pt;font-family:
+"Times New Roman",serif;mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";color:#222222;background:white;
+mso-highlight:white'>In this syntax, we have not specified <span class=SpellE>nlp_model</span>
+                    parameter. This has been set as &nbsp;None&nbsp;. In such a case, we use </span><span class=SpellE><span
+                      lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";color:white;background:#333333'>en_core_web_sm</span></span><span lang=EN
+                    style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman";color:#222222;background:white;mso-highlight:white'>, as the
+                    default language model. Below is how the output will look like for the executed
+                    syntax.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='line-height:normal'><span lang=EN style='font-family:
+Consolas;mso-fareast-font-family:Consolas;mso-bidi-font-family:Consolas;
+color:white;background:#333333'>Original Text: You should </span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;mso-bidi-font-family:
+Consolas;color:#FCC28C;background:#333333'>not</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;mso-bidi-font-family:
+Consolas;color:white;background:#333333'> run any more<br>
+                    <span class=SpellE>SNGram</span> bigram: <span class=SpellE>run_You</span> <span
+                      class=SpellE>run_should</span> <span class=SpellE>run_not</span> <span
+                      class=SpellE>more_any</span> <span class=SpellE>run_more</span><br>
+                    <span class=SpellE>SNGram</span> trigram: <span class=SpellE>run_more_any</span></span><span lang=EN
+                    style='font-size:12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>Unlike traditional n-grams,
+                    syntactic n-grams are less arbitrary. Dependency parsing is language-specific
+                    and different for each language. Hence by extracting syntactic n-grams, we can
+                    include linguistic-rich features in our model. Additionally, as we are not
+                    including all the possible n-grams that can be created, their numbers are less
+                    than the number of traditional n-grams. Hence, syntactic n-gram features can be
+                    interpreted as a linguistic phenomenon, while traditional n-grams have no
+                    plausible linguistic interpretation and they are merely a statistical artifact.<o:p></o:p></span>
+                </p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>One shortcoming with
+                    syntactic n-gram is that it is dependent on the availability of syntactic
+                    parser and lexical resources. Not all human language has lexical resources to
+                    be able to build SN-gram. For the languages for which we have lexical resources
+                    available, it requires the construction of dependency parse trees, which
+                    increases processing time. In contrast, traditional n-grams are faster to
+                    compute.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%;background:white'><a name="_heading=h.odc9jc"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-color-alt:windowtext'>10.2.3<span style='mso-tab-count:1'>&nbsp; </span>Domain-Specific
+                      Taxonomy Features</span></b><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman";color:windowtext;mso-color-alt:windowtext'>
+                      <o:p></o:p>
+                    </span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>The use of background
+                    knowledge is largely unexploited in text classification tasks. To include
+                    background knowledge in the form of metadata, ontology or taxonomy-generated
+                    features can be incorporated in machine learning classifiers. It acts as a
+                    second-level context. It can lead to improved interpretability and performance
+                    of the model. For doing so, we focus on semantic structures, derived through
+                    hypernym relation between words. <o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>Individual words are mapped
+                    to higher-order semantic concepts. For example, for the word &nbsp;tiger&nbsp;, its
+                    WordNet hypernym is the term &nbsp;mammal&nbsp;. It can be further mapped with &nbsp;animals&nbsp;.
+                    We can ultimately reach the most general term, which is an entity.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>Before we construct
+                    hypernym-based features, word-sense disambiguation should be performed, get the
+                    exact context behind the word. For example, the word bank can have different
+                    meanings, in different contexts. Between the sentences &quot;I went to the bank
+                    to withdraw money.&quot; and &quot;I was relaxing near the bank of the river in
+                    the morning.&quot;. In both sentences, the meaning of bank is different. In the
+                    first sentence, the bank refers to a financial institution and in the second
+                    sentence, a bank refers to a recreational place.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>For each word in the
+                    document, we find a hypernym path between the word and the most general term.
+                    Document-based taxonomy thus created, is a tree-like structure. Word-specific
+                    tree structures are collated at the document level to create a corpus-based
+                    taxonomy at the document level.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>One shortcoming of using
+                    the Wordnet-based taxonomy feature is that Wordnet is a general-purpose
+                    taxonomy. If a customized lexical resource can be created for the specific
+                    domain for which the classifier is being developed, it can sharply increase the
+                    machine learning classifier and its usability even further.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%;background:white'><a name="_heading=h.38czs75"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-color-alt:windowtext'>10.2.4<span style='mso-tab-count:1'>&nbsp; </span>Meta
+                      Features</span></b><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext;mso-color-alt:windowtext'>
+                      <o:p></o:p>
+                    </span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>These features have been
+                    used previously in predicting whether a question posted on <span class=SpellE>StackOverflow</span>
+                    can be deleted. <span class=SpellE>Stackoverflow</span> is an online forum for
+                    software engineers and programmers to post their questions. This website is
+                    moderated by volunteers who delete questions that are too broad or off-topic.
+                    To reduce manual moderation and automate this task, several algorithms and
+                    approaches have been suggested. One such method <sup>[2]</sup> is to use
+                    meta-features from past user-generated content and site-generated statistics.
+                    Meta features from the users were grouped into 4 categories: profile,
+                    community, content, and syntactic.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>Profile features are
+                    defined based on the historical statistics of the user who posted the question.
+                    For example, how old is the account which posted the question, the number of
+                    previous questions, the number of previous answers, the question to the age of
+                    account ratio, answer to the age of account ratio. This can be used for example
+                    in Twitter, how many tweets have been posted, how many tweets replied to, how
+                    many tweets are liked, and how many people follow the Twitter account.
+                    Similarly, many such statistics can be computed for the users as scores based
+                    on functionalities available on the social media website.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>Community features in <span class=SpellE>StackOverflow</span> are
+                    average reputation and popularity
+                    statistics for the user. For example, the average answer score, the average
+                    number of comments, and the average question score. On Twitter, for example, we
+                    can calculate the average number of retweets for the tweets of users, the
+                    average number of likes, and replies received in the past for their tweets.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>Many of the content and
+                    syntactic meta-features use LIWC scores. LIWC stands for Linguistic Inquiry and
+                    Word Count. LIWC2007 is a software that contains 4,500 words and 64
+                    hierarchical dictionary categories. Given an input natural language text
+                    document, it outputs a score for the input against all 64 categories after
+                    analyzing writing style and psychometric properties.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>Content features were
+                    computed based on the textual content of the question. For example, the average
+                    number of URLs, number of previous tags, and LIWC score of Pronouns. On
+                    Twitter, we can similarly calculate the average number of hashtags used by
+                    users in past, and the number of links posted.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>Syntactic features are
+                    computed based on the writing style of the written text. For example, the
+                    number of characters, upper case characters, lower case characters, and digits
+                    in the text document. These can be used as it is.<o:p></o:p></span></p>
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+      <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+  <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+  <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+  <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+  <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+  <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+  <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+  <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+  <script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+  <script>
+    gitbook.require(["gitbook"], function (gitbook) {
+      gitbook.start({
+        "sharing": {
+          "github": true,
+          "facebook": false,
+          "twitter": true,
+          "linkedin": true,
+          "weibo": false,
+          "instapaper": false,
+          "vk": false,
+          "whatsapp": false,
+          "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+        },
+        "fontsettings": {
+          "theme": "white",
+          "family": "sans",
+          "size": 2
+        },
+        "edit": {
+          "link": "https://github.com/christophM/interpretable-ml-book/edit/master/manuscript/index.Rmd",
+          "text": "Edit"
+        },
+        "history": {
+          "link": null,
+          "text": null
+        },
+        "view": {
+          "link": null,
+          "text": null
+        },
+        "download": null,
+        "search": {
+          "engine": "fuse",
+          "options": null
+        },
+        "toc": {
+          "collapse": "subsection"
+        }
+      });
+    });
+  </script>
+
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      var src = "true";
+      if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+      if (location.protocol !== "file:")
+        if (/^https?:/.test(src))
+          src = src.replace(/^https?:/, '');
+      script.src = src;
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+</body>
+
+</html>

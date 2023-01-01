@@ -2,40 +2,12 @@
 <html lang="" xml:lang="">
 
 <head>
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Feature Engineering & Selection for Explainable Models</title>
-  <meta name="description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Feature Engineering & Selection for Explainable Models" />
-  <meta property="og:type" content="book" />
-
-  <meta property="og:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Feature Engineering & Selection for Explainable Models" />
-
-  <meta name="twitter:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="author" content="Christoph Molnar" />
-
-
-  <meta name="date" content="2022-12-14" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-
-
-  <link rel="next" href="preface-by-the-author.html" />
+  <title>Chapter 6 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+  </title>
+  <link rel="prev" href="index.html" />
+  <link rel="next" href="intro.html" />
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -139,11 +111,21 @@
       }
     }
   </style>
+
+
+
+
+
+
   <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
+
+
+
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
     <div class="book-summary">
       <nav role="navigation">
 
@@ -384,25 +366,90 @@
 
     <div class="book-body">
       <div class="body-inner">
+
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
-            <div id="header">
-              <h1 class="title">Feature Engineering & Selection for Explainable Models</h1>
-              <p>&nbsp;</p>
-              <h2 class="subtitle"><em>A Second Course for Data Scientists</em></h2>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p class="author"><em>Md Azimul Haque</em></p>
-            </div>
+
+            <section class="normal" id="section-">
+              <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
+                <h1><span class="header-section-number">Chapter 6:</span> Fundamentals of Feature Selection</h1>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <h4>Chapter 6.1: Introduction</h4>
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>The objective behind training a
+                    machine learning model is to accurately predict the target variable using
+                    features. Some of these features facilitate the process of accurately
+                    predicting the target variable. These can be considered as 'signals'. Some
+                    features will be weak at predicting the target variable. These are called as
+                    'noise'.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>If a model is trained to predict
+                    hotel reservations for a specific hotel, we might consider the demand for
+                    similar hotels in the vicinity as an indicator of market demand. In the absence
+                    of demand data for competitors, we can consider the pricing of rooms by
+                    competitors as indicator of market demand. Similarly, we can also consider
+                    seasonality for the weekday as another useful feature. i.e., day of the week
+                    out of 7 days. Here we have two sets of features, competitor pricing, and 7 dummy
+                    variables indicating each day of the week.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Let us take the example of another
+                    feature. Employee strength is the number of employees who come to work at the
+                    hotel daily. It is not constant and fluctuates every day. Using this
+                    information might not be the best indicator of demand for the hotel room. Less
+                    number of employees in a hotel in a day might affect hotel operations for a
+                    specific day, and a greater number of employees might affect hotel running
+                    costs. However, it might not have any significant impact on the way people book
+                    hotel rooms on a travel website. This is an example of noise feature.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>It must be noted that some features
+                    could be weak signals and might fall in between 'signal' and 'noise'. For
+                    example, the demand for hotel rooms is seasonal in tourist locations. During
+                    the peak tourist season, we can expect hotel bookings at 100%, whereas during
+                    the off-season, occupancy might be less. In this situation, demand is seasonal
+                    and varies between each month. In contrast, the day of the week starting Monday
+                    to Sunday does not give clear indication of occupancy levels. It varies for each
+                    specific month. Here, day of the week could be a noisy feature in comparison to
+                    the month of the year for the check-in date.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>There can be an interaction between
+                    a strong signal feature and weak signal feature. It can occur that the combined
+                    presence of both the features in the model gives higher predictive power, than
+                    when they are present individually in the model. Hence, our objective in doing
+                    feature selection is to identify the combination of features that gives the
+                    best predictive power. Feature selection is even more relevant in
+                    high-dimensional data, where we need to reduce noise and identify features that
+                    are rich in the signal. A smaller number of features can significantly reduce
+                    model training time as well as the speed of prediction during production
+                    deployment. It also makes the model less complex and easier to explain the
+                    model prediction to laymen.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>We will be performing
+                    cross-validation during feature selection. The methods discussed in this
+                    chapter return a list of features for each cross-validation. For ease of
+                    understanding, we will look at how many features are common across all
+                    cross-validation from among the selected features.<o:p></o:p></span></p>
+              </div>
             </section>
 
           </div>
         </div>
       </div>
-
-      <a href="preface-by-the-author.html" class="navigation navigation-next navigation-unique"
-        aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+      <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
     </div>
   </div>
   <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

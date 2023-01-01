@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9.4 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+  </title>
+  <link rel="prev" href="index.html" />
+  <link rel="next" href="intro.html" />
+  <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+  <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+  <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+  <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+  <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+  <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+  <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+  <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+  <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+  <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+  <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+  <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-110543840-1', 'https://christophm.github.io/interpretable-ml-book/', {
+      'anonymizeIp': true
+      , 'storage': 'none'
+      , 'clientId': window.localStorage.getItem('ga_clientId')
+    });
+    ga(function (tracker) {
+      window.localStorage.setItem('ga_clientId', tracker.get('clientId'));
+    });
+    ga('send', 'pageview');
+  </script>
+
+  <link rel="stylesheet" type="text/css" href="css/cookieconsent.min.css" />
+  <script src="javascript/cookieconsent.min.js"></script>
+  <script>
+    window.addEventListener("load", function () {
+      window.cookieconsent.initialise({
+        "palette": {
+          "popup": {
+            "background": "#000"
+          },
+          "button": {
+            "background": "#f1d600"
+          }
+        },
+        "position": "bottom-right",
+        "content": {
+          "message": "This website uses cookies for Google Analytics so that I know how many people are reading the book and which chapters are the most popular. The book website doesn't collect any personal data."
+        }
+      })
+    });
+  </script>
+
+  <style>
+    #cta-button-desktop:hover,
+    #cta-button-device:hover {
+      background-color: #ffc266;
+      border-color: #ffc266;
+      box-shadow: none;
+    }
+
+    #cta-button-desktop,
+    #cta-button-device {
+      color: white;
+      background-color: #ffa31a;
+      text-shadow: 1px 1px 0 #444;
+      text-decoration: none;
+      border: 2px solid #ffa31a;
+      border-radius: 10px;
+      position: fixed;
+      padding: 5px 10px;
+      z-index: 10;
+    }
+
+    #cta-button-device {
+      box-shadow: 0px 10px 10px -5px rgba(194, 180, 190, 1);
+      display: none;
+      right: 20px;
+      bottom: 20px;
+      font-size: 20px;
+    }
+
+    #cta-button-desktop {
+      box-shadow: 0px 20px 20px -10px rgba(194, 180, 190, 1);
+      display: display;
+      padding: 8px 16px;
+      right: 40px;
+      bottom: 40px;
+      font-size: 25px;
+    }
+
+    @media (max-width : 450px) {
+      #cta-button-device {
+        display: block;
+      }
+
+      #cta-button-desktop {
+        display: none;
+      }
+    }
+  </style>
+
+
+
+
+
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+    <div class="book-summary">
+      <nav role="navigation">
+
+        <ul class="summary">
+          <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i
+                class="fa fa-check"></i>Summary</a></li>
+          <li class="chapter" data-level="1" data-path="preface-by-the-author.html"><a href="foreward.html"><i
+                class="fa fa-check"></i>Foreward</a></li>
+          <li class="chapter" data-level="1" data-path="preface-by-the-author.html"><a
+              href="preface-by-the-author.html"><i class="fa fa-check"></i>Preface by the Author</a></li>
+          <li class="chapter" data-level="1" data-path="intro.html"><a href="before-we-start.html"><i
+                class="fa fa-check"></i>Before we start</a></li>
+          <li class="chapter" data-level="1"><a href="section01.html"><i class="fa fa-check"></i>Section 01:
+              Introduction</a>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter01.html"><i class="fa fa-check"></i>1: Introduction</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter0101.html"><i class="fa fa-check"></i>1.1:
+                  Terminology</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0102.html"><i class="fa fa-check"></i>1.2: Process of
+                  Training a Machine Learning Model</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0103.html"><i class="fa fa-check"></i>1.3: Preventing
+                  Overfitting</a></li>
+              <li class="chapter" data-level="2.4"><a href="chapter0104.html"><i class="fa fa-check"></i>1.4: Code
+                  Conventions</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0105.html"><i class="fa fa-check"></i>1.5: Datasets
+                  Used</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0106.html"><i class="fa fa-check"></i>1.6:
+                  References</a></li>
+            </ul>
+          </li>
+          <li class="chapter" data-level="1"><a href="section02.html"><i class="fa fa-check"></i>Section 02:
+              Feature Engineering</a>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter02.html"><i class="fa fa-check"></i>2: Domain Specific
+                  Feature Engineering </a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter02.html"><i class="fa fa-check"></i>2.1:
+                  Introduction</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0202.html"><i class="fa fa-check"></i>2.2:
+                  Domain-Specific Feature Engineering </a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0203.html"><i class="fa fa-check"></i>2.3:
+                  References</a></li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter03.html"><i class="fa fa-check"></i>3: EDA Feature
+                  Engineering </a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter03.html"><i class="fa fa-check"></i>3.1:
+                  Introduction</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0302.html"><i class="fa fa-check"></i>3.2: Car Sales
+                </a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0303.html"><i class="fa fa-check"></i>3.3: Coupon
+                  Recommendation</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0304.html"><i class="fa fa-check"></i>3.4:
+                  Conclusion</a></li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter04.html"><i class="fa fa-check"></i>4: Higher Order
+                  Feature Engineering </a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter0401.html"><i class="fa fa-check"></i>4.1:
+                  Engineering Categorical Features</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0402.html"><i class="fa fa-check"></i>4.2:
+                  Engineering Ordinal Features </a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0403.html"><i class="fa fa-check"></i>4.3:
+                  Engineering Numerical Features</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0404.html"><i class="fa fa-check"></i>4.4:
+                  Conclusion</a></li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter05.html"><i class="fa fa-check"></i>5: Interaction
+                  Effect Feature Engineering</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter0501.html"><i class="fa fa-check"></i>5.1:
+                  Interaction Plot</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0502.html"><i class="fa fa-check"></i>5.2: SHAP</a>
+              </li>
+              <li class="chapter" data-level="2.3"><a href="chapter0503.html"><i class="fa fa-check"></i>5.3: Putting
+                  Everything Together</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0504.html"><i class="fa fa-check"></i>5.4:
+                  Conclusion</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0505.html"><i class="fa fa-check"></i>5.5:
+                  References</a></li>
+            </ul>
+          </li>
+          <li class="chapter" data-level="1"><a href="section03.html"><i class="fa fa-check"></i>Section 03:
+              Feature Selection</a>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter06.html"><i class="fa fa-check"></i>6: Fundamentals of
+                  Feature Selection</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter06.html"><i class="fa fa-check"></i>6.1:
+                  Introduction</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0602.html"><i class="fa fa-check"></i>6.2: Different
+                  Feature Selection Methods</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0603.html"><i class="fa fa-check"></i>6.3: Filter
+                  Method</a></li>
+              <li class="chapter" data-level="2.4"><a href="chapter0604.html"><i class="fa fa-check"></i>6.4: Wrapper
+                  Method</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0605.html"><i class="fa fa-check"></i>6.5: Putting
+                  Everything Together</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0606.html"><i class="fa fa-check"></i>6.6:
+                  Conclusion</a></li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter07.html"><i class="fa fa-check"></i>7: Feature
+                  Selection Concerning Modeling Techniques</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter0701.html"><i class="fa fa-check"></i>7.1:
+                  Lasso, Ridge, and ElasticNet</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0702.html"><i class="fa fa-check"></i>7.2: Feature
+                  Importance of Tree Models</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0703.html"><i class="fa fa-check"></i>7.3: Boruta</a>
+              </li>
+              <li class="chapter" data-level="2.4"><a href="chapter0704.html"><i class="fa fa-check"></i>7.4: Using
+                  Tree-Based Feature Importance for Linear Model</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0705.html"><i class="fa fa-check"></i>7.5: Using
+                  Linear Model Feature Importance for Tree Models</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0706.html"><i class="fa fa-check"></i>7.6: Linear
+                  Regression</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0707.html"><i class="fa fa-check"></i>7.7: SVM</a>
+              </li>
+              <li class="chapter" data-level="2.5"><a href="chapter0708.html"><i class="fa fa-check"></i>7.8: PCA</a>
+              </li>
+              <li class="chapter" data-level="2.5"><a href="chapter0709.html"><i class="fa fa-check"></i>7.9: Putting
+                  Everything Together</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0710.html"><i class="fa fa-check"></i>7.10:
+                  Conclusion</a></li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter08.html"><i class="fa fa-check"></i>8: Feature
+                  Selection Using Metaheuristic Algorithms</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter0801.html"><i class="fa fa-check"></i>8.1: Exhaustive
+                  Feature Selection</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0802.html"><i class="fa fa-check"></i>8.2: Genetic
+                  Algorithm</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0803.html"><i class="fa fa-check"></i>8.3: Simulated
+                  Annealing</a></li>
+              <li class="chapter" data-level="2.4"><a href="chapter0804.html"><i class="fa fa-check"></i>8.4: Ant Colony
+                  Optimization</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0805.html"><i class="fa fa-check"></i>8.5: Particle
+                  Swarm Optimization</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0806.html"><i class="fa fa-check"></i>8.6: Putting
+                  Everything Together</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0807.html"><i class="fa fa-check"></i>8.7:
+                  Conclusion</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0809.html"><i class="fa fa-check"></i>8.8:
+                  References</a></li>
+            </ul>
+          </li>
+          <li class="chapter" data-level="1"><a href="section04.html"><i class="fa fa-check"></i>Section 04:
+              Model Explanation</a>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter09.html"><i class="fa fa-check"></i>9: Explaining Model
+                  and Model Predictions to Layman</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter09.html"><i class="fa fa-check"></i>9.1:
+                  Introduction</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0902.html"><i class="fa fa-check"></i>9.2:
+                  Explainable models</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0903.html"><i class="fa fa-check"></i>9.3:
+                  Explanation Techniques</a></li>
+              <li class="chapter" data-level="2.4"><a href="chapter0904.html"><i class="fa fa-check"></i>9.4: Putting
+                  Everything Together</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0905.html"><i class="fa fa-check"></i>9.5:
+                  Conclusion</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0906.html"><i class="fa fa-check"></i>9.6:
+                  References</a></li>
+            </ul>
+          </li>
+          <li class="chapter" data-level="1"><a href="section05.html"><i class="fa fa-check"></i>Section 05:
+              Special Chapters</a>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter10.html"><i class="fa fa-check"></i>10: Feature
+                  Engineering & Selection for Text Classification</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter10.html"><i class="fa fa-check"></i>10.1:
+                  Introduction</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter1002.html"><i class="fa fa-check"></i>10.2: Feature
+                  Construction</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter1003.html"><i class="fa fa-check"></i>10.3: Feature
+                  Selection</a></li>
+              <li class="chapter" data-level="2.4"><a href="chapter1004.html"><i class="fa fa-check"></i>10.4: Feature
+                  Extraction</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter1005.html"><i class="fa fa-check"></i>10.5: Feature
+                  Reduction</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter1006.html"><i class="fa fa-check"></i>10.6:
+                  Conclusion</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter1007.html"><i class="fa fa-check"></i>10.7:
+                  References</a></li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter11.html"><i class="fa fa-check"></i>11: Things That Can
+                  Give Additional Improvement</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter11.html"><i class="fa fa-check"></i>11.1:
+                  Introduction</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter1102.html"><i class="fa fa-check"></i>11.2:
+                  Hyperparameter Tuning</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter1103.html"><i class="fa fa-check"></i>11.3: Ensemble
+                  Learning</a></li>
+              <li class="chapter" data-level="2.4"><a href="chapter1104.html"><i class="fa fa-check"></i>11.4: Signal
+                  Processing</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter1105.html"><i class="fa fa-check"></i>11.5:
+                  Conclusion</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter1106.html"><i class="fa fa-check"></i>11.6:
+                  References</a></li>
+            </ul>
+          </li>
+        </ul>
+
+      </nav>
+    </div>
+        <div class="book-body">
+      <div class="body-inner">
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+              <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
+                <h1><span class="header-section-number">Chapter 9.4:</span> Putting
+                  Everything Together</h1>
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>After understanding different
+                    methods of model explainability, now let us try to apply the methods for the
+                    hotel room booking prediction, and hotel booking cancellation datasets.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                  0cm;line-height:150%'><a name="_heading=h.42ddq1a"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                  color:windowtext'>9.4.1<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Hotel Total
+                      Room Booking<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>We tried all 4 methods of explaining
+                    the Lightgbm model, partial dependence plot, accumulated local effects plot,
+                    permutation feature importance, and surrogate model. For these two datasets, we
+                    were able to create acceptable level of model performance through
+                    metaheuristics feature selection.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>We tried a surrogate linear
+                    regression model. However, the RMSE of the model was more than 30. Hence, we
+                    will not include the surrogate model for understanding the Lightgbm regression
+                    model. Permutation feature importance is the easiest to interpret, as it gives
+                    the features in decreasing order of importance for the model. Let us start with
+                    this method. This can be seen in figure 9.4.1.1.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image57.png" o:spid="_x0000_i1052" type="#_x0000_t75" style='width:468pt;
+                   height:110pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image140.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=624 height=147 src="images/image141.jpg" v:shapes="image57.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 9.4.1.1 permutation feature
+                    importance plot for Lightgbm regression model for the hotel total room booking
+                    dataset.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>The first feature is a higher order
+                    feature of cumulative rooms sold for the hotel, for a specific check-in date,
+                    at a lead time. Total rooms to be sold does have an impact on seasonality, as
+                    evidenced by the second most important feature, which is the month of the year
+                    encoded feature.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>To a layman, we can explain that
+                    sold rooms inventory for a check-in date, and the monthly seasonality of the
+                    booking demand have the biggest impact on total room demand for a check-in
+                    date. This can help the machine learning engineer to speak in layman's terms
+                    and convince the users to adopt the model.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>We will now look at the partial
+                    dependence plot for the Lightgbm regression model in figure 9.4.1.2.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image58.png" o:spid="_x0000_i1051" type="#_x0000_t75" style='width:501pt;
+                   height:495.5pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image127.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=668 height=661 src="images/image142.jpg" v:shapes="image58.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 9.4.1.2 partial dependence
+                    plot of Lightgbm regression model for the hotel total room booking dataset.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>The most impactful features have the
+                    sharpest curves. The most important is the plot represented in the second row,
+                    first column. This is a higher order feature of the cumulative number of net
+                    rooms sold. This is an almost linear relationship. The second most impactful
+                    feature is the last subplot in the third row and third column. This is an
+                    encoded feature of the month feature. The months are encoded from 0 to 11.
+                    Since this is a categorical feature, it will not be appropriate to deduct a
+                    conclusion based on the shape of the relationship. We can however conclude the
+                    different levels of hotel reservations for different months. Now let us look at
+                    the accumulated local effects plot for the same dataset in figure 9.4.1.3.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image64.png" o:spid="_x0000_i1050" type="#_x0000_t75" style='width:517pt;
+                   height:517pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image129.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=689 height=689 src="images/image143.jpg" v:shapes="image64.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 9.4.1.3 accumulated local
+                    effects plot of Lightgbm regression model for the hotel total room booking
+                    dataset.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>The accumulated local effects plot
+                    explains the model performance after accommodating the correlation among
+                    features. We can see that the most important feature is the same as it was in
+                    the partial dependence plot. For the second most important feature, the extent
+                    of the impact is less. However, it still has the second-highest sharp changes
+                    for different values of the feature.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>In addition to the inferences drawn
+                    from the three plots, we see that there is very little difference between the
+                    partial dependence plot and the accumulated local effects plot. There is one
+                    advantage with the accumulated local effects plot, as it overcomes the
+                    disadvantage of a partial dependence plot, which cannot work with correlated
+                    features. Although the partial dependence plot and accumulated local effects
+                    plots carry more information than the permutation feature importance plot, the
+                    latter is more legible and easier to read if the model has a huge number of
+                    features.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>For the hotel bookings cancellations
+                    dataset, we will restrict our investigation for overall model explanation to
+                    accumulated local effects plot, and permutation feature importance. For the
+                    rest of this section, we will discuss explaining individual predictions of
+                    hotel total room booking prediction.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image62.png" o:spid="_x0000_i1049" type="#_x0000_t75" style='width:468pt;
+                   height:461pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image131.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=624 height=615 src="images/image144.jpg" v:shapes="image62.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 9.4.1.4 Individual
+                    Conditional Expectation plot of Lightgbm regression model for the hotel total
+                    room booking dataset for the first 10 rows of external test data.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>The ICE plot in figure 9.4.1.4
+                    suggests that there is a degree of non-linearity between the feature '<span class=SpellE><i
+                        style='mso-bidi-font-style:normal'>CumulativeNumberOfRoomsNet_Quartile_Encoded</i></span>'
+                    and the dependent variable. For many cases, the number of total bookings
+                    increases as we move up towards the higher quartile of the number of net
+                    cumulative rooms sold. However, in some cases, it decreases after increasing
+                    for a short while. Hence the relationship could be non-linear.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Let us now look at the LIME
+                    interpretation of a single row of data from the 4th index of external test
+                    data, as displayed in figure 9.4.1.5.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image51.png" o:spid="_x0000_i1048" type="#_x0000_t75" style='width:519pt;
+                   height:160.5pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image133.png"
+                    o:title="" croptop="1853f" cropleft="700f"/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=692 height=214 src="images/image145.gif" v:shapes="image51.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 9.4.1.5 LIME plot of Lightgbm
+                    regression model for the hotel total room booking dataset for the 4th row of
+                    external test data.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>The above plot has 3 parts. Let us
+                    understand the first part. The predicted value displays higher values in orange
+                    color and smaller values in blue color. The prediction from model 189.01 is a
+                    high value. The second subplot has a negative and positive relationship
+                    indicator against the feature. For example, for the &nbsp;<span class=SpellE><i
+                        style='mso-bidi-font-style:normal'>DayOfWeek_Encoded</i></span>&nbsp; feature, total
+                    rooms increase in demand for days that are farther from Monday. Similarly, for
+                    the &nbsp;<span class=SpellE><i
+                        style='mso-bidi-font-style:normal'>AdjustedLeadTimeCumulativeNumberOfRoomsNet_Quartile_Encoded</i></span>&nbsp;
+                    feature, it has a negative relationship with total room demand. This is the
+                    interaction between lead time and the net number of rooms quartile feature. The
+                    second part of the plot also suggests the current value for the feature,
+                    against a threshold set by the model. For example, the &nbsp;<span class=SpellE><i
+                        style='mso-bidi-font-style:normal'>DayOfMonth_Encoded</i></span>&nbsp; feature, has
+                    a negative relationship with the total rooms sold for a check-in date. I.e.
+                    Total number of rooms is sold more towards the beginning of the month, and then
+                    gradually decreases as the month passes. Here the value is 20, which is higher
+                    than the set threshold of 15, and the check-in date for which the model has
+                    predicted is farther in the month.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>The third part of the plot is a
+                    table and simply denotes each feature in orange and blue color, depending on
+                    whether the feature has a positive or negative relationship with the dependent
+                    variable. The second column of the table shows the actual values of the feature
+                    for the specific row.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Now let us look at the
+                    counterfactual model explanation for the same observation in 4<sup>th</sup>
+                    row, in figure 9.4.1.6.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image54.png" o:spid="_x0000_i1047" type="#_x0000_t75" style='width:468pt;
+                   height:373pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image135.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=624 height=497 src="images/image146.jpg" v:shapes="image54.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 9.4.1.6 Counterfactual plot
+                    of Lightgbm regression model for the hotel total room booking dataset for the
+                    4th row of external test data.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>We can clearly see that month of the
+                    year encoded feature has highest impact, as identified by the counterfactual
+                    plot. A small change the value of month can bring a drastic change in the model
+                    prediction. This was followed by the &nbsp;<span class=SpellE><i style='mso-bidi-font-style:
+                  normal'>AdjustedLeadTimeCumulativeRevenueNet_Quartile_Encoded</i></span>&nbsp;
+                    feature.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Now let us look at the SHAP model
+                    explanation for the same observation in 4th row, in figure 9.4.1.7.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image55.png" o:spid="_x0000_i1046" type="#_x0000_t75" style='width:467.5pt;
+                   height:262.5pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image138.png"
+                    o:title="" cropbottom="3874f"/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=623 height=350 src="images/image147.jpg" v:shapes="image55.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 9.4.1.7 SHAP plot of Lightgbm
+                    regression model for the hotel total room booking dataset for the 4th row of
+                    external test data.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>This plot is a simple and
+                    easy-to-understand explanation of the prediction for 4<sup>th</sup> row of
+                    data. The plot ranks the extent of impact each feature had on the specific
+                    prediction. The month of the year and day of the week has the most impact on
+                    predicting the 4<sup>th</sup> row of data. This indicates a strong trend and
+                    seasonality impact for this check-in date.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                  0cm;line-height:150%'><a name="_heading=h.2hio093"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                  color:windowtext'>9.4.2<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Hotel Booking
+                      Cancellation<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>We will look at permutation feature
+                    importance, and the accumulated local effects plot for the overall model
+                    explanation in this section. We tried creating a logistic regression surrogate
+                    model. However, its precision was found to be very low at 0.19 for the external
+                    test data. Hence, we will not try the surrogate model explanation for the hotel
+                    booking cancellation dataset.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Amongst the partial dependence plots
+                    and accumulated local effects plots, the latter is more robust as it considers
+                    the correlation among features. Hence, we will discuss the latter. As the
+                    number of features in the model is quite high, we will restrict our model
+                    explanation to the topmost features. Let us now look at figure 9.4.2.1 for the
+                    top 7 features based on the variation each feature has concerning the dependent
+                    variable.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image60.png" o:spid="_x0000_i1045" type="#_x0000_t75" style='width:532.5pt;
+                   height:393.5pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image148.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=710 height=525 src="images/image149.gif" v:shapes="image60.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 9.4.2.1 Accumulated local
+                    effects plot of Xgboost classification model for the hotel booking cancellation
+                    dataset<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>We can see from the plot that the
+                    lead time, followed by annual daily revenue (ADR) makes a huge impact on the
+                    dependent variable. This is confirmed by the huge variation in the plot, as
+                    well as distinctly visible scatter data points.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Let us now perform permutation
+                    feature importance for the top 40 features in figure 9.4.2.2.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image63.png" o:spid="_x0000_i1044" type="#_x0000_t75" style='width:468pt;
+                   height:446pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image150.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=624 height=595 src="images/image151.jpg" v:shapes="image63.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 9.4.2.2 Permutation feature
+                    importance plot of Xgboost classification model for the hotel booking
+                    cancellation dataset<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Permutation feature importance
+                    suggests that country is the biggest contributor to booking cancellation in the
+                    model. This is followed by lead time and agent. Guests from certain countries,
+                    as well as reservations from certain agents, are more likely to lead to
+                    cancelation in comparison to others. While reporting this, we also need to
+                    consider the ethical aspects of the model, so that it is not inherently biased
+                    and discriminatory towards different nationalities.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>After understanding the model as a
+                    whole, now let us try to explore individual predictions made by the model. Let
+                    us start with ICE plots in figure 9.4.2.3 with 10 example observations from
+                    external test data.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image56.png" o:spid="_x0000_i1043" type="#_x0000_t75" style='width:499pt;
+                   height:355.5pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image152.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=665 height=474 src="images/image153.gif" v:shapes="image56.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 9.4.2.3 Individual
+                    Conditional Expectation plot of Xgboost classification model for the hotel
+                    booking cancellation dataset for the first 10 rows of external test data.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>The ICE plot in figure 9.4.2.3
+                    suggests that lead time and previous cancellations are clear indicators of the
+                    likelihood of cancellation for the hotel reservation. Although in some cases,
+                    it is difficult to differentiate, as seen for the lead time square root value
+                    between 7.5 and 10. However, in comparison to other features, these features
+                    give a clear indication of cancellation behavior.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Now let us look at the LIME plot for
+                    the Xgboost model in figure 9.4.2.3. As the number of features is numerous, we
+                    will be focusing on top features only.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image52.png" o:spid="_x0000_i1042" type="#_x0000_t75" style='width:495pt;
+                   height:371pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image154.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=660 height=495 src="images/image155.gif" v:shapes="image52.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 9.4.2.3 LIME plot of Xgboost
+                    classification model for the hotel booking cancellation dataset for the 4<sup>th</sup>
+                    row of external test data.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>The prediction value is 0.97 as the
+                    probability of the reservation being canceled. The table on the right-hand side
+                    in figure 9.4.2.3 has the actual value of different features, based on which
+                    the Xgboost model predicted 0.97. The current value for the feature &nbsp;<span class=SpellE><i
+                        style='mso-bidi-font-style:normal'>LeadTime_Sqrt</i></span>&nbsp; is
+                    19.57, which is higher than the threshold identified by LIME as 12.49 for the
+                    feature, beyond which the likelihood of cancellation increases.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>We tried counterfactual
+                    explanations. However, it was not conclusive for the 4th observation in
+                    external test data. Hence, we will look at SHAP explanations for the 4th
+                    observation in the external test data for the top 20 features, as identified by
+                    the SHAP explanation.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image53.png" o:spid="_x0000_i1041" type="#_x0000_t75" style='width:468pt;
+                   height:531pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image156.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=624 height=708 src="images/image157.gif" v:shapes="image53.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p>&nbsp;</o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 9.4.2.4 SHAP plot of Xgboost
+                    classification model for the hotel booking cancellation dataset for the 4th row
+                    of external test data.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>The highest impact for the model
+                    prediction is made by encoded features of the country and the square root of
+                    lead time respectively. This matches with permutation feature importance in
+                    figure 9.4.2.2.<o:p></o:p></span></p>
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+      <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+  <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+  <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+  <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+  <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+  <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+  <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+  <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+  <script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+  <script>
+    gitbook.require(["gitbook"], function (gitbook) {
+      gitbook.start({
+        "sharing": {
+          "github": true,
+          "facebook": false,
+          "twitter": true,
+          "linkedin": true,
+          "weibo": false,
+          "instapaper": false,
+          "vk": false,
+          "whatsapp": false,
+          "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+        },
+        "fontsettings": {
+          "theme": "white",
+          "family": "sans",
+          "size": 2
+        },
+        "edit": {
+          "link": "https://github.com/christophM/interpretable-ml-book/edit/master/manuscript/index.Rmd",
+          "text": "Edit"
+        },
+        "history": {
+          "link": null,
+          "text": null
+        },
+        "view": {
+          "link": null,
+          "text": null
+        },
+        "download": null,
+        "search": {
+          "engine": "fuse",
+          "options": null
+        },
+        "toc": {
+          "collapse": "subsection"
+        }
+      });
+    });
+  </script>
+
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      var src = "true";
+      if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+      if (location.protocol !== "file:")
+        if (/^https?:/.test(src))
+          src = src.replace(/^https?:/, '');
+      script.src = src;
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+</body>
+
+</html>

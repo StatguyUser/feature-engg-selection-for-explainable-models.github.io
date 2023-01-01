@@ -2,40 +2,12 @@
 <html lang="" xml:lang="">
 
 <head>
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Feature Engineering & Selection for Explainable Models</title>
-  <meta name="description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Feature Engineering & Selection for Explainable Models" />
-  <meta property="og:type" content="book" />
-
-  <meta property="og:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Feature Engineering & Selection for Explainable Models" />
-
-  <meta name="twitter:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="author" content="Christoph Molnar" />
-
-
-  <meta name="date" content="2022-12-14" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-
-
-  <link rel="next" href="preface-by-the-author.html" />
+  <title>Chapter 10.4 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+  </title>
+  <link rel="prev" href="index.html" />
+  <link rel="next" href="intro.html" />
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -139,10 +111,19 @@
       }
     }
   </style>
+
+
+
+
+
+
   <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
+
+
+
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
     <div class="book-summary">
       <nav role="navigation">
@@ -381,28 +362,288 @@
 
       </nav>
     </div>
-
-    <div class="book-body">
+      <div class="book-body">
       <div class="body-inner">
+        
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
-            <div id="header">
-              <h1 class="title">Feature Engineering & Selection for Explainable Models</h1>
-              <p>&nbsp;</p>
-              <h2 class="subtitle"><em>A Second Course for Data Scientists</em></h2>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p class="author"><em>Md Azimul Haque</em></p>
-            </div>
+
+            <section class="normal" id="section-">
+              <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
+                <h1><span class="header-section-number">Chapter 10.4:</span> Feature Extraction</h1>
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>In the case of text
+                    classification, feature extraction is done by representing text documents into matrices,
+                    which can then be used by machine learning algorithms as features to classify
+                    labels. For traditional machine learning models, feature extraction is done
+                    mostly by either a bag of words matrix or the TF-IDF matrix.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%;background:white'><a name="_heading=h.2eclud0"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-color-alt:windowtext'>10.4.1<span style='mso-tab-count:1'>&nbsp; </span>Bag of
+                      Words</span></b><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext;mso-color-alt:windowtext'>
+                      <o:p></o:p>
+                    </span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>It is a scoring method in which the
+                    count of individual words is used for presence and 0 for absence. Let us
+                    consider example 10.4.1 below with 4 corpora.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Example 10.4.1<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Corpus 1: I am very happy.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Corpus 2: I just had an awesome
+                    weekend.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Corpus 3: I just had lunch. You had
+                    lunch?<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Corpus 4: Do you want chips?<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Unique words from these 4 corpora,
+                    after removing punctuation marks are: 'am', 'an', 'awesome', 'chips', 'Do',
+                    'had', 'happy', 'I', 'just', 'lunch', 'very', 'want', 'weekend', 'you'<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Bag of words vector will appear in
+                    table 10.4.1.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image15.png" o:spid="_x0000_i1032" type="#_x0000_t75" style='width:240.5pt;
+ height:204.5pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image174.png"
+  o:title=""/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=321 height=273 src="images/image175.gif" v:shapes="image15.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Table 10.4.1: Bag of words vector<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>In the above table, the corpus is
+                    present in the column and the words are present in the row. If a specific word
+                    is present in the corpus, its count is presented in corresponding cells against
+                    the word. If a word is not present in the corpus, 0 is presented in the
+                    corresponding cell.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>For example, the word &nbsp;<i style='mso-bidi-font-style:normal'>lunch</i>&nbsp; is
+                    present in corpus 3. Hence
+                    count 2 is present in the corresponding cell. The word &nbsp;<i style='mso-bidi-font-style:
+normal'>am</i>&nbsp; is only present in corpus 1, for once. Hence the corresponding
+                    cells have the value 1. Again, the word &nbsp;<i style='mso-bidi-font-style:normal'>am</i>&nbsp;,
+                    is not present in any other corpus apart from corpus 1. Hence, in corpus 2, 3,
+                    and 4, the value in the corresponding cells is 0.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%;background:white'><a name="_heading=h.thw4kt"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-color-alt:windowtext'>10.4.2<span style='mso-tab-count:1'>&nbsp; </span>Term Frequency
+                      Inverse Document Frequency</span></b><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman";color:windowtext;mso-color-alt:windowtext'>
+                      <o:p></o:p>
+                    </span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>This is otherwise abbreviated as
+                    TF-IDF. Term frequency and inverse document frequency of each word are
+                    calculated and multiplied to obtain the TF-IDF score.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Term frequency (TF) is calculated by
+                    dividing how frequently a term appears in a corpus, by the total number of terms
+                    in the corpus.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>TF = Count of the number of times
+                    the term &nbsp;t&nbsp; is present in the corpus) / Count all the terms in the corpus.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Inverse document frequency is
+                    calculated by taking the logarithm of the total number of the corpus by the
+                    count of documents that has the term.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>IDF = log (Total number of documents
+                    / Count(documents which have term &nbsp;t&nbsp;))<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>TF-IDF vector for the corpora in
+                    example 10.4.1 will appear as per table 10.4.2<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image20.png" o:spid="_x0000_i1031" type="#_x0000_t75" style='width:259pt;
+ height:217pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image176.png"
+  o:title=""/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=345 height=289 src="images/image177.gif" v:shapes="image20.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Table 10.4.2: TF-IDF vector<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%;background:white'><a name="_heading=h.3dhjn8m"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-color-alt:windowtext'>10.4.3<span style='mso-tab-count:1'>&nbsp;
+                      </span>Word2vec</span></b><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext;mso-color-alt:windowtext'>
+                      <o:p></o:p>
+                    </span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Word2Vec is a shallow neural network
+                    that tries to understand the context of words <sup>[10]</sup>. In word2vec,
+                    individual words are represented as one-hot vectors and are used for creating a
+                    vector space. It has a hidden layer, which is a fully-connected dense layer.
+                    The weights of the hidden layer are the word embeddings. The output layer
+                    outputs probabilities based on the Softmax activation function for the target
+                    words from the vocabulary. Such a network is a &quot;standard&quot; multinomial
+                    (multi-class) classifier.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>The objective function of word2vec
+                    is to maximize the log of similarity between the vectors for words that appear
+                    close together in the context and minimize the similarity of words that do not.
+                    This is called the Softmax function.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image19.png" o:spid="_x0000_i1030" type="#_x0000_t75" style='width:261.5pt;
+ height:69.5pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image178.png"
+  o:title=""/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=349 height=93 src="images/image179.jpg" v:shapes="image19.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Since classes are actual words, the
+                    number of neurons is huge. The Softmax function when applied to such a huge
+                    output layer will be computationally expensive. To save costly computation of
+                    the Softmax in the output layer, noise-contrastive estimation is used. This
+                    converts the multinomial classification problem to a binary classification
+                    problem.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image17.png" o:spid="_x0000_i1029" type="#_x0000_t75" style='width:412pt;
+ height:46.5pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image180.png"
+  o:title=""/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=549 height=62 src="images/image181.jpg" v:shapes="image17.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><i style='mso-bidi-font-style:normal'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman"'>C</span></i><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'> is the context word, and <i style='mso-bidi-font-style:normal'>W</i> is the
+                    focus word. <span class=SpellE>V<sub>c</sub></span>
+                    is the embedding of context words and <span class=SpellE>V<sub>w</sub></span>
+                    is the embedding of focus words. <o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Given a pair of words, we will
+                    predict the context target or not. For this, we will create positive and
+                    negative samples. For example, if 'Orange' and 'juice' are positive, it will be
+                    inferred that these appear together in the same context. Similarly, if
+                    'Orange', and 'king' are negative, it will be inferred that both words do not
+                    appear in the same context. Positive samples are extracted from the context
+                    window whereas negative sample is drawn randomly from the dictionary of all
+                    words. Depending on the size of the data, if the data is small, negative sample
+                    size k is selected between 5&lt;&gt;20 and for large, k is between 2&lt;&gt;5.
+                    Accordingly, word pairs are created consisting of the input word, surrounding
+                    context word, and target label whether it is a positive sample or negative
+                    sample.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>For backpropagation, two matrices of
+                    the same size are created namely embedding and context. The number of rows in
+                    the matrix is the size of the vocabulary in the corpus and the number of
+                    columns is defined as the size of the embedding. The embedding matrix has input
+                    word representation and the context matrix has representation from context
+                    word. At the start of the training process, random values are initialized in
+                    these matrices.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Through the dot product of input
+                    embedding with each of the context embeddings, we obtain similarities between
+                    the input and context embeddings. Resultant dot product numbers are converted
+                    into positive numbers ranging between 0 and 1 using the sigmoid function. The
+                    prediction error is obtained for each pair of input words and context words by
+                    subtracting sigmoid transformation from the actual label value of the positive
+                    sample(1) and negative sample(0). The error so obtained is inserted in the
+                    embedding layer for each of the words in input for all the combination pairs.
+                    This process is repeated through the dataset, based on the number of epochs
+                    defined. Finally, the context matrix is discarded and the embedding matrix is
+                    used.<o:p></o:p></span></p>
+              </div>
             </section>
 
           </div>
         </div>
       </div>
-
-      <a href="preface-by-the-author.html" class="navigation navigation-next navigation-unique"
-        aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+      <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
     </div>
   </div>
   <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

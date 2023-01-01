@@ -2,40 +2,12 @@
 <html lang="" xml:lang="">
 
 <head>
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Feature Engineering & Selection for Explainable Models</title>
-  <meta name="description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Feature Engineering & Selection for Explainable Models" />
-  <meta property="og:type" content="book" />
-
-  <meta property="og:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Feature Engineering & Selection for Explainable Models" />
-
-  <meta name="twitter:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="author" content="Christoph Molnar" />
-
-
-  <meta name="date" content="2022-12-14" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-
-
-  <link rel="next" href="preface-by-the-author.html" />
+  <title>Chapter 6.3 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+  </title>
+  <link rel="prev" href="index.html" />
+  <link rel="next" href="intro.html" />
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -139,10 +111,19 @@
       }
     }
   </style>
+
+
+
+
+
+
   <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
+
+
+
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
     <div class="book-summary">
       <nav role="navigation">
@@ -381,28 +362,84 @@
 
       </nav>
     </div>
-
+  
     <div class="book-body">
       <div class="body-inner">
+
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
-            <div id="header">
-              <h1 class="title">Feature Engineering & Selection for Explainable Models</h1>
-              <p>&nbsp;</p>
-              <h2 class="subtitle"><em>A Second Course for Data Scientists</em></h2>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p class="author"><em>Md Azimul Haque</em></p>
-            </div>
+
+            <section class="normal" id="section-">
+              <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
+                <h1><span class="header-section-number">Chapter 6.3:</span> Filter Method</h1>
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>This method uses the characteristics
+                    of the data. This method is independent of the machine learning technique. This
+                    is done before training the model. It requires less computational power and is
+                    usually fast. This method can miss out on removing features that are not useful
+                    for the modeling problem. This method is sometimes used as a preliminary
+                    feature selection method for datasets. After obtaining a reduced set of
+                    features from filter method, these features are introduced to other
+                    sophisticated feature selection methods. This approach is useful when the
+                    number of features is too high and computing power is limited. The reduced set
+                    of features can then be used by advanced methods to give superior results.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>It mostly uses correlation
+                    coefficient and hypothesis testing techniques such as ANOVA, T-Test, and
+                    Chi-Square test to identify the relationship between the dependent variable and
+                    independent variables. Features that do not have any proven relationship with
+                    the dependent variable are discarded from the features for modeling.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>If the nature of the modeling
+                    problem is classification and the feature is categorical, we can use the
+                    chi-square test to validate if the distribution of different categories across
+                    different classes is statistically significant. If the p-value is above 0.05,
+                    we can remove the categorical feature, as the distribution of categories across
+                    different classes is not significant. This could imply a weak predictor.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>For classification problems and
+                    numerical features, we can perform ANOVA. The dependent variable has a value of
+                    either 1 or 0 and can be considered as 2 categories. We can calculate averages
+                    for both classes for numerical features. With the help of ANOVA, we can test
+                    the hypothesis if the different mean value thus calculated for each class of
+                    dependent variable is statistically significant. If it is not significant, we
+                    can remove such numerical features. ANOVA can also be applied for the numeric
+                    dependent variable and categorical features, in other words, regression models
+                    and categorical features.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>For regression problems and
+                    numerical features, we can use correlation to ascertain the strength of the
+                    feature. Although correlation is not causation, this technique can still be
+                    used for high-dimensional datasets. One caveat of this method is deciding the
+                    correlation threshold to use for accepting or rejecting a feature as useful.
+                    Although it is subjective, we can keep a higher threshold such as 0.5 and
+                    above. For linear regression with multiple features, using correlation as a
+                    feature selection method has its limitations. The biggest risk will be losing
+                    out on potential interaction effects, as correlation only talks about the
+                    relation between the feature and the dependent variable in isolation, without
+                    accounting for any other feature. The same could be said for the Chi-square
+                    test and logistic regression. In such a situation, regularization techniques
+                    such as Lasso would be the most ethically sound method for feature selection
+                    for linear regression.<o:p></o:p></span></p>
+              </div>
             </section>
 
           </div>
         </div>
       </div>
-
-      <a href="preface-by-the-author.html" class="navigation navigation-next navigation-unique"
-        aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+      <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
     </div>
   </div>
   <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

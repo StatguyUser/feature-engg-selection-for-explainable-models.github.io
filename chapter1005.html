@@ -2,40 +2,12 @@
 <html lang="" xml:lang="">
 
 <head>
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Feature Engineering & Selection for Explainable Models</title>
-  <meta name="description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Feature Engineering & Selection for Explainable Models" />
-  <meta property="og:type" content="book" />
-
-  <meta property="og:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Feature Engineering & Selection for Explainable Models" />
-
-  <meta name="twitter:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="author" content="Christoph Molnar" />
-
-
-  <meta name="date" content="2022-12-14" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-
-
-  <link rel="next" href="preface-by-the-author.html" />
+  <title>Chapter 10.5 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+  </title>
+  <link rel="prev" href="index.html" />
+  <link rel="next" href="intro.html" />
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -139,11 +111,21 @@
       }
     }
   </style>
+
+
+
+
+
+
   <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
+
+
+
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
     <div class="book-summary">
       <nav role="navigation">
 
@@ -381,28 +363,88 @@
 
       </nav>
     </div>
-
     <div class="book-body">
       <div class="body-inner">
+
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
-            <div id="header">
-              <h1 class="title">Feature Engineering & Selection for Explainable Models</h1>
-              <p>&nbsp;</p>
-              <h2 class="subtitle"><em>A Second Course for Data Scientists</em></h2>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p class="author"><em>Md Azimul Haque</em></p>
-            </div>
+
+            <section class="normal" id="section-">
+              <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
+                <h1><span class="header-section-number">Chapter 10.5:</span> Feature Reduction</h1>
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>There are a few methods
+                    available for the feature reduction of sparse vectors. The most notable ones
+                    are singular value decomposition (SVD) and non-negative matrix factorization (NMF).
+                    The objective of both techniques is to identify latent spaces that explain the
+                    original data in a more concise and computationally efficient manner.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%;background:white'><a name="_heading=h.4cmhg48"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-color-alt:windowtext'>10.5.1<span style='mso-tab-count:1'>&nbsp; </span>Singular Value
+                      Decomposition</span></b><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman";color:windowtext;mso-color-alt:windowtext;background:white;
+mso-highlight:white'>
+                      <o:p></o:p>
+                    </span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>Bag of words and TF-IDF
+                    methods create high-dimensional vectors which contain useful numbers. However,
+                    these are very long and sparse. <o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>Storing and processing
+                    high-dimensional data is computationally intensive and expensive. Hence,
+                    ideally, we will like to reduce the bag of words and TF-IDF vectors into short
+                    dense vectors which contain the most important dimensions of variation. A
+                    traditional method of doing this is called singular value decomposition. </span><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-color-alt:windowtext'>SVD can reduce the
+                    TF-IDF matrix into a few columnar features, which makes machine learning
+                    classifier training faster. It removes less important parts of the matrix and
+                    produced an approximation in the specified number of dimensions. It is a
+                    classical second-order eigenvector technique, in which components are generated
+                    from the original vector, which is uncorrelated. SVD is used as a data
+                    compression technique.</span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%;background:white'><a name="_heading=h.2rrrqc1"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-color-alt:windowtext'>10.5.2<span style='mso-tab-count:1'>&nbsp; </span>Non-Negative
+                      Matrix Factorization</span></b><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman";color:windowtext;mso-color-alt:windowtext'>
+                      <o:p></o:p>
+                    </span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%;background:white'><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:#222222;background:white;mso-highlight:white'>This method is otherwise
+                    known as NMF. This is suitable when features are made up of non-negative
+                    elements. In the case of text classification, both bag of words and TF-IDF
+                    feature matrix, values are positive. The lowest value in the matrix is 0.
+                    Hence, we can use it for processing sparse matrices and finding meaningful
+                    components. It is mostly used for topic modeling techniques. Through NMF and
+                    topic modeling, we can identify the most common word in social media
+                    conversations. This can help us create a lexicon of useful words for the
+                    domain. The availability of a comprehensive lexicon can aid in identifying the
+                    different classes for the classification model, as well as expanding the
+                    understanding of the broad domain for which the classification model is being
+                    developed.<o:p></o:p></span></p>
+              </div>
             </section>
 
           </div>
         </div>
       </div>
-
-      <a href="preface-by-the-author.html" class="navigation navigation-next navigation-unique"
-        aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+      <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
     </div>
   </div>
   <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

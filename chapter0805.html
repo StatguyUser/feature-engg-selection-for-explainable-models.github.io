@@ -2,40 +2,12 @@
 <html lang="" xml:lang="">
 
 <head>
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Feature Engineering & Selection for Explainable Models</title>
-  <meta name="description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Feature Engineering & Selection for Explainable Models" />
-  <meta property="og:type" content="book" />
-
-  <meta property="og:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Feature Engineering & Selection for Explainable Models" />
-
-  <meta name="twitter:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="author" content="Christoph Molnar" />
-
-
-  <meta name="date" content="2022-12-14" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-
-
-  <link rel="next" href="preface-by-the-author.html" />
+  <title>Chapter 8.5 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+  </title>
+  <link rel="prev" href="index.html" />
+  <link rel="next" href="intro.html" />
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -139,10 +111,19 @@
       }
     }
   </style>
+
+
+
+
+
+
   <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
+
+
+
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
     <div class="book-summary">
       <nav role="navigation">
@@ -381,28 +362,171 @@
 
       </nav>
     </div>
-
     <div class="book-body">
       <div class="body-inner">
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
-            <div id="header">
-              <h1 class="title">Feature Engineering & Selection for Explainable Models</h1>
-              <p>&nbsp;</p>
-              <h2 class="subtitle"><em>A Second Course for Data Scientists</em></h2>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p class="author"><em>Md Azimul Haque</em></p>
-            </div>
+
+            <section class="normal" id="section-">
+              <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
+                <h1><span class="header-section-number">Chapter 8.5:</span> Particle Swarm Optimization</h1>
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>The particle swarm optimization
+                    (PSO) is an optimization algorithm that tries to iteratively improve candidate
+                    solutions. Individual candidate solutions are known as particles. The
+                    population of all candidate solutions, which comprises all particle candidate
+                    solutions, is called a swarm. It tries to move the candidate particles in the
+                    search space using the position of the particle and velocity. Each particle
+                    tries to move toward the best-known position, based on the better position
+                    found by the particle itself and also the better position found by other
+                    particles collectively in the swarm. This helps the swarm to collectively move
+                    towards better solutions. This process is iteratively repeated to find the best
+                    possible solution.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>It is inspired by the collective
+                    behavior of animals such as birds. For example, a swarm of birds is a swarm of
+                    insects. Let's take the example of a flock of birds. A flock of birds flies to
+                    find a place where food availability is maximum and the presence of predators
+                    is minimum. If a bird has to change its direction from its flock, it does so by
+                    changing its direction and redirecting its force in the new direction. Birds
+                    also share information amongst themselves about changes in direction. Once the
+                    best place is found by one of the swarm&nbsp;s members, the rest of the birds follow
+                    the direction of the first bird to change direction. By sharing information,
+                    birds of the flock together have a greater chance of survival than if they had
+                    to survive alone.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Let's try to understand the
+                    mathematics behind PSO. X is an n-dimensional vector that tries to optimize a
+                    given objective function f(X). Here n is the number of factors or variables
+                    that have an impact on the outcome. For birds, it can be the longitude and
+                    latitude of the place where they want to land. For P particles in the swarm
+                    that goes through the &nbsp;t&nbsp; number of iterations, the position vector can be
+                    represented as X<sup>t</sup><sub>i </sub>= (x<sub>i</sub>1 x<sub>i</sub>2 x<sub>i</sub>3&nbsp;<span
+                      class=SpellE>x<sub>i</sub>n</span>)<sup>T</sup>. The velocity vector can be
+                    represented as <span class=SpellE>V<sup>t</sup><sub>i</sub></span><sub> </sub>=
+                    (v<sub>i</sub>1 v<sub>i</sub>2 v<sub>i</sub>3&nbsp;v<sub>i</sub>n)<sup>T</sup>.
+                    Individual particles are denoted as &nbsp;i&nbsp; and have values from 1 till P. Position
+                    and velocity vectors are updated through j dimensions with the help of the below
+                    2 equations, where j has values from 1 till n.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image36.png" o:spid="_x0000_i1069" type="#_x0000_t75" style='width:383pt;
+ height:70pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image099.png"
+  o:title="" croptop="6263f" cropbottom="6274f" cropleft="2740f" cropright="1906f"/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=511 height=93 src="images/image100.gif" v:shapes="image36.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Equation 1 is used for updating the
+                    velocity of the particles, whereas equation 2 is used for changing the
+                    particle's positions. In the above two equations, c1 and c2 are positive
+                    acceleration constants. The constant c1 relates to previous learning by the
+                    same particle, whereas the constant c2 is a social learning constant. r1 and r2
+                    are random values between 0 and 1 and help PSO to avoid getting stuck at local
+                    minima/maxima and increase the likelihood of finding global minima/maxima. w is
+                    inertia weight constant and is a positive number. It helps update velocity by
+                    multiplying the previous velocity and the weight constant. If it is kept above
+                    0 but less than 1, the swarm will be able to explore more solutions in the
+                    searching domain and have more chances of getting global minima. Although, as a
+                    consequence, it can increase the computation time.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>The <span class=SpellE>pbest</span>
+                    represents individual learning, whereas <span class=SpellE>gbest</span>
+                    represents global learning. If the <span class=SpellE>pbest</span> term (<span
+                      class=SpellE>pbest<sub>ij</sub></span> - <span class=SpellE>X<sub>ij</sub><sup>t</sup></span>)
+                    increases, it can help individual i<sup>th</sup> particles towards the best
+                    possible position. If the <span class=SpellE>gbest</span> term (<span
+                      class=SpellE>gbest<sub>j</sub></span> - <span class=SpellE>X<sub>ij</sub><sup>t</sup></span>)
+                    increases, it can help find the global best of the swarm.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Figure 8.5.1 below is the flowchart
+                    of PSO <sup>[3]</sup>.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image29.png" o:spid="_x0000_i1068" type="#_x0000_t75" style='width:336.5pt;
+ height:244.5pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image101.png"
+  o:title=""/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=449 height=326 src="images/image102.gif" v:shapes="image29.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Figure 8.5.1: Flowchart of particle
+                    swarm optimization<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>We can use the function </span><span class=SpellE><span lang=EN style='font-family:Consolas;mso-fareast-font-family:
+Consolas;mso-bidi-font-family:Consolas;color:white;background:#333333'>ParticleSwarmOptimization</span></span><span
+                    lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman"'> in the feature selection object </span><span class=SpellE><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'>fsObj</span></span><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman"'> for performing particle swarm optimization. Below is how
+                    the syntax will look like.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='line-height:normal'><span class=SpellE><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;mso-bidi-font-family:
+Consolas;color:white;background:#333333'>best_columns</span></span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'> = <span
+                      class=SpellE>fsObj.ParticleSwarmOptimization</span>(iterations = </span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#D36363;background:#333333'>25</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'>,<br>
+                    <span style='mso-spacerun:yes'>&nbsp;</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=SpellE>swarmSize</span>
+                    = </span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:
+Consolas;mso-bidi-font-family:Consolas;color:#D36363;background:#333333'>75</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'>,<br>
+                    <span style='mso-spacerun:yes'>&nbsp;</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=SpellE>run_time</span>=</span><span
+                    lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#D36363;background:#333333'>1200</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'>)</span><span lang=EN style='font-size:12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>In this syntax example, we have
+                    executed particle swarm optimization for 25 iterations. Within each iteration,
+                    we have swarm size of 75. Execution time limit is set for 1200 minutes.<o:p></o:p></span></p>
+              </div>
             </section>
 
           </div>
         </div>
       </div>
-
-      <a href="preface-by-the-author.html" class="navigation navigation-next navigation-unique"
-        aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+      <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
     </div>
   </div>
   <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

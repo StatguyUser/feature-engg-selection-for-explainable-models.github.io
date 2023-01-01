@@ -2,40 +2,12 @@
 <html lang="" xml:lang="">
 
 <head>
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Feature Engineering & Selection for Explainable Models</title>
-  <meta name="description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Feature Engineering & Selection for Explainable Models" />
-  <meta property="og:type" content="book" />
-
-  <meta property="og:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Feature Engineering & Selection for Explainable Models" />
-
-  <meta name="twitter:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="author" content="Christoph Molnar" />
-
-
-  <meta name="date" content="2022-12-14" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-
-
-  <link rel="next" href="preface-by-the-author.html" />
+  <title>Chapter 6.5 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+  </title>
+  <link rel="prev" href="index.html" />
+  <link rel="next" href="intro.html" />
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -139,10 +111,19 @@
       }
     }
   </style>
+
+
+
+
+
+
   <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
+
+
+
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
     <div class="book-summary">
       <nav role="navigation">
@@ -384,25 +365,235 @@
 
     <div class="book-body">
       <div class="body-inner">
+ 
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
-            <div id="header">
-              <h1 class="title">Feature Engineering & Selection for Explainable Models</h1>
-              <p>&nbsp;</p>
-              <h2 class="subtitle"><em>A Second Course for Data Scientists</em></h2>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p class="author"><em>Md Azimul Haque</em></p>
-            </div>
+
+            <section class="normal" id="section-">
+              <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
+                <h1><span class="header-section-number">Chapter 6.5:</span> Putting
+                  Everything Together</h1>
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>We tried all the methods discussed
+                    in this chapter for the 4 datasets. In this section, we will look at the best
+                    results achieved for each dataset.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Certain feature selection methods
+                    are computationally expensive, whereas some others are computationally
+                    prohibitive. Backward and step feature selection methods in sequential feature
+                    selection are of computationally prohibitive type. We tried executing these
+                    methods in an intel i7, 64GB RAM machine. For linear and Xgboost models, many
+                    times its execution wasn't completed even after 48 hours. At this point, we
+                    stopped the Jupyter notebook cell and moved on to the next method. This
+                    criterion was applied to all methods where it took more than 48 hours, it was
+                    stopped.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                  0cm;line-height:150%'><a name="_heading=h.4h042r0"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                  color:windowtext'>6.5.1<span style='mso-tab-count:1'>��� </span>Hotel Total
+                      Room Booking<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>We tried different models and
+                    feature selection methods. Of all the methods, Xgboost regression, when used
+                    with the filter method, gave the best performance. For cross-validation test,
+                    and validation data, the RMSE was observed to be 13.9. RMSE for the external
+                    test data was identified as 5.9. The detailed results for each cross-validation
+                    can be seen in figure 6.5.1.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p>&nbsp;</o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image4.png" o:spid="_x0000_i1085" type="#_x0000_t75" style='width:521pt;
+                   height:276pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image067.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=695 height=368 src="images/image068.jpg" v:shapes="image4.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 6.5.1 performance of Xgboost
+                    tree model with filter method for feature selection on cross-validation test,
+                    validation, and external test data for hotel total room booking prediction<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>The results came as an improvement
+                    upon the results reported in chapter 5. It still has a few areas for
+                    improvement. Firstly, the difference in results between the two test data sets
+                    is quite high. Also, among different cross-validations, the results are not
+                    consistent and fluctuate drastically. This can be seen by comparing the first
+                    vs third cross-validation results for external test data. Secondly, the results
+                    despite being better than what was reported in chapter 5, still fall short and
+                    RMSE are quite high. We will need to try other feature selection methods to see
+                    if the results are any different.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                  0cm;line-height:150%'><a name="_heading=h.2w5ecyt"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                  color:windowtext'>6.5.2<span style='mso-tab-count:1'>��� </span>Hotel Booking
+                      Cancellation<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>We tried different models and
+                    feature selection methods. Of all the methods, the Xgboost classifier, when
+                    used with the filter method, gave the best performance. For the
+                    cross-validation test, and the validation data precision was recorded at 0.835,
+                    and 0.877 for external test data. The detailed results for each
+                    cross-validation can be seen in figure 6.5.2.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image3.png" o:spid="_x0000_i1084" type="#_x0000_t75" style='width:526.5pt;
+                   height:277.5pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image069.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=702 height=370 src="images/image070.jpg" v:shapes="image3.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 6.5.2 performance of Xgboost
+                    tree model with filter method for feature selection on cross-validation test,
+                    validation, and external test data for hotel booking cancellation prediction<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>The previous results achieved in
+                    chapter 5 were better than the results obtained through the filter method.
+                    However, recall improved to a slight extent, in comparison to previous results.
+                    Even then, we still need to improve on both the precision and recall for both
+                    datasets. Also, we need to bring the performance of both datasets to a similar
+                    level. Finally, the results in the 1st cross-validation is poor than the rest
+                    of the cross-validations. All these points suggest us to try other methods of
+                    feature selection to find a better solution.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                  0cm;line-height:150%'><a name="_heading=h.1baon6m"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                  color:windowtext'>6.5.3<span style='mso-tab-count:1'>��� </span>Car Sales<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>We tried different models and
+                    feature selection methods. Lightgbm regression, when used with the filter
+                    method, gave the best performance of all the methods. For cross-validation
+                    test, and validation data RMSE was observed to be 398263, and 230356 for
+                    external test data. The detailed results for each cross-validation can be seen
+                    in figure 6.5.3.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image6.png" o:spid="_x0000_i1083" type="#_x0000_t75" style='width:508.5pt;
+                   height:261pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image071.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=678 height=348 src="images/image072.jpg" v:shapes="image6.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 6.5.3 performance of Lightgbm
+                    tree model with filter method for feature selection on cross-validation test,
+                    validation, and external test data for used car price prediction.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>The results obtained through the
+                    filter method are marginally better than the previous results presented in
+                    chapter 5. Even then, it suffers from the same issues we saw in chapter 5.
+                    Results across different test datasets are inconsistent. Results across
+                    different cross-validations are not consistent. If we had to use this model, we
+                    cannot say with confidence that it will generalize well on new unseen data, to
+                    the extent it does for the test, validation, and external test data. Also, the
+                    RMSE values for car prices are very high to be considered acceptable.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>As the results presented for car
+                    prices are not acceptable enough to be used as a model, we will try other
+                    methods of feature selection in subsequent chapters.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                  0cm;line-height:150%'><a name="_heading=h.3vac5uf"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                  color:windowtext'>6.5.4<span style='mso-tab-count:1'>��� </span>Coupon Recommendation<o:p></o:p>
+                      </span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>We tried different models and
+                    feature selection methods. Of all the methods, the Xgboost classifier, when
+                    used with the filter method, gave the best performance. For the
+                    cross-validation test, validation data precision was recorded at 0.708, and
+                    0.755 for external test data. Although recall worsened than previous results to
+                    a small extent. The detailed results for each cross-validation for precision
+                    can be seen in figure 6.5.4 below.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image2.png" o:spid="_x0000_i1082" type="#_x0000_t75" style='width:524.5pt;
+                   height:276.5pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image073.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=699 height=369 src="images/image074.jpg" v:shapes="image2.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 6.5.4 performance of Xgboost
+                    tree model with filter method for feature selection on cross-validation test,
+                    validation, and external test data for coupon recommendation dataset.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><a name="_heading=h.2afmg28"></a><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+                  "Times New Roman"'>This model, like its predecessor model discussed in chapter
+                    5 suffers from the same issues. The precision and recall are not good enough
+                    and the results in external test data are not consistent with cross-validations
+                    test and validation data. We will try other methods of feature selection in the
+                    next chapters to see if any improvement is possible.<o:p></o:p></span></p>
+              </div>
             </section>
 
           </div>
         </div>
       </div>
-
-      <a href="preface-by-the-author.html" class="navigation navigation-next navigation-unique"
-        aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+      <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
     </div>
   </div>
   <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

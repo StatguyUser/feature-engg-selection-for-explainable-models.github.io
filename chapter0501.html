@@ -2,40 +2,12 @@
 <html lang="" xml:lang="">
 
 <head>
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Feature Engineering & Selection for Explainable Models</title>
-  <meta name="description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Feature Engineering & Selection for Explainable Models" />
-  <meta property="og:type" content="book" />
-
-  <meta property="og:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Feature Engineering & Selection for Explainable Models" />
-
-  <meta name="twitter:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="author" content="Christoph Molnar" />
-
-
-  <meta name="date" content="2022-12-14" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-
-
-  <link rel="next" href="preface-by-the-author.html" />
+  <title>Chapter 5.1 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+  </title>
+  <link rel="prev" href="index.html" />
+  <link rel="next" href="intro.html" />
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -139,11 +111,21 @@
       }
     }
   </style>
+
+
+
+
+
+
   <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
+
+
+
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
     <div class="book-summary">
       <nav role="navigation">
 
@@ -386,23 +368,172 @@
       <div class="body-inner">
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
-            <div id="header">
-              <h1 class="title">Feature Engineering & Selection for Explainable Models</h1>
-              <p>&nbsp;</p>
-              <h2 class="subtitle"><em>A Second Course for Data Scientists</em></h2>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p class="author"><em>Md Azimul Haque</em></p>
-            </div>
+
+            <section class="normal" id="section-">
+              <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
+                <h1><span class="header-section-number">Chapter 5.1:</span> Interaction
+                  Plot</h1>
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>The interaction plot is an extension
+                    of two-way ANOVA, which tests if two factors affect the dependent variable. If
+                    the p-value is below 0.05, we will believe that there is a significant
+                    interaction effect between the two factors. Before that, let's understand what
+                    is one-way and two-way ANOVA.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>The one-way ANOVA tests variance in
+                    the group means within a sample while considering only one categorical feature.
+                    In the case of two-way ANOVA, it tests variance in the group means within a
+                    sample while considering levels of two categorical features. It tests the
+                    interaction between categorical features, for the continuous dependent
+                    variables.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>There are two steps for concluding
+                    the relationship between two categorical features. In the first step, we
+                    perform two-way ANOVA and check the p-value of the interaction effect. If the
+                    interaction effect is significant, we perform the second step. In the second step,
+                    we plot the relationship with the help of an interaction plot. Interaction plot
+                    can help us understand the relationship visually. If the lines in the plot are
+                    parallel, we can conclude that there is no interaction. On the other hand, if
+                    lines intersect each other, we can say that there is an interaction among the
+                    features. If lines neither intersect nor run parallel, we can say that there is
+                    some degree of interaction.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>The final decision of accepting or
+                    rejecting the presence of interaction effect should be done after checking the
+                    p-value of ANOVA. To avoid overfitting, we will perform ANOVA on training data
+                    across all cross-validations. If the result is significant across all
+                    cross-validations, we will consider it statistically significant and the interaction
+                    effect valid.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>For the hotel room booking dataset,
+                    all the categorical features are derived either from the check-in date, or
+                    quartile features from numerical features such as booking trend, and revenue.
+                    Hence It will not be meaningful to do ANOVA between the dependent variable and
+                    the categorical variables derived from the dependent variable. It will neither
+                    be meaningful to perform ANOVA with only categorical variables derived from the
+                    seasonality of the date feature.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Let&nbsp;s go through the car sales
+                    regression dataset. We will use a few categorical features to explain the
+                    interaction plot. We will start with the &nbsp;fuel&nbsp; and &nbsp;<span class=SpellE>sellertype</span>&nbsp;
+                    categorical features against the dependent variable &nbsp;<span class=SpellE>sellingprice</span>&nbsp;.
+                    Figure 5.1 shows the interaction plot between the features and the dependent
+                    variable..<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image23.png" o:spid="_x0000_i1094" type="#_x0000_t75" style='width:422.5pt;
+                   height:419.5pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image049.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=563 height=559 src="images/image050.jpg" v:shapes="image23.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 5.1: Interaction plot of fuel
+                    and <span class=SpellE>sellertype</span> against <span class=SpellE>sellingprice</span>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>From the graph we can see that
+                    dealer car have the highest price, regardless of the fuel type. This is
+                    followed by petrol cars sold by Trustmark dealers. LPG, followed by CNG cars
+                    has the lowest prices when sold by individual sellers. Although we can infer
+                    these relationships from the graph, it was not validated by the p-value of
+                    ANOVA for training data across all cross-validation samples. Also, none of the
+                    lines in the plot cross each other. Hence, we conclude that the interaction
+                    effect is not present between &nbsp;fuel&nbsp; and &nbsp;<span class=SpellE>sellertype</span>&nbsp;.<o:p></o:p></span>
+                </p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Now let&nbsp;s look at the relationship
+                    between fuel and owner on car selling price in figure 5.2.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image24.png" o:spid="_x0000_i1093" type="#_x0000_t75" style='width:413pt;
+                   height:417.5pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image051.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=551 height=557 src="images/image052.jpg" v:shapes="image24.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 5.2: Interaction plot of fuel
+                    and owner against <span class=SpellE>sellingprice</span>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>From figure 5.2 we can see that
+                    petrol test drive cars have the highest price. We can infer this from the
+                    position of the blue dot at the top right section of the plot. This is followed
+                    by diesel cars sold by first owners, which have the second highest price.
+                    Petrol cars sold by first owners fetch less price than diesel cars sold by
+                    first owners.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Second, third, and fourth owners
+                    intersect at LPG for all owner types, which means LPG cars are sold at similar
+                    prices, regardless of the number of times it has been sold in the past. The
+                    only exception is the first owner, for whom the selling price is relatively
+                    higher.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>We also tested the relationship with
+                    ANOVA for training data across 5 cross-validation samples. In all the samples,
+                    the relationship came as significant. We can finally create an interaction
+                    effect feature between these two categorical features.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>The best way to go about finding the
+                    interaction effect through an interaction plot is that first, we should perform
+                    ANOVA across different samples of training data in cross-validation. If it came
+                    significant in all the cross-validation samples, we can then use an interaction
+                    plot to get an intuitive explanation of the type of relationship that exists.
+                    We can finally use it for creating interaction effect features.<o:p></o:p></span></p>
+              </div>
             </section>
 
           </div>
         </div>
       </div>
-
-      <a href="preface-by-the-author.html" class="navigation navigation-next navigation-unique"
-        aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+      <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
     </div>
   </div>
   <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

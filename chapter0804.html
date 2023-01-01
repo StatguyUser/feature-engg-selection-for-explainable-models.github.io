@@ -2,40 +2,12 @@
 <html lang="" xml:lang="">
 
 <head>
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Feature Engineering & Selection for Explainable Models</title>
-  <meta name="description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Feature Engineering & Selection for Explainable Models" />
-  <meta property="og:type" content="book" />
-
-  <meta property="og:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Feature Engineering & Selection for Explainable Models" />
-
-  <meta name="twitter:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="author" content="Christoph Molnar" />
-
-
-  <meta name="date" content="2022-12-14" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-
-
-  <link rel="next" href="preface-by-the-author.html" />
+  <title>Chapter 8.4 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+  </title>
+  <link rel="prev" href="index.html" />
+  <link rel="next" href="intro.html" />
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -139,10 +111,19 @@
       }
     }
   </style>
+
+
+
+
+
+
   <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
+
+
+
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
     <div class="book-summary">
       <nav role="navigation">
@@ -381,28 +362,195 @@
 
       </nav>
     </div>
-
     <div class="book-body">
       <div class="body-inner">
-        <div class="page-wrapper" tabindex="-1" role="main">
+         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
-            <div id="header">
-              <h1 class="title">Feature Engineering & Selection for Explainable Models</h1>
-              <p>&nbsp;</p>
-              <h2 class="subtitle"><em>A Second Course for Data Scientists</em></h2>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p class="author"><em>Md Azimul Haque</em></p>
-            </div>
+
+            <section class="normal" id="section-">
+              <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
+                <h1><span class="header-section-number">Chapter 8.4:</span> Ant Colony Optimization</h1>
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Ants as insects are social by nature
+                    and live in colonies. Their objective is to survive collectively as a colony,
+                    instead of survival as an individual ant. Ants communicate with each other
+                    using sound, touch, and pheromones.<span style='mso-spacerun:yes'>&nbsp; </span>Ant
+                    colony optimization (ACO) focuses on pheromones. Ants carry a portion of the
+                    food. While returning, they leave traces of pheromone. Other ants try to find
+                    an optimal path by following the pheromone trail left by other ants on the
+                    ground. ACO tries to mimic the behavior of ants to find the shortest path for
+                    food as an optimization algorithm. Figure 8.4.1 below illustrates the ACO
+                    metaheuristic algorithm.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image48.png" o:spid="_x0000_i1072" type="#_x0000_t75" style='width:265pt;
+ height:151pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image093.png"
+  o:title=""/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=353 height=201 src="images/image094.gif" v:shapes="image48.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Figure 8.4.1: ACO metaheuristic.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>In the first step, the pheromone
+                    trail and parameters are initialized. Each ant then constructs a complete
+                    solution for the problem using a pheromone trail and heuristic information.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Starting nodes, and a path between
+                    the nest and food, which passes through nodes are selected at random. Paths
+                    with a higher number of pheromone trails are given a higher probability. Ants
+                    travel between food and nest by passing through multiple nodes. This process is
+                    called a 'tour'. Each completed tour is a solution.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>After pheromone trails are
+                    generated, their update is initiated. Pheromone can evaporate. As a result of
+                    evaporation, the level of pheromone in the pheromone trail can increase or
+                    decrease. Pheromone update considers this for improving the solution search.
+                    Pheromone update happens in two steps. In the first step, a fraction of the
+                    pheromone evaporates. In the second step, each ant updates the pheromone trail
+                    by depositing the amount of pheromone, proportional to how good or bad the
+                    trail is. Better solutions receive more pheromone trails, whereas worse
+                    solutions receive fewer pheromone trails.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>In the next step, a new cycle is
+                    performed and this process is repeated until most of the ants follow the same
+                    tour on most of the cycles. At each iteration, the pheromone tends to
+                    concentrate within the reduced search space. The global optima are searched
+                    within the reduced search space in subsequent iterations, using the best values
+                    obtained from the new ant colony from the previous iteration.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Figure 8.4.2 below illustrates the
+                    pseudocode of ACO, and figure 8.4.3 explains all the variables used in ACO.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image41.png" o:spid="_x0000_i1071" type="#_x0000_t75" style='width:403pt;
+ height:425pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image095.png"
+  o:title="" cropbottom="1528f" cropleft="1365f" cropright="1574f"/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=537 height=567 src="images/image096.jpg" v:shapes="image41.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Figure 8.4.2: ACO pseudocode<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p>&nbsp;</o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image25.png" o:spid="_x0000_i1070" type="#_x0000_t75" style='width:468pt;
+ height:152pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image097.png"
+  o:title=""/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=624 height=203 src="images/image098.jpg" v:shapes="image25.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Figure 8.4.3: Variables used in ACO
+                    pseudocode<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>After understanding all the details
+                    of the ACO algorithm, we should remember that it is useful for a smaller number
+                    of features. For a large number of features, it may or may not give the best
+                    solution.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>We can use the function <span class=SpellE><span
+                        style='color:white;background:#333333'>AntColonyOptimization</span></span>
+                    in the feature selection object </span><span class=SpellE><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;mso-bidi-font-family:
+Consolas;color:white;background:#333333'>fsObj</span></span><span lang=EN
+                    style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman"'>
+                    for performing ant colony optimization. Below is how the syntax will look like.<o:p></o:p></span>
+                </p>
+
+                <p class=MsoNormal style='line-height:normal'><span class=SpellE><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;mso-bidi-font-family:
+Consolas;color:white;background:#333333'>best_columns</span></span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'> = <span
+                      class=SpellE>fsObj.AntColonyOptimization</span>(iterations = </span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#D36363;background:#333333'>25</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'>,<br>
+                    <span style='mso-spacerun:yes'>&nbsp;</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=SpellE>N_ants</span> = </span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#D36363;background:#333333'>75</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'>,<br>
+                    <span style='mso-spacerun:yes'>&nbsp;</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=SpellE>run_time</span>=</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#D36363;background:#333333'>1200</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'>,<br>
+                    <span style='mso-spacerun:yes'>&nbsp;</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=SpellE>evaporation_rate</span>=</span><span lang=EN
+                    style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#D36363;background:#333333'>0.8</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'>,<br>
+                    <span style='mso-spacerun:yes'>&nbsp;</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Q=</span><span lang=EN style='font-family:
+Consolas;mso-fareast-font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#D36363;background:#333333'>0.2</span><span lang=EN style='font-family:
+Consolas;mso-fareast-font-family:Consolas;mso-bidi-font-family:Consolas;
+color:white;background:#333333'>)</span><span lang=EN style='font-size:12.0pt;
+font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>In this syntax example, we have
+                    executed ant colony optimization for 25 iterations. Within each iteration, we
+                    have 75 ants. Execution time limit is set for 1200 minutes. We have set
+                    evaporation rate for pheromones as 0.8 and Q as 0.2.<o:p></o:p></span></p>
+              </div>
             </section>
 
           </div>
         </div>
       </div>
-
-      <a href="preface-by-the-author.html" class="navigation navigation-next navigation-unique"
-        aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+      <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
     </div>
   </div>
   <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

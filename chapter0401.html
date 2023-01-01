@@ -2,40 +2,12 @@
 <html lang="" xml:lang="">
 
 <head>
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Feature Engineering & Selection for Explainable Models</title>
-  <meta name="description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Feature Engineering & Selection for Explainable Models" />
-  <meta property="og:type" content="book" />
-
-  <meta property="og:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Feature Engineering & Selection for Explainable Models" />
-
-  <meta name="twitter:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="author" content="Christoph Molnar" />
-
-
-  <meta name="date" content="2022-12-14" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-
-
-  <link rel="next" href="preface-by-the-author.html" />
+  <title>Chapter 4.1 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+  </title>
+  <link rel="prev" href="index.html" />
+  <link rel="next" href="intro.html" />
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -139,10 +111,19 @@
       }
     }
   </style>
+
+
+
+
+
+
   <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
+
+
+
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
     <div class="book-summary">
       <nav role="navigation">
@@ -381,28 +362,279 @@
 
       </nav>
     </div>
-
     <div class="book-body">
       <div class="body-inner">
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
-            <div id="header">
-              <h1 class="title">Feature Engineering & Selection for Explainable Models</h1>
-              <p>&nbsp;</p>
-              <h2 class="subtitle"><em>A Second Course for Data Scientists</em></h2>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p class="author"><em>Md Azimul Haque</em></p>
-            </div>
+
+            <section class="normal" id="section-">
+              <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
+                <h1><span class="header-section-number">Chapter 4.1:</span> Engineering Categorical Features</h1>
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>A categorical feature or nominal
+                    feature has multiple unique categories, where there is no order of importance
+                    for one category against the other. An example can be different departments in
+                    a company, such as finance, human resource, sales, and marketing. Categorical
+                    features cannot be introduced to machine learning models as they are. Instead,
+                    they should be preprocessed and converted into a format that can be understood
+                    by the model. These techniques are called as &nbsp;encodings&nbsp;. There are many different
+                    types of encodings available. We will now look at different types of encodings
+                    for categorical features.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%'><a name="_heading=h.ihv636"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext'>4.1.1<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Dummy Encoding
+                      or One-Hot Encoding<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Linear algorithms cannot learn from
+                    categorical features as it is. Instead, these features need to be converted to
+                    a one-hot encoded format for the model to be able to learn. This is especially
+                    useful in the event of auto-correlation, where we can create seasonality
+                    related dummy variables to treat auto-correlation.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p>&nbsp;</o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Let's take the example of the
+                    feature 'weather' from the coupon recommendation dataset. It has 3 categories,
+                    namely 'Sunny', 'Rainy', and 'Snowy'. We can use the Pandas' function <span class=SpellE><span
+                        style='color:white;background:#333333'>get_dummies</span></span>
+                    to create dummy encoded variables. Below is what the output will look like.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image65.png" o:spid="_x0000_i1105" type="#_x0000_t75" style='width:188.5pt;
+ height:162.5pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image027.png"
+  o:title=""/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=251 height=217 src="images/image028.gif" v:shapes="image65.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>While creating dummy encoding, we
+                    should be careful about the 'dummy variable trap'. This is a scenario when
+                    variables are highly correlated to each other. For linear models, it can be
+                    problematic and could lead to multicollinearity. To mitigate this, we can drop
+                    one of the columns. In Pandas, we can do this by changing the parameter in <span class=SpellE><span
+                        style='color:white;background:#333333'>pd.get_dummies</span></span>
+                    from <span class=SpellE><span style='color:white;background:#333333'>drop_first</span></span><span
+                      style='color:white;background:#333333'>=</span><span style='color:#FCC28C;
+background:#333333'>False</span>, to <span class=SpellE><span style='color:
+white;background:#333333'>drop_first</span></span><span style='color:white;
+background:#333333'>=</span><span style='color:#FCC28C;background:#333333'>True</span>.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%'><a name="_heading=h.32hioqz"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext'>4.1.2<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Label Encoding<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Tree-based algorithms can learn from
+                    categorical features without having to create dummy features. Tree models
+                    instead require categorical features to be represented as labels. In this
+                    method, a unique number is assigned to each category. The numbers assigned to
+                    each category are to distinguish from other categories. These numbers do not
+                    represent rank in any order of importance or usefulness.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>We can use the <span class=SpellE><span
+                        style='color:white;background:#333333'>LabelEncoder</span></span> function from
+                    the Sklearn library to convert categorical features into label-encoded
+                    features. Below is how the &nbsp;</span><span lang=EN style='font-size:10.5pt;
+line-height:150%;font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman";background:white;mso-highlight:white'>time</span><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman"'>&nbsp; feature will look, before and after label encoding.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image68.png" o:spid="_x0000_i1104" type="#_x0000_t75" style='width:134.5pt;
+ height:224.5pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image029.png"
+  o:title=""/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=179 height=299 src="images/image030.gif" v:shapes="image68.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%'><a name="_heading=h.1hmsyys"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext'>4.1.3<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Count, and Percentage
+                      Encoding<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>In count encoding, we replace the
+                    respective categories with their count of occurrence. In percent encoding, we
+                    replace categories with percentages. It can be used for both linear and
+                    tree-based algorithms. If a specific category is present more often than
+                    others, in such a situation, count replacement for the category could become an
+                    outlier. In this situation, we can perform log transformation, as it will
+                    smoothen the effect of the outlier. Also, count or percentage encoding should be
+                    done based on the count of categories in training data only and not on the
+                    entire data set. As otherwise it will lead to data leakage and overfitting.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Below is the encoding for the &nbsp;<span class=SpellE>passanger</span>&nbsp; feature
+                    in the coupon recommendation data set
+                    with count and percentage.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image74.png" o:spid="_x0000_i1103" type="#_x0000_t75" style='width:261.5pt;
+ height:97.5pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image031.png"
+  o:title=""/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=349 height=130 src="images/image032.gif" v:shapes="image74.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%'><a name="_heading=h.41mghml"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext'>4.1.4<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Encoding by
+                      Rank of Counts<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>One of the problems with count
+                    encoding is that if a specific category is the present majority of the time, it
+                    can make the counts look skewed. One way to fix this problem is by performing
+                    log transformation. We can mitigate this challenge also by ranking categories
+                    based on the count for the categories and replacing categories with the rank.
+                    We first take the count of each category in the feature. Categories are sorted
+                    in the order of their counts in ascending order. The category which has the
+                    lowest count is given value 1. The count for other categories in ascending
+                    order is incremented by 1. These encodings should be developed only from
+                    training data.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>One additional advantage of the rank
+                    of counts encoding is that this is useful for both linear and non-linear
+                    models.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>For the &nbsp;<span class=SpellE>passanger</span>&nbsp;
+                    feature in the coupon recommendation data set, below is what the rank of counts
+                    will look like.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image94.png" o:spid="_x0000_i1102" type="#_x0000_t75" style='width:208pt;
+ height:116.5pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image033.png"
+  o:title=""/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=277 height=155 src="images/image034.gif" v:shapes="image94.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%'><a name="_heading=h.2grqrue"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext'>4.1.5<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Target Encoding<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>We can take summary statistics for
+                    categories against the dependent variable and use it to replace the categories.
+                    The most commonly used summary statistics are the mean value of the dependent
+                    variable. We can calculate the mean value of the dependent variable for each
+                    category and replace these mean values with actual categories. Mean encodings
+                    can be applied for both regression and classification problems.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>For regression problems, we can also
+                    use quantiles, such as the 25th percentile, median, and 75th percentile instead
+                    of the mean. We can also use the standard deviation for each category, to
+                    replace each category. If data in the dependent variable has outliers, we can
+                    instead convert the dependent variable to a log scale and then calculate
+                    desired summary statistics for each category. Below is an example of mean
+                    encoding for the coupon recommendation dataset for the &nbsp;occupation&nbsp; feature.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image7.png" o:spid="_x0000_i1101" type="#_x0000_t75" style='width:227pt;
+ height:107pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image035.png"
+  o:title=""/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=303 height=143 src="images/image036.gif" v:shapes="image7.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'><span style='mso-spacerun:yes'>&nbsp;</span>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>This encoding is useful when we have
+                    too many categories in the categorical feature. We should however calculate
+                    these encodings only on the training data. After calculating the encodings, we
+                    can apply these to test data and validation data. This will prevent
+                    overfitting.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>For categorical features with high
+                    cardinality, for the last 3 encodings discussed, it can be possible that a
+                    category is present only in the test data and validation data, whereas it is
+                    absent in training data. In such a case, encoding for the categorical feature
+                    will not be representative of all data. We can drop the encoding feature of
+                    high cardinality features in such a case. Although not an ideal solution, we
+                    can also include encoding from training data of another cross-validation sample
+                    for the missed categories, as a workaround. It will ensure that we have
+                    encoding value for the missing category, and at the same time, there is minimal
+                    data leakage, as we are only taking encoding for the missing category and from
+                    training data of another cross-validation sample. Including encoding from the
+                    entire dataset should always be avoided, as it will lead to data leakage and
+                    overfitting. In rare occurrences when the specific category for the feature is
+                    only present in test data and not in training data of any cross-validation
+                    sample, we may obtain encoding for the specific category from test data. If
+                    there are too many such categories in a feature that are not present in
+                    training data, we should avoid using count, percent, rank percent, and target
+                    encoding for such features.<o:p></o:p></span></p>
+              </div>
             </section>
 
           </div>
         </div>
       </div>
-
-      <a href="preface-by-the-author.html" class="navigation navigation-next navigation-unique"
-        aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+      <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
     </div>
   </div>
   <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -2,40 +2,12 @@
 <html lang="" xml:lang="">
 
 <head>
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Feature Engineering & Selection for Explainable Models</title>
-  <meta name="description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Feature Engineering & Selection for Explainable Models" />
-  <meta property="og:type" content="book" />
-
-  <meta property="og:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Feature Engineering & Selection for Explainable Models" />
-
-  <meta name="twitter:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="author" content="Christoph Molnar" />
-
-
-  <meta name="date" content="2022-12-14" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-
-
-  <link rel="next" href="preface-by-the-author.html" />
+  <title>Chapter 1.1 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+  </title>
+  <link rel="prev" href="index.html" />
+  <link rel="next" href="intro.html" />
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -139,10 +111,19 @@
       }
     }
   </style>
+
+
+
+
+
+
   <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
+
+
+
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
     <div class="book-summary">
       <nav role="navigation">
@@ -384,25 +365,141 @@
 
     <div class="book-body">
       <div class="body-inner">
+
+
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
-            <div id="header">
-              <h1 class="title">Feature Engineering & Selection for Explainable Models</h1>
-              <p>&nbsp;</p>
-              <h2 class="subtitle"><em>A Second Course for Data Scientists</em></h2>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p class="author"><em>Md Azimul Haque</em></p>
-            </div>
+
+            <section class="normal" id="section-">
+              <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
+                <h1><span class="header-section-number">Chapter 1.1:</span> Terminology</h1>
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Over the next section in this chapter
+                    and subsequent chapters, we will use a few terms frequently. Let's understand
+                    the meaning of these terms.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%'><a name="_heading=h.1t3h5sf"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext'>1.1.1<span style='mso-tab-count:1'>&nbsp; </span>Dataset,
+                      Variable, and Observation</span></b><b><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                      <o:p></o:p>
+                    </span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>If we are considering a CSV file
+                    that has relevant data for a machine learning project, we will refer to it as a
+                    dataset. Each column has data values and is of value for the project. We will
+                    refer to it as a &nbsp;variable&nbsp;. A variable could be considered a dependent or
+                    target or outcome variable if it is the central point of focus of the project.
+                    The variables that we want to use for modeling the behavior of the target
+                    variable could be referred to as features or independent variables. Each row in
+                    the dataset will be referred to as an observation or record.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%'><a name="_heading=h.4d34og8"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext'>1.1.2<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Feature
+                      Engineering<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Feature engineering or feature
+                    construction is the process of creating new features in the data set using
+                    domain knowledge, as well as creating higher order features from original
+                    features.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>A bank employee responsible for the
+                    upkeep of minimum cash reserve in a bank branch might be aware more customers
+                    visit branches for cash withdrawals just a few days before holidays, than the
+                    number of customers who visit during other days. Similarly, fewer customers
+                    might come to the branch for cash withdrawals, on the next day of the festival.
+                    This information can be used for creating 2 separate binary 1|0 indicator
+                    features to represent days before and after the festivals. This is an example
+                    of feature engineering using domain knowledge.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>In addition to domain knowledge, we
+                    can also use data-driven approaches for feature construction, such as
+                    exploratory data analysis (EDA). For example, during EDA if we observe data
+                    anomalies, we can probe this with subject matter experts and if it indeed turns
+                    out to be a valid pattern in the data, and is of use for the machine learning
+                    project, we can create features that represent the pattern in raw data.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>We can also create new features from
+                    existing features using transformations of the original features. For example,
+                    instead of taking original values, we can take the square of the original value
+                    to increase the magnitude. If body weight recorded for an adult is 71.9, 72,
+                    and 69.9, etc., we can instead take 5169.61, 5184, and 4886.01, which are
+                    squares of the original values. By performing a square, the difference in
+                    weight is more noticeable than the original values.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%'><a name="_heading=h.2s8eyo1"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext'>1.1.3<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Feature
+                      Extraction<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Feature extraction is the process of
+                    finding alternative representations for the original features created during
+                    feature engineering. It converts features into a lower dimension. This makes
+                    the structure of the data clearer for the model to learn.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>For example, if there are 500
+                    features, a technique such as principal component analysis (PCA) can convert
+                    these features into a lesser number of principal components, say 20. It might
+                    be easier and faster for the model to learn from fewer features that have
+                    maximum information.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%'><a name="_heading=h.17dp8vu"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext'>1.1.4<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Feature
+                      Selection<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Feature selection deals with
+                    choosing a subset of features from a list of given features. This helps
+                    identify features that are rich in useful information for the model, ultimately
+                    resulting in a less complex model of high predictive power.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>For example, if we have 5000
+                    features, by performing feature selection we can identify a very small number
+                    of features that gives the highest performance. By having a small set of
+                    features, it also becomes easier to explain model prediction to laymen.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+0cm;line-height:150%'><a name="_heading=h.3rdcrjn"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+color:windowtext'>1.1.5<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Cost Function<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>&nbsp;Cost function&nbsp;, &nbsp;model metric&nbsp;,
+                    &nbsp;model performance&nbsp;, and &nbsp;predictive performance&nbsp; are used interchangeably as
+                    synonyms in this book. For a regression model, example cost functions are root
+                    mean square error (RMSE), mean absolute error (MAE), etc. For a classification
+                    model, example cost functions could be F1 score, precision, and recall.<o:p></o:p></span></p>
+              </div>
             </section>
 
           </div>
         </div>
       </div>
-
-      <a href="preface-by-the-author.html" class="navigation navigation-next navigation-unique"
-        aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+      <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
     </div>
   </div>
   <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -2,40 +2,12 @@
 <html lang="" xml:lang="">
 
 <head>
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Feature Engineering & Selection for Explainable Models</title>
-  <meta name="description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Feature Engineering & Selection for Explainable Models" />
-  <meta property="og:type" content="book" />
-
-  <meta property="og:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Feature Engineering & Selection for Explainable Models" />
-
-  <meta name="twitter:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="author" content="Christoph Molnar" />
-
-
-  <meta name="date" content="2022-12-14" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-
-
-  <link rel="next" href="preface-by-the-author.html" />
+  <title>Chapter 4.2 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+  </title>
+  <link rel="prev" href="index.html" />
+  <link rel="next" href="intro.html" />
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -139,10 +111,19 @@
       }
     }
   </style>
+
+
+
+
+
+
   <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
+
+
+
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
     <div class="book-summary">
       <nav role="navigation">
@@ -381,28 +362,143 @@
 
       </nav>
     </div>
-
     <div class="book-body">
       <div class="body-inner">
+
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
-            <div id="header">
-              <h1 class="title">Feature Engineering & Selection for Explainable Models</h1>
-              <p>&nbsp;</p>
-              <h2 class="subtitle"><em>A Second Course for Data Scientists</em></h2>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p class="author"><em>Md Azimul Haque</em></p>
-            </div>
+
+            <section class="normal" id="section-">
+              <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
+                <h1><span class="header-section-number">Chapter 4.2:</span> Engineering
+                  Ordinal Features</h1>
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Ordinal feature, just like the
+                    categorical feature has multiple categories. The difference between the both
+                    type of feature is that in the case of ordinal feature, categories follow a
+                    specific order. For example, an ordinal feature 'age group' can have the age of
+                    individuals recorded as categories such as 'kid', 'teenager', 'adult', and
+                    'elderly'. These categories are reflective of the age of individuals from lower
+                    to higher value incrementally. In this case, the 'age group' can be considered
+                    an ordinal feature. Let&nbsp;s discuss the different types of encoding possible for
+                    ordinal features.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Let's consider the ordinal feature '<i
+                      style='mso-bidi-font-style:normal'>income</i>' in the coupon recommendation
+                    data set. It has 9 levels, starting from 0 to more than 100000. Each category
+                    is a range with lower and upper ranges. The difference between the upper and
+                    lower ranges of each category is 12499. The difference between the lower range
+                    of the next category and the upper range of the previous category is 1.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Just like categorical features,
+                    ordinal features should be presented as encodings.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                  0cm;line-height:150%'><a name="_heading=h.3fwokq0"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                  color:windowtext'>4.2.1<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Rank Encoding<o:p></o:p></span></b>
+                </h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>This is the most simplistic feature
+                    encoding for ordinal features. We rank categories in such a way that the
+                    category of least value is given a value of 1 and for other categories, we
+                    incrementally increase the label by 1. In the example given for '<i
+                      style='mso-bidi-font-style:normal'>income</i>', the category ''Less than
+                    $12500'' will be given value as 1, for '$12500 - $24999' it will be 2, and so
+                    on.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Below is a snapshot of the
+                    rank-encoded representation of the income feature.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image12.png" o:spid="_x0000_i1100" type="#_x0000_t75" style='width:107.5pt;
+                   height:125.5pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image037.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=143 height=167 src="images/image038.gif" v:shapes="image12.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                  0cm;line-height:150%'><a name="_heading=h.1v1yuxt"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                  color:windowtext'>4.2.2<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Polynomial
+                      Encoding<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>It searches for 3 different types of
+                    trends in the feature, based on which it creates contrast encodings. It fits a
+                    regression line using mean, quadratic parabola, and a cubic term to produce
+                    linear, quadratic, and cubic encodings. If the ordinal feature has N number of
+                    categories, polynomial encodings produce N-1 polynomial encodings. Below is a
+                    snapshot of polynomial encoded features for &nbsp;income&nbsp;.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image35.png" o:spid="_x0000_i1099" type="#_x0000_t75" style='width:450.5pt;
+                   height:141pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image039.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=601 height=188 src="images/image040.gif" v:shapes="image35.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                  0cm;line-height:150%'><a name="_heading=h.4f1mdlm"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                  color:windowtext'>4.2.3<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Backward
+                      Difference Encoding<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>In this method, the mean of the
+                    dependent variable for one level of the categorical variable is compared to the
+                    mean of the dependent variable for the prior adjacent level. It produces N-1
+                    encoded features for N categories in an ordinal feature. Below is a snapshot of
+                    backward difference encoding for &nbsp;income&nbsp;.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image33.png" o:spid="_x0000_i1098" type="#_x0000_t75" style='width:488.5pt;
+                   height:125pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image041.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=651 height=167 src="images/image042.gif" v:shapes="image33.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+              </div>
             </section>
 
           </div>
         </div>
       </div>
-
-      <a href="preface-by-the-author.html" class="navigation navigation-next navigation-unique"
-        aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+      <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
     </div>
   </div>
   <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

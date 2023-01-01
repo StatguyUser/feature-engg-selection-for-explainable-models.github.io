@@ -2,40 +2,12 @@
 <html lang="" xml:lang="">
 
 <head>
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Feature Engineering & Selection for Explainable Models</title>
-  <meta name="description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Feature Engineering & Selection for Explainable Models" />
-  <meta property="og:type" content="book" />
-
-  <meta property="og:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Feature Engineering & Selection for Explainable Models" />
-
-  <meta name="twitter:description"
-    content="Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable." />
-
-
-  <meta name="author" content="Christoph Molnar" />
-
-
-  <meta name="date" content="2022-12-14" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-
-
-  <link rel="next" href="preface-by-the-author.html" />
+  <title>Chapter 8.3 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+  </title>
+  <link rel="prev" href="index.html" />
+  <link rel="next" href="intro.html" />
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -139,10 +111,19 @@
       }
     }
   </style>
+
+
+
+
+
+
   <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
+
+
+
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
     <div class="book-summary">
       <nav role="navigation">
@@ -384,25 +365,154 @@
 
     <div class="book-body">
       <div class="body-inner">
+
+
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
-            <div id="header">
-              <h1 class="title">Feature Engineering & Selection for Explainable Models</h1>
-              <p>&nbsp;</p>
-              <h2 class="subtitle"><em>A Second Course for Data Scientists</em></h2>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p class="author"><em>Md Azimul Haque</em></p>
-            </div>
+
+            <section class="normal" id="section-">
+              <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
+                <h1><span class="header-section-number">Chapter 8.3:</span> Simulated Annealing</h1>
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Simulated annealing is an
+                    optimization algorithm whose objective is to find global optima. It is inspired
+                    by the process of annealing performed to toughen metals. For example, a piece
+                    of steel is repeatedly heated at extremely high temperatures and then slowly
+                    cooled. This process of heating and slow cooling helps molecules in the steel
+                    to improve and reorganize their position, thereby strengthening the steel. It
+                    is an improvement on the hill climbing algorithm, which is good at finding
+                    local optima, but performs poorly on global optima.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>The algorithm is executed for
+                    several iterations as specified by the user. The temperature for annealing is
+                    set by the user before the start of the algorithm. For the first iteration, a
+                    random subset of features is drawn and its performance is measured for the dataset.
+                    The given feature set is perturbed by randomly removing and adding new features
+                    to the feature set. We can specify the percentage of features that can be
+                    perturbed. Usually, this percentage is kept between 1 and 5. After the features
+                    are perturbed, the new perturbed features are used for evaluating the dataset.
+                    We then compare model performance between features drawn at the beginning of
+                    iteration and perturbed features. If the new subset is better than the initial
+                    subset, we replace the initial subset with the better subset. If on the other
+                    hand, the perturbed subset performs worse than the initial subset, we calculate
+                    an acceptance or rejection probability, which uses both the model metric as
+                    well as temperature. The calculated probability is compared against a random
+                    probability. For the regression problem, if the random probability is less than
+                    accept reject probability, we take the worse-performing perturbed feature set.
+                    For classification problems, if the random probability is more than accept reject
+                    probability, we take the worse-performing perturbed feature set. The new
+                    feature set thus generated is used for the next iteration, and the temperature
+                    is cooled based on a predefined alpha value. One thing to note about perturbing
+                    is that in an iteration, we can perturb more than once.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Simulated annealing tries to improve
+                    the feature set randomly generated in the first iteration. In some cases, the
+                    random feature set generated could be very close to global minima or global
+                    maxima. Hence, for the same feature set, in some cases, the extent of
+                    improvement obtained through simulated annealing could be worse in comparison
+                    to some other instances. Apart from the hyperparameters of the algorithm, the
+                    random feature set generated in the first iteration also has an impact. This is
+                    one of the limitations of simulated annealing, as it is beyond the control of
+                    the user.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>After completion of simulated
+                    annealing, we should test the resultant feature set on external test and
+                    validation data. Figure 8.3.1 below is a flowchart of the simulated annealing
+                    algorithm<sup> [1]</sup>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image59.png" o:spid="_x0000_i1073" type="#_x0000_t75" style='width:250pt;
+ height:437.5pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="images/image091.png"
+  o:title=""/>
+</v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=333 height=583 src="images/image092.gif" v:shapes="image59.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Figure 8.3.1: Simulated Annealing
+                    algorithm flowchart<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>We can use the function <span class=SpellE><span
+                        style='color:white;background:#333333'>SimulatedAnnealing</span></span>
+                    in the feature selection object </span><span class=SpellE><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;mso-bidi-font-family:
+Consolas;color:white;background:#333333'>fsObj</span></span><span lang=EN
+                    style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman"'>
+                    for performing simulated annealing. Below is how the syntax will look like.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='line-height:normal'><span class=SpellE><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;mso-bidi-font-family:
+Consolas;color:white;background:#333333'>best_columns</span></span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'> = <span
+                      class=SpellE>fsObj.SimulatedAnnealing</span>(temperature = </span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#D36363;background:#333333'>1500</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'>,<br>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; iterations = </span><span lang=EN
+                    style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#D36363;background:#333333'>25</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'>,<br>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=SpellE>n_perturb</span> =
+                  </span><span lang=EN style='font-family:Consolas;
+mso-fareast-font-family:Consolas;mso-bidi-font-family:Consolas;color:#D36363;
+background:#333333'>75</span><span lang=EN style='font-family:Consolas;
+mso-fareast-font-family:Consolas;mso-bidi-font-family:Consolas;color:white;
+background:#333333'>,<br>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span
+                      class=SpellE>run_time</span>=</span><span lang=EN style='font-family:Consolas;
+mso-fareast-font-family:Consolas;mso-bidi-font-family:Consolas;color:#D36363;
+background:#333333'>1200</span><span lang=EN style='font-family:Consolas;
+mso-fareast-font-family:Consolas;mso-bidi-font-family:Consolas;color:white;
+background:#333333'>,<br>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span
+                      class=SpellE>n_features_percent_perturb</span>=</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;mso-bidi-font-family:
+Consolas;color:#D36363;background:#333333'>1</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;mso-bidi-font-family:
+Consolas;color:white;background:#333333'>,<br>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alpha=</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#D36363;background:#333333'>0.9</span><span lang=EN style='font-family:Consolas;mso-fareast-font-family:Consolas;
+mso-bidi-font-family:Consolas;color:white;background:#333333'>)</span><span lang=EN style='font-size:12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>In this syntax example, we have set
+                    a high temperature of 1500. We have executed simulated annealing for 25
+                    iterations. Within each iteration, we have perturbed 1 percent of features. We
+                    have allowed perturbation to happen for 75 times in each iteration. Execution
+                    time limit is set for 1200 minutes. We have set alpha as 0.9.<o:p></o:p></span></p>
+              </div>
             </section>
 
           </div>
         </div>
       </div>
-
-      <a href="preface-by-the-author.html" class="navigation navigation-next navigation-unique"
-        aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+      <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
     </div>
   </div>
   <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

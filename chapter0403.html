@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4.3 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+  </title>
+  <link rel="prev" href="index.html" />
+  <link rel="next" href="intro.html" />
+  <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+  <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+  <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+  <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+  <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+  <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+  <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+  <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+  <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+  <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+  <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+  <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-110543840-1', 'https://christophm.github.io/interpretable-ml-book/', {
+      'anonymizeIp': true
+      , 'storage': 'none'
+      , 'clientId': window.localStorage.getItem('ga_clientId')
+    });
+    ga(function (tracker) {
+      window.localStorage.setItem('ga_clientId', tracker.get('clientId'));
+    });
+    ga('send', 'pageview');
+  </script>
+
+  <link rel="stylesheet" type="text/css" href="css/cookieconsent.min.css" />
+  <script src="javascript/cookieconsent.min.js"></script>
+  <script>
+    window.addEventListener("load", function () {
+      window.cookieconsent.initialise({
+        "palette": {
+          "popup": {
+            "background": "#000"
+          },
+          "button": {
+            "background": "#f1d600"
+          }
+        },
+        "position": "bottom-right",
+        "content": {
+          "message": "This website uses cookies for Google Analytics so that I know how many people are reading the book and which chapters are the most popular. The book website doesn't collect any personal data."
+        }
+      })
+    });
+  </script>
+
+  <style>
+    #cta-button-desktop:hover,
+    #cta-button-device:hover {
+      background-color: #ffc266;
+      border-color: #ffc266;
+      box-shadow: none;
+    }
+
+    #cta-button-desktop,
+    #cta-button-device {
+      color: white;
+      background-color: #ffa31a;
+      text-shadow: 1px 1px 0 #444;
+      text-decoration: none;
+      border: 2px solid #ffa31a;
+      border-radius: 10px;
+      position: fixed;
+      padding: 5px 10px;
+      z-index: 10;
+    }
+
+    #cta-button-device {
+      box-shadow: 0px 10px 10px -5px rgba(194, 180, 190, 1);
+      display: none;
+      right: 20px;
+      bottom: 20px;
+      font-size: 20px;
+    }
+
+    #cta-button-desktop {
+      box-shadow: 0px 20px 20px -10px rgba(194, 180, 190, 1);
+      display: display;
+      padding: 8px 16px;
+      right: 40px;
+      bottom: 40px;
+      font-size: 25px;
+    }
+
+    @media (max-width : 450px) {
+      #cta-button-device {
+        display: block;
+      }
+
+      #cta-button-desktop {
+        display: none;
+      }
+    }
+  </style>
+
+
+
+
+
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+    <div class="book-summary">
+      <nav role="navigation">
+
+        <ul class="summary">
+          <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i
+                class="fa fa-check"></i>Summary</a></li>
+          <li class="chapter" data-level="1" data-path="preface-by-the-author.html"><a href="foreward.html"><i
+                class="fa fa-check"></i>Foreward</a></li>
+          <li class="chapter" data-level="1" data-path="preface-by-the-author.html"><a
+              href="preface-by-the-author.html"><i class="fa fa-check"></i>Preface by the Author</a></li>
+          <li class="chapter" data-level="1" data-path="intro.html"><a href="before-we-start.html"><i
+                class="fa fa-check"></i>Before we start</a></li>
+          <li class="chapter" data-level="1"><a href="section01.html"><i class="fa fa-check"></i>Section 01:
+              Introduction</a>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter01.html"><i class="fa fa-check"></i>1: Introduction</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter0101.html"><i class="fa fa-check"></i>1.1:
+                  Terminology</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0102.html"><i class="fa fa-check"></i>1.2: Process of
+                  Training a Machine Learning Model</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0103.html"><i class="fa fa-check"></i>1.3: Preventing
+                  Overfitting</a></li>
+              <li class="chapter" data-level="2.4"><a href="chapter0104.html"><i class="fa fa-check"></i>1.4: Code
+                  Conventions</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0105.html"><i class="fa fa-check"></i>1.5: Datasets
+                  Used</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0106.html"><i class="fa fa-check"></i>1.6:
+                  References</a></li>
+            </ul>
+          </li>
+          <li class="chapter" data-level="1"><a href="section02.html"><i class="fa fa-check"></i>Section 02:
+              Feature Engineering</a>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter02.html"><i class="fa fa-check"></i>2: Domain Specific
+                  Feature Engineering </a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter02.html"><i class="fa fa-check"></i>2.1:
+                  Introduction</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0202.html"><i class="fa fa-check"></i>2.2:
+                  Domain-Specific Feature Engineering </a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0203.html"><i class="fa fa-check"></i>2.3:
+                  References</a></li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter03.html"><i class="fa fa-check"></i>3: EDA Feature
+                  Engineering </a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter03.html"><i class="fa fa-check"></i>3.1:
+                  Introduction</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0302.html"><i class="fa fa-check"></i>3.2: Car Sales
+                </a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0303.html"><i class="fa fa-check"></i>3.3: Coupon
+                  Recommendation</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0304.html"><i class="fa fa-check"></i>3.4:
+                  Conclusion</a></li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter04.html"><i class="fa fa-check"></i>4: Higher Order
+                  Feature Engineering </a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter0401.html"><i class="fa fa-check"></i>4.1:
+                  Engineering Categorical Features</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0402.html"><i class="fa fa-check"></i>4.2:
+                  Engineering Ordinal Features </a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0403.html"><i class="fa fa-check"></i>4.3:
+                  Engineering Numerical Features</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0404.html"><i class="fa fa-check"></i>4.4:
+                  Conclusion</a></li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter05.html"><i class="fa fa-check"></i>5: Interaction
+                  Effect Feature Engineering</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter0501.html"><i class="fa fa-check"></i>5.1:
+                  Interaction Plot</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0502.html"><i class="fa fa-check"></i>5.2: SHAP</a>
+              </li>
+              <li class="chapter" data-level="2.3"><a href="chapter0503.html"><i class="fa fa-check"></i>5.3: Putting
+                  Everything Together</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0504.html"><i class="fa fa-check"></i>5.4:
+                  Conclusion</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0505.html"><i class="fa fa-check"></i>5.5:
+                  References</a></li>
+            </ul>
+          </li>
+          <li class="chapter" data-level="1"><a href="section03.html"><i class="fa fa-check"></i>Section 03:
+              Feature Selection</a>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter06.html"><i class="fa fa-check"></i>6: Fundamentals of
+                  Feature Selection</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter06.html"><i class="fa fa-check"></i>6.1:
+                  Introduction</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0602.html"><i class="fa fa-check"></i>6.2: Different
+                  Feature Selection Methods</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0603.html"><i class="fa fa-check"></i>6.3: Filter
+                  Method</a></li>
+              <li class="chapter" data-level="2.4"><a href="chapter0604.html"><i class="fa fa-check"></i>6.4: Wrapper
+                  Method</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0605.html"><i class="fa fa-check"></i>6.5: Putting
+                  Everything Together</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0606.html"><i class="fa fa-check"></i>6.6:
+                  Conclusion</a></li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter07.html"><i class="fa fa-check"></i>7: Feature
+                  Selection Concerning Modeling Techniques</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter0701.html"><i class="fa fa-check"></i>7.1:
+                  Lasso, Ridge, and ElasticNet</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0702.html"><i class="fa fa-check"></i>7.2: Feature
+                  Importance of Tree Models</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0703.html"><i class="fa fa-check"></i>7.3: Boruta</a>
+              </li>
+              <li class="chapter" data-level="2.4"><a href="chapter0704.html"><i class="fa fa-check"></i>7.4: Using
+                  Tree-Based Feature Importance for Linear Model</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0705.html"><i class="fa fa-check"></i>7.5: Using
+                  Linear Model Feature Importance for Tree Models</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0706.html"><i class="fa fa-check"></i>7.6: Linear
+                  Regression</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0707.html"><i class="fa fa-check"></i>7.7: SVM</a>
+              </li>
+              <li class="chapter" data-level="2.5"><a href="chapter0708.html"><i class="fa fa-check"></i>7.8: PCA</a>
+              </li>
+              <li class="chapter" data-level="2.5"><a href="chapter0709.html"><i class="fa fa-check"></i>7.9: Putting
+                  Everything Together</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0710.html"><i class="fa fa-check"></i>7.10:
+                  Conclusion</a></li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter08.html"><i class="fa fa-check"></i>8: Feature
+                  Selection Using Metaheuristic Algorithms</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter0801.html"><i class="fa fa-check"></i>8.1: Exhaustive
+                  Feature Selection</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0802.html"><i class="fa fa-check"></i>8.2: Genetic
+                  Algorithm</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0803.html"><i class="fa fa-check"></i>8.3: Simulated
+                  Annealing</a></li>
+              <li class="chapter" data-level="2.4"><a href="chapter0804.html"><i class="fa fa-check"></i>8.4: Ant Colony
+                  Optimization</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0805.html"><i class="fa fa-check"></i>8.5: Particle
+                  Swarm Optimization</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0806.html"><i class="fa fa-check"></i>8.6: Putting
+                  Everything Together</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0807.html"><i class="fa fa-check"></i>8.7:
+                  Conclusion</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0809.html"><i class="fa fa-check"></i>8.8:
+                  References</a></li>
+            </ul>
+          </li>
+          <li class="chapter" data-level="1"><a href="section04.html"><i class="fa fa-check"></i>Section 04:
+              Model Explanation</a>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter09.html"><i class="fa fa-check"></i>9: Explaining Model
+                  and Model Predictions to Layman</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter09.html"><i class="fa fa-check"></i>9.1:
+                  Introduction</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter0902.html"><i class="fa fa-check"></i>9.2:
+                  Explainable models</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter0903.html"><i class="fa fa-check"></i>9.3:
+                  Explanation Techniques</a></li>
+              <li class="chapter" data-level="2.4"><a href="chapter0904.html"><i class="fa fa-check"></i>9.4: Putting
+                  Everything Together</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0905.html"><i class="fa fa-check"></i>9.5:
+                  Conclusion</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter0906.html"><i class="fa fa-check"></i>9.6:
+                  References</a></li>
+            </ul>
+          </li>
+          <li class="chapter" data-level="1"><a href="section05.html"><i class="fa fa-check"></i>Section 05:
+              Special Chapters</a>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter10.html"><i class="fa fa-check"></i>10: Feature
+                  Engineering & Selection for Text Classification</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter10.html"><i class="fa fa-check"></i>10.1:
+                  Introduction</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter1002.html"><i class="fa fa-check"></i>10.2: Feature
+                  Construction</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter1003.html"><i class="fa fa-check"></i>10.3: Feature
+                  Selection</a></li>
+              <li class="chapter" data-level="2.4"><a href="chapter1004.html"><i class="fa fa-check"></i>10.4: Feature
+                  Extraction</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter1005.html"><i class="fa fa-check"></i>10.5: Feature
+                  Reduction</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter1006.html"><i class="fa fa-check"></i>10.6:
+                  Conclusion</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter1007.html"><i class="fa fa-check"></i>10.7:
+                  References</a></li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2"><a href="chapter11.html"><i class="fa fa-check"></i>11: Things That Can
+                  Give Additional Improvement</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="chapter" data-level="2.1"><a href="chapter11.html"><i class="fa fa-check"></i>11.1:
+                  Introduction</a></li>
+              <li class="chapter" data-level="2.2"><a href="chapter1102.html"><i class="fa fa-check"></i>11.2:
+                  Hyperparameter Tuning</a></li>
+              <li class="chapter" data-level="2.3"><a href="chapter1103.html"><i class="fa fa-check"></i>11.3: Ensemble
+                  Learning</a></li>
+              <li class="chapter" data-level="2.4"><a href="chapter1104.html"><i class="fa fa-check"></i>11.4: Signal
+                  Processing</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter1105.html"><i class="fa fa-check"></i>11.5:
+                  Conclusion</a></li>
+              <li class="chapter" data-level="2.5"><a href="chapter1106.html"><i class="fa fa-check"></i>11.6:
+                  References</a></li>
+            </ul>
+          </li>
+        </ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+              <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
+                <h1><span class="header-section-number">Chapter 4.3:</span> Engineering
+                  Numerical Features</h1>
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Values of a continuous or numeric
+                    feature exist within a range of lower and higher points. It can have unlimited
+                    values between the lowest and highest points. Some examples are prices,
+                    distance, weight, height, etc. Most of the higher order feature engineering for
+                    numerical features are transformations and are useful for linear models. Linear
+                    models expect the relationship between the feature and dependent variable as
+                    linear and residuals to have homoscedasticity. If this is not met,
+                    transformations can help.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>For classification problems, we can
+                    select all higher order numerical features, for whom F-test is significant. In
+                    the case of numerical features, for regression problems, we can rank the
+                    transformed features based on correlation with the dependent variable. We can
+                    select the higher order feature which has the highest correlation with the
+                    dependent variable. In some cases, we can also discuss why a certain higher
+                    order feature has a higher correlation than others by looking at the data
+                    distribution in the original feature. This principle is applicable for all types
+                    of higher order features, except for &nbsp;Binning&nbsp;, as it produces a categorical
+                    feature.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                  0cm;line-height:150%'><a name="_heading=h.19c6y18"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                  color:windowtext'>4.3.1<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Binning<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>It is the process of creating a
+                    categorical feature from a numerical feature. We can for example use quartiles
+                    0-25 percentile, 25-50 percentile, 50-75 percentile, and 75th
+                    percentile-maximum for creating bins. If a value in the original numeric
+                    feature falls under a specific quartile, we can code the value amongst the 4
+                    quartiles in the categorical feature. Similarly, we can also divide the data
+                    into percentile bins and code the categorical values. Binning helps in finding
+                    definite structure in numerical features, at the cost of removing nuances.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                  0cm;line-height:150%'><a name="_heading=h.3tbugp1"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                  color:windowtext'>4.3.2<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Square and Cube<o:p></o:p></span></b>
+                </h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Square and the cube of the original
+                    feature are polynomials. It is helpful to use polynomial features if the
+                    feature follows an inverted-U pattern. An inverted-U pattern exists when the
+                    dependent variable increases concerning an increase in the independent variable
+                    at lower values. However, at higher values of the independent variable, the
+                    dependent variable increases at decreasing rate. An example can be wage, as
+                    against age. When age increases, wage also increases. After a certain age, the
+                    wage doesn't increase and instead decreases. In other words, when the
+                    relationship between the feature and the dependent variable is not linear or
+                    when the relationship is curvilinear or quadratic, we can use polynomial
+                    features. Polynomial features are used mostly as square. Sometimes, a higher
+                    order polynomial such as a cube can also be used.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                  0cm;line-height:150%'><a name="_heading=h.28h4qwu"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                  color:windowtext'>4.3.3<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Regression
+                      Splines<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>If we are using a linear model and
+                    the evidence suggests that the relationship is nonlinear, it's better to
+                    replace the linear model with a polynomial model. However, if the number of
+                    polynomial features keeps increasing, it can lead to overfitting. In this type
+                    of situation, we can instead use regression splines. It divides data into
+                    multiple regions, known as bins, and fits linear or low-degree polynomial
+                    models for each bin. Points at which data are separated as bins are called
+                    knots. It usually uses a cubic polynomial function, within each region. Using a
+                    very high number of knots overfits the model. We should try a different number
+                    of knots to identify which one produces the best results.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                  0cm;line-height:150%'><a name="_heading=h.nmf14n"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                  color:windowtext'>4.3.4<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Square Root and
+                      Cube Root<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Square root and cube root
+                    transformation can help normalize a skewed distribution. It does so by
+                    compressing higher values and inflating lower values, resulting in lower values
+                    becoming more spread out. This is especially true when the feature has count data
+                    and follows a Poisson distribution. Square and cube root transformation could
+                    be much closer to gaussian. It can convert a non-linear relationship between 2
+                    variables into a linear relationship. However, we should be careful when
+                    applying square root and cube root transformation on features that have
+                    negative values. Square root and cube root of negative values are returned as
+                    missing values.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>For the feature '<span
+                      class=SpellE>CumulativeNumberOfRooms</span>'
+                    in the hotel booking demand dataset, the correlation of the original feature
+                    with total rooms was 0.80. After square root transformation, it marginally
+                    improved to 0.83. The effect of the transformation can be understood better
+                    with the help of figure 4.3.4 below.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image18.png" o:spid="_x0000_i1097" type="#_x0000_t75" style='width:467.5pt;
+                   height:246pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image043.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=623 height=328 src="images/image044.jpg" v:shapes="image18.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 4.3.4: Scatter plot of <span
+                      class=SpellE>TotalRooms</span> with <span class=SpellE>CumulativeNumberOfRooms</span>
+                    and the square root of <span class=SpellE>CumulativeNumberOfRooms</span>.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>We can infer from the straight line
+                    like structure in the second plot that after square root transformation, the
+                    feature has a nearly linear relationship with the dependent variable.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                  0cm;line-height:150%'><a name="_heading=h.37m2jsg"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                  color:windowtext'>4.3.5<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Log Transformation<o:p></o:p>
+                      </span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>If the feature or the dependent
+                    variable has an outlier, log transformation can help subdue the effect of such
+                    observations. Just like square root and cube root, log transformation can
+                    compress higher values. It does so more aggressively than square root and cube
+                    root. This in turn can help models which are sensitive to outliers. For
+                    example, linear regression can help achieve normality.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>It can also help in converting a
+                    non-linear model into a linear model. For models which study the effect of
+                    percentage change in the feature on the percentage change in the dependent
+                    variable, performing log transformation before modeling can result in a linear
+                    model.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Let's consider the feature <span
+                      class=SpellE>AdjustedLeadTime_CumulativeRevenue</span> in the hotel room
+                    booking dataset. This is an interaction effect feature and a product of <span
+                      class=SpellE>AdjustedLeadTime</span> and <span class=SpellE>CumulativeRevenue</span>.
+                    Values in this feature are very high. Log transformation was able to subdue the
+                    higher values, and as a result correlation for the feature with the dependent
+                    variable '<span class=SpellE>TotalRooms</span>' increased from 0.637 to 0.775.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>We can also infer from plot 4.3.5
+                    that the log-transformed feature has a nearly linear relationship with the
+                    dependent variable.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image21.png" o:spid="_x0000_i1096" type="#_x0000_t75" style='width:455pt;
+                   height:244.5pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image045.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=607 height=326 src="images/image046.jpg" v:shapes="image21.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 4.3.5: Scatter plot of <span
+                      class=SpellE>TotalRooms</span> with </span><span class=SpellE><span lang=EN
+                      style='font-size:10.5pt;line-height:150%;font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";background:white;mso-highlight:white'>AdjustedLeadTime_CumulativeRevenue</span></span><span lang=EN style='font-size:10.5pt;line-height:150%;font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";background:white;mso-highlight:white'>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+                  "Times New Roman"'>and log of </span><span class=SpellE><span lang=EN
+                      style='font-size:10.5pt;line-height:150%;font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";background:white;mso-highlight:white'>AdjustedLeadTime_CumulativeRevenue</span></span><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+                  "Times New Roman"'>.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                  0cm;line-height:150%'><a name="_heading=h.1mrcu09"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                  color:windowtext'>4.3.6<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Standardization
+                      and Normalization<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Linear models use gradient descent
+                    for converging. For gradient descent, it helps if all the features are on the
+                    same scale. If the features are not in the same scale, we can take use 2
+                    methods to convert features in different scale of measurement, into same scale
+                    of measurement. These two methods are called as scaling and standardization.
+                    Scaling is also known as normalization, and standardization, is otherwise known
+                    as Z-score.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Normalization transforms all the
+                    values in features in the range of 0, and 1. It does so while preserving the
+                    shape of data distribution.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Unlike normalization,
+                    standardization retains useful information about outliers. For a standardized feature,
+                    its mean value becomes 0 and the standard deviation becomes 1, and hence
+                    follows a normal distribution. standardization is more applicable in linear
+                    algorithms. It is sensitive to outliers and outliers should be treated first,
+                    before proceeding with this method.<o:p></o:p></span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                  0cm;line-height:150%'><a name="_heading=h.46r0co2"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                  color:windowtext'>4.3.7<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Box-cox
+                      Transformation<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif'>
+                    <w:Sdt SdtTag="goog_rdk_0" ID="-841163834"><span style='mso-fareast-font-family:Cardo'>Box-cox
+                        transformation is done to convert non-normal distribution into a normal
+                        distribution. It relies on a parameter &#955;. If the value of &#955;=1, it
+                        means no transformation. If &#955;=0, it will result in log transformation. If
+                        &#955;=0.5, it will lead to square root transformation, whereas
+                        &#955;=&#8722;1 will give inverse transformation. It is useful for linear
+                        models which require normal distribution. One caveat of this method is that it
+                        can only be applied to features that have strictly positive values.</span></w:Sdt>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+                  "Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                  0cm;line-height:150%'><a name="_heading=h.2lwamvv"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                  color:windowtext'>4.3.8<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Yeo-Johnson
+                      Transformation<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Yeo-Johnson technique helps convert
+                    skewed data into Gaussian distribution. It can handle zero and negative values,
+                    unlike the box-cox transformation.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+                   id="image22.png" o:spid="_x0000_i1095" type="#_x0000_t75" style='width:468pt;
+                   height:241pt;visibility:visible;mso-wrap-style:square'>
+                   <v:imagedata src="images/image047.png"
+                    o:title=""/>
+                  </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=624 height=321 src="images/image048.jpg" v:shapes="image22.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Figure 4.3.8: Scatter plot of <span
+                      class=SpellE>TotalRooms</span> with </span><span class=SpellE><span lang=EN
+                      style='font-size:10.5pt;line-height:150%;font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";background:white;mso-highlight:white'>CumulativeRevenue_Substract</span></span><span lang=EN style='font-size:10.5pt;line-height:150%;font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman";background:white;mso-highlight:white'>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+                  "Times New Roman"'>and yeo-<span class=SpellE>johnson</span> transformation of </span><span
+                    class=SpellE><span lang=EN style='font-size:10.5pt;line-height:150%;font-family:
+                  "Times New Roman",serif;mso-fareast-font-family:"Times New Roman";background:
+                  white;mso-highlight:white'>CumulativeRevenue_Substract</span></span><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+                  "Times New Roman"'>.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>Let's consider the feature </span><span class=SpellE><span
+                      lang=EN style='font-size:10.5pt;line-height:150%;font-family:
+                  "Times New Roman",serif;mso-fareast-font-family:"Times New Roman";background:
+                  white;mso-highlight:white'>CumulativeRevenue_Substract</span></span><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+                  "Times New Roman"'> in the hotel room booking dataset. Yeo-Johnson
+                    transformation was able to change the relationship between the feature and
+                    dependent variable. As a result of the transformation, the correlation for the
+                    feature with the dependent variable '<span class=SpellE>TotalRooms</span>'
+                    increased from 0.625 to 0.752.<o:p></o:p></span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                  8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+                  mso-fareast-font-family:"Times New Roman"'>We can also infer from plot 4.3.8
+                    that the transformed feature has a nearly linear relationship with the
+                    dependent variable.<o:p></o:p></span></p>
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+      <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+  <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+  <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+  <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+  <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+  <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+  <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+  <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+  <script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+  <script>
+    gitbook.require(["gitbook"], function (gitbook) {
+      gitbook.start({
+        "sharing": {
+          "github": true,
+          "facebook": false,
+          "twitter": true,
+          "linkedin": true,
+          "weibo": false,
+          "instapaper": false,
+          "vk": false,
+          "whatsapp": false,
+          "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+        },
+        "fontsettings": {
+          "theme": "white",
+          "family": "sans",
+          "size": 2
+        },
+        "edit": {
+          "link": "https://github.com/christophM/interpretable-ml-book/edit/master/manuscript/index.Rmd",
+          "text": "Edit"
+        },
+        "history": {
+          "link": null,
+          "text": null
+        },
+        "view": {
+          "link": null,
+          "text": null
+        },
+        "download": null,
+        "search": {
+          "engine": "fuse",
+          "options": null
+        },
+        "toc": {
+          "collapse": "subsection"
+        }
+      });
+    });
+  </script>
+
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      var src = "true";
+      if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+      if (location.protocol !== "file:")
+        if (/^https?:/.test(src))
+          src = src.replace(/^https?:/, '');
+      script.src = src;
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+</body>
+
+</html>
