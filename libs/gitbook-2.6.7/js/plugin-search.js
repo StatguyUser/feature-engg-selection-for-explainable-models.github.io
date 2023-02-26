@@ -59,7 +59,6 @@ gitbook.require(["gitbook", "lodash", "jQuery"], function (gitbook, _, $) {
             },
             _search.opts
         ));
-        console.log(fuse)
     }
 
     // Fetch the search index
