@@ -330,6 +330,10 @@
 
     <div class="book-body">
       <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+          </h1>
+        </div>
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
 
@@ -457,6 +461,17 @@
   <script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
   
 
+   <script>
+    gitbook.require(["gitbook"], function (gitbook) {
+      gitbook.start({
+        "search": {
+          "engine": "fuse",
+          "options": null
+        },
+        "info": false
+      });
+    });
+  </script>
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>
     (function () {

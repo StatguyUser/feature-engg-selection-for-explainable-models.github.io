@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4.1 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
   </title>
-  
-  
+
+
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -23,7 +23,7 @@
   <script src="libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
   <!-- Global site tag (gtag.js) - Google Analytics -->
-   
+
 
   <link rel="stylesheet" type="text/css" href="css/cookieconsent.min.css" />
   <script src="javascript/cookieconsent.min.js"></script>
@@ -180,9 +180,9 @@
             <li class="chapter" data-level="2"><a href="chapter0404.html"><i class="fa fa-check"></i>4.4:
                 Conclusion</a></li>
           </ul>
- <li class="chapter" data-level="2"><a href="chapter05.html"><i class="fa fa-check"></i>5: Interaction
-                Effect Feature Engineering</a>
-            </li>
+          <li class="chapter" data-level="2"><a href="chapter05.html"><i class="fa fa-check"></i>5: Interaction
+              Effect Feature Engineering</a>
+          </li>
           <ul>
             <li class="chapter" data-level="2.1"><a href="chapter0501.html"><i class="fa fa-check"></i>5.1:
                 Interaction Plot</a></li>
@@ -327,6 +327,10 @@
     </div>
     <div class="book-body">
       <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+          </h1>
+        </div>
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
 
@@ -403,7 +407,8 @@ background:#333333'>=</span><span style='color:#FCC28C;background:#333333'>True<
 
                 <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
 0cm;line-height:150%'><a name="_heading=h.32hioqz"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
-color:windowtext'>4.1.2<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Label Encoding<o:p></o:p></span></b></h4>
+color:windowtext'>4.1.2<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Label Encoding<o:p></o:p></span></b>
+                </h4>
 
                 <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
 8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
@@ -458,7 +463,8 @@ mso-fareast-font-family:"Times New Roman"'>In count encoding, we replace the
 
                 <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
 8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
-mso-fareast-font-family:"Times New Roman"'>Below is the encoding for the &nbsp;<span class=SpellE>passanger</span>&nbsp; feature
+mso-fareast-font-family:"Times New Roman"'>Below is the encoding for the &nbsp;<span
+                      class=SpellE>passanger</span>&nbsp; feature
                     in the coupon recommendation data set
                     with count and percentage.<o:p></o:p></span></p>
 
@@ -524,7 +530,8 @@ mso-fareast-font-family:"Times New Roman"'>
 
                 <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
 0cm;line-height:150%'><a name="_heading=h.2grqrue"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
-color:windowtext'>4.1.5<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Target Encoding<o:p></o:p></span></b></h4>
+color:windowtext'>4.1.5<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Target Encoding<o:p></o:p></span></b>
+                </h4>
 
                 <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
 8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
@@ -543,7 +550,8 @@ mso-fareast-font-family:"Times New Roman"'>For regression problems, we can also
                     replace each category. If data in the dependent variable has outliers, we can
                     instead convert the dependent variable to a log scale and then calculate
                     desired summary statistics for each category. Below is an example of mean
-                    encoding for the coupon recommendation dataset for the &nbsp;occupation&nbsp; feature.<o:p></o:p></span></p>
+                    encoding for the coupon recommendation dataset for the &nbsp;occupation&nbsp; feature.<o:p></o:p>
+                    </span></p>
 
                 <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
 8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
@@ -608,8 +616,19 @@ mso-fareast-font-family:"Times New Roman"'>For categorical features with high
   <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
   <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
   <script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-  
 
+
+   <script>
+    gitbook.require(["gitbook"], function (gitbook) {
+      gitbook.start({
+        "search": {
+          "engine": "fuse",
+          "options": null
+        },
+        "info": false
+      });
+    });
+  </script>
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>
     (function () {

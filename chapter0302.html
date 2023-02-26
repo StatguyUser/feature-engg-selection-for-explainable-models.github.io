@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3.2 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
   </title>
-  
-  
+
+
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -23,7 +23,7 @@
   <script src="libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
   <!-- Global site tag (gtag.js) - Google Analytics -->
-   
+
 
   <link rel="stylesheet" type="text/css" href="css/cookieconsent.min.css" />
   <script src="javascript/cookieconsent.min.js"></script>
@@ -180,9 +180,9 @@
             <li class="chapter" data-level="2"><a href="chapter0404.html"><i class="fa fa-check"></i>4.4:
                 Conclusion</a></li>
           </ul>
- <li class="chapter" data-level="2"><a href="chapter05.html"><i class="fa fa-check"></i>5: Interaction
-                Effect Feature Engineering</a>
-            </li>
+          <li class="chapter" data-level="2"><a href="chapter05.html"><i class="fa fa-check"></i>5: Interaction
+              Effect Feature Engineering</a>
+          </li>
           <ul>
             <li class="chapter" data-level="2.1"><a href="chapter0501.html"><i class="fa fa-check"></i>5.1:
                 Interaction Plot</a></li>
@@ -325,9 +325,13 @@
 
       </nav>
     </div>
- 
+
     <div class="book-body">
       <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+          </h1>
+        </div>
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
 
@@ -388,9 +392,7 @@ mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><
  <v:imagedata src="images/image001.png"
   o:title=""/>
 </v:shape><![endif]-->
-                    <![if !vml]><img border=0 width=679 height=674
-                      src="images/image002.jpg"
-                      v:shapes="image77.png">
+                    <![if !vml]><img border=0 width=679 height=674 src="images/image002.jpg" v:shapes="image77.png">
                     <![endif]>
                   </span><span lang=EN style='font-family:"Times New Roman",serif;
 mso-fareast-font-family:"Times New Roman"'>
@@ -424,9 +426,7 @@ mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><
  <v:imagedata src="images/image003.png"
   o:title=""/>
 </v:shape><![endif]-->
-                    <![if !vml]><img border=0 width=624 height=623
-                      src="images/image004.jpg"
-                      v:shapes="image84.png">
+                    <![if !vml]><img border=0 width=624 height=623 src="images/image004.jpg" v:shapes="image84.png">
                     <![endif]>
                   </span><span lang=EN style='font-family:"Times New Roman",serif;
 mso-fareast-font-family:"Times New Roman"'>
@@ -489,7 +489,8 @@ mso-fareast-font-family:"Times New Roman"'>If we go by common knowledge about
 
                 <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
 8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
-mso-fareast-font-family:"Times New Roman"'>Let's start with the &nbsp;<i style='mso-bidi-font-style:normal'>owner</i>&nbsp;
+mso-fareast-font-family:"Times New Roman"'>Let's start with the &nbsp;<i
+                      style='mso-bidi-font-style:normal'>owner</i>&nbsp;
                     feature in figure 3.2.3. This
                     feature has values representing how many people have previously owned the car.
                     &nbsp;<i style='mso-bidi-font-style:normal'>First Owner</i>&nbsp; suggests that the car
@@ -512,9 +513,7 @@ mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><
  <v:imagedata src="images/image005.png"
   o:title=""/>
 </v:shape><![endif]-->
-                    <![if !vml]><img border=0 width=521 height=354
-                      src="images/image006.jpg"
-                      v:shapes="image81.png">
+                    <![if !vml]><img border=0 width=521 height=354 src="images/image006.jpg" v:shapes="image81.png">
                     <![endif]>
                   </span><span lang=EN style='font-family:"Times New Roman",serif;
 mso-fareast-font-family:"Times New Roman"'>
@@ -524,7 +523,8 @@ mso-fareast-font-family:"Times New Roman"'>
                 <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
 8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
 mso-fareast-font-family:"Times New Roman"'>Figure 3.2.3: Boxplot of
-                    selling_price for each type of &nbsp;<i style='mso-bidi-font-style:normal'>owner</i>&nbsp;<o:p></o:p></span>
+                    selling_price for each type of &nbsp;<i style='mso-bidi-font-style:normal'>owner</i>&nbsp;<o:p>
+                    </o:p></span>
                 </p>
 
                 <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
@@ -556,9 +556,7 @@ mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><
  <v:imagedata src="images/image007.png"
   o:title=""/>
 </v:shape><![endif]-->
-                    <![if !vml]><img border=0 width=410 height=579
-                      src="images/image008.jpg"
-                      v:shapes="image75.png">
+                    <![if !vml]><img border=0 width=410 height=579 src="images/image008.jpg" v:shapes="image75.png">
                     <![endif]>
                   </span><span lang=EN style='font-family:"Times New Roman",serif;
 mso-fareast-font-family:"Times New Roman"'>
@@ -610,9 +608,7 @@ mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><
  <v:imagedata src="images/image009.png"
   o:title=""/>
 </v:shape><![endif]-->
-                    <![if !vml]><img border=0 width=572 height=293
-                      src="images/image010.jpg"
-                      v:shapes="image88.png">
+                    <![if !vml]><img border=0 width=572 height=293 src="images/image010.jpg" v:shapes="image88.png">
                     <![endif]>
                   </span><span lang=EN style='font-family:"Times New Roman",serif;
 mso-fareast-font-family:"Times New Roman"'>
@@ -654,8 +650,19 @@ mso-fareast-font-family:"Times New Roman"'>Most of the cars for which
   <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
   <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
   <script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-  
 
+
+   <script>
+    gitbook.require(["gitbook"], function (gitbook) {
+      gitbook.start({
+        "search": {
+          "engine": "fuse",
+          "options": null
+        },
+        "info": false
+      });
+    });
+  </script>
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>
     (function () {

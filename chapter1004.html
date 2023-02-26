@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 10.4 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
   </title>
-  
-  
+
+
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -23,7 +23,7 @@
   <script src="libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
   <!-- Global site tag (gtag.js) - Google Analytics -->
-   
+
 
   <link rel="stylesheet" type="text/css" href="css/cookieconsent.min.css" />
   <script src="javascript/cookieconsent.min.js"></script>
@@ -180,9 +180,9 @@
             <li class="chapter" data-level="2"><a href="chapter0404.html"><i class="fa fa-check"></i>4.4:
                 Conclusion</a></li>
           </ul>
- <li class="chapter" data-level="2"><a href="chapter05.html"><i class="fa fa-check"></i>5: Interaction
-                Effect Feature Engineering</a>
-            </li>
+          <li class="chapter" data-level="2"><a href="chapter05.html"><i class="fa fa-check"></i>5: Interaction
+              Effect Feature Engineering</a>
+          </li>
           <ul>
             <li class="chapter" data-level="2.1"><a href="chapter0501.html"><i class="fa fa-check"></i>5.1:
                 Interaction Plot</a></li>
@@ -325,9 +325,13 @@
 
       </nav>
     </div>
-      <div class="book-body">
+    <div class="book-body">
       <div class="body-inner">
-        
+        <div class="book-header" role="navigation">
+          <h1>
+          </h1>
+        </div>
+
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
 
@@ -418,7 +422,8 @@ mso-fareast-font-family:"Times New Roman"'>In the above table, the corpus is
 
                 <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
 8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
-mso-fareast-font-family:"Times New Roman"'>For example, the word &nbsp;<i style='mso-bidi-font-style:normal'>lunch</i>&nbsp; is
+mso-fareast-font-family:"Times New Roman"'>For example, the word &nbsp;<i
+                      style='mso-bidi-font-style:normal'>lunch</i>&nbsp; is
                     present in corpus 3. Hence
                     count 2 is present in the corresponding cell. The word &nbsp;<i style='mso-bidi-font-style:
 normal'>am</i>&nbsp; is only present in corpus 1, for once. Hence the corresponding
@@ -428,7 +433,8 @@ normal'>am</i>&nbsp; is only present in corpus 1, for once. Hence the correspond
 
                 <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
 0cm;line-height:150%;background:white'><a name="_heading=h.thw4kt"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
-"Times New Roman";color:black;mso-color-alt:windowtext'>10.4.2<span style='mso-tab-count:1'>&nbsp; </span>Term Frequency
+"Times New Roman";color:black;mso-color-alt:windowtext'>10.4.2<span style='mso-tab-count:1'>&nbsp; </span>Term
+                      Frequency
                       Inverse Document Frequency</span></b><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
 "Times New Roman";color:windowtext;mso-color-alt:windowtext'>
                       <o:p></o:p>
@@ -449,7 +455,8 @@ mso-fareast-font-family:"Times New Roman"'>Term frequency (TF) is calculated by
                 <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
 8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
 mso-fareast-font-family:"Times New Roman"'>TF = Count of the number of times
-                    the term &nbsp;t&nbsp; is present in the corpus) / Count all the terms in the corpus.<o:p></o:p></span></p>
+                    the term &nbsp;t&nbsp; is present in the corpus) / Count all the terms in the corpus.<o:p></o:p>
+                    </span></p>
 
                 <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
 8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
@@ -617,8 +624,19 @@ mso-fareast-font-family:"Times New Roman"'>Through the dot product of input
   <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
   <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
   <script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-  
 
+
+   <script>
+    gitbook.require(["gitbook"], function (gitbook) {
+      gitbook.start({
+        "search": {
+          "engine": "fuse",
+          "options": null
+        },
+        "info": false
+      });
+    });
+  </script>
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>
     (function () {

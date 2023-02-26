@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8.6 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
   </title>
-  
-  
+
+
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -23,7 +23,7 @@
   <script src="libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
   <!-- Global site tag (gtag.js) - Google Analytics -->
-   
+
 
   <link rel="stylesheet" type="text/css" href="css/cookieconsent.min.css" />
   <script src="javascript/cookieconsent.min.js"></script>
@@ -180,9 +180,9 @@
             <li class="chapter" data-level="2"><a href="chapter0404.html"><i class="fa fa-check"></i>4.4:
                 Conclusion</a></li>
           </ul>
- <li class="chapter" data-level="2"><a href="chapter05.html"><i class="fa fa-check"></i>5: Interaction
-                Effect Feature Engineering</a>
-            </li>
+          <li class="chapter" data-level="2"><a href="chapter05.html"><i class="fa fa-check"></i>5: Interaction
+              Effect Feature Engineering</a>
+          </li>
           <ul>
             <li class="chapter" data-level="2.1"><a href="chapter0501.html"><i class="fa fa-check"></i>5.1:
                 Interaction Plot</a></li>
@@ -327,6 +327,10 @@
     </div>
     <div class="book-body">
       <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+          </h1>
+        </div>
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
 
@@ -416,13 +420,12 @@
                     across different cross-validations. Both of these factors suggest that the
                     model will generalize well on unseen data.<o:p></o:p></span></p>
 
-                    <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
-                    0cm;line-height:150%'><a name="_heading=h.36ei31r"></a><b><span lang=EN
-                    style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
-                    color:windowtext'>8.6.2<span style='mso-tab-count:1'>    </span>Hotel Booking
-                    Cancellation<o:p></o:p></span></b></h4>
-                    
-                    <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                    0cm;line-height:150%'><a name="_heading=h.36ei31r"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                    color:windowtext'>8.6.2<span style='mso-tab-count:1'> </span>Hotel Booking
+                      Cancellation<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
                     8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
                     mso-fareast-font-family:"Times New Roman"'>Xgboost and simulated annealing
                     performed the best for the hotel booking cancellation dataset. It has 0.88 as
@@ -431,27 +434,30 @@
                     low recall at 0.41 for the external test data. For simulated annealing, we used
                     35 iterations and 75 perturbs for performing feature selection. Figure 8.6.2.1
                     explains the model performance for each cross-validation.<o:p></o:p></span></p>
-                    
-                    <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
                     8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
                     mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
                      id="image32.png" o:spid="_x0000_i1066" type="#_x0000_t75" style='width:521pt;
                      height:274pt;visibility:visible;mso-wrap-style:square'>
                      <v:imagedata src="images/image105.png"
                       o:title=""/>
-                    </v:shape><![endif]--><![if !vml]><img border=0 width=695 height=365
-                    src="images/image106.jpg"
-                    v:shapes="image32.png"><![endif]></span><span lang=EN style='font-family:"Times New Roman",serif;
-                    mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></p>
-                    
-                    <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                    </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=695 height=365 src="images/image106.jpg" v:shapes="image32.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                    mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
                     8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
                     mso-fareast-font-family:"Times New Roman"'>Figure 8.6.2.1 performance of
                     Xgboost tree model with simulated annealing feature selection on
                     cross-validation test, validation, and external test data for hotel booking
                     cancellation<o:p></o:p></span></p>
-                    
-                    <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
                     8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
                     mso-fareast-font-family:"Times New Roman"'>There is another solution which is
                     the combination of Xgboost and genetic algorithm, and it performed as second
@@ -460,8 +466,8 @@
                     has a relatively better recall at 0.41 for the external test data. We used 20
                     generations for 75 chromosomes for the algorithm execution. Figure 8.6.2.2
                     explains the model performance for each cross-validation.<o:p></o:p></span></p>
-                    
-                    <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
                     8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
                     mso-fareast-font-family:"Times New Roman"'>Both the solutions, especially the
                     first solution is not perfect, but nearly useful. If the precision can be
@@ -473,37 +479,39 @@
                     identify only 40 percent of cancellations and cannot identify the rest of the
                     60 percent of the cancellations, it will still be useful for the hotel to
                     minimize loss occurring because of 40% of cancellations.<o:p></o:p></span></p>
-                    
-                    <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
                     8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
                     mso-fareast-font-family:"Times New Roman"'>Comparing the solutions obtained
                     through all 4 metaheuristics algorithms, these are the best result achieved for
                     this dataset, in comparison to other feature selection methods.<o:p></o:p></span></p>
-                    
-                    <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
                     8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
                     mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
                      id="image34.png" o:spid="_x0000_i1065" type="#_x0000_t75" style='width:516pt;
                      height:272pt;visibility:visible;mso-wrap-style:square'>
                      <v:imagedata src="images/image107.png"
                       o:title=""/>
-                    </v:shape><![endif]--><![if !vml]><img border=0 width=688 height=363
-                    src="images/image108.jpg"
-                    v:shapes="image34.png"><![endif]></span><span lang=EN style='font-family:"Times New Roman",serif;
-                    mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></p>
-                    
-                    <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                    </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=688 height=363 src="images/image108.jpg" v:shapes="image34.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                    mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
                     8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
                     mso-fareast-font-family:"Times New Roman"'>Figure 8.6.2.2 performance of
                     Xgboost tree model with genetic algorithm feature selection on cross-validation
                     test, validation, and external test data for hotel booking cancellation<o:p></o:p></span></p>
-                    
-                    <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
-                    0cm;line-height:150%'><a name="_heading=h.1ljsd9k"></a><b><span lang=EN
-                    style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
-                    color:windowtext'>8.6.3<span style='mso-tab-count:1'>    </span>Car Sales<o:p></o:p></span></b></h4>
-                    
-                    <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                    0cm;line-height:150%'><a name="_heading=h.1ljsd9k"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                    color:windowtext'>8.6.3<span style='mso-tab-count:1'> </span>Car Sales<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
                     8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
                     mso-fareast-font-family:"Times New Roman"'>We tried different combinations of
                     metaheuristics algorithms and models. The best performance was achieved by the
@@ -511,8 +519,8 @@
                     validation data, RMSE was 197495, whereas for the external test data it is
                     224034. It is better than the results reported in chapter 7. For simulated
                     annealing, we used 35 iterations with 75 perturbations.<o:p></o:p></span></p>
-                    
-                    <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
                     8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
                     mso-fareast-font-family:"Times New Roman"'>Figure 8.6.3 shows the model
                     performance across different cross-validations. RMSE is not very consistent
@@ -525,32 +533,34 @@
                     can be easier for the model to learn, finding anomalies, and treating it to
                     ensure a dataset with the least amount of noise, and finally in creating
                     features that permeate from domain knowledge.<o:p></o:p></span></p>
-                    
-                    <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
                     8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
                     mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
                      id="image39.png" o:spid="_x0000_i1064" type="#_x0000_t75" style='width:528.5pt;
                      height:272pt;visibility:visible;mso-wrap-style:square'>
                      <v:imagedata src="images/image109.png"
                       o:title=""/>
-                    </v:shape><![endif]--><![if !vml]><img border=0 width=705 height=363
-                    src="images/image110.jpg"
-                    v:shapes="image39.png"><![endif]></span><span lang=EN style='font-family:"Times New Roman",serif;
-                    mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></p>
-                    
-                    <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                    </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=705 height=363 src="images/image110.jpg" v:shapes="image39.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                    mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
                     8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
                     mso-fareast-font-family:"Times New Roman"'>Figure 8.6.3 performance of the
                     Lightgbm model with simulated annealing feature selection on cross-validation
                     test, validation, and external test data for used car price prediction.<o:p></o:p></span></p>
-                    
-                    <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
-                    0cm;line-height:150%'><a name="_heading=h.45jfvxd"></a><b><span lang=EN
-                    style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
-                    color:windowtext'>8.6.4<span style='mso-tab-count:1'>    </span>Coupon
-                    Recommendation<o:p></o:p></span></b></h4>
-                    
-                    <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+
+                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
+                    0cm;line-height:150%'><a name="_heading=h.45jfvxd"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
+                    color:windowtext'>8.6.4<span style='mso-tab-count:1'> </span>Coupon
+                      Recommendation<o:p></o:p></span></b></h4>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
                     8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
                     mso-fareast-font-family:"Times New Roman"'>For this dataset, Xgboost performed
                     the best with simulated annealing feature selection. It has 0.78 as precision
@@ -559,8 +569,8 @@
                     recall at 0.59 for the external test data. For simulated annealing, we used 35
                     iterations and 75 perturbs for performing feature selection. Figure 8.6.4
                     explains the model performance for each cross-validation.<o:p></o:p></span></p>
-                    
-                    <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
                     8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
                     mso-fareast-font-family:"Times New Roman"'>This is the best performance that
                     could be achieved for the dataset, across all feature selection methods and
@@ -570,28 +580,30 @@
                     performance across different cross-validations is very similar, and there is a
                     very small difference between the two different test datasets, we will discard
                     this model.<o:p></o:p></span></p>
-                    
-                    <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
                     8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
                     mso-fareast-font-family:"Times New Roman"'>In the absence of domain knowledge
                     for this dataset, we at this point halt any further effort to improve the model
                     for this dataset.<o:p></o:p></span></p>
-                    
-                    <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
                     8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
                     mso-fareast-font-family:"Times New Roman";mso-no-proof:yes'><!--[if gte vml 1]><v:shape
                      id="image38.png" o:spid="_x0000_i1063" type="#_x0000_t75" style='width:468.5pt;
                      height:247pt;visibility:visible;mso-wrap-style:square'>
                      <v:imagedata src="images/image111.png"
                       o:title=""/>
-                    </v:shape><![endif]--><![if !vml]><img border=0 width=625 height=329
-                    src="images/image112.jpg"
-                    v:shapes="image38.png"><![endif]></span><span lang=EN style='font-family:"Times New Roman",serif;
-                    mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></p>
-                    
-                    <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
-                    8.0pt;margin-left:0cm;line-height:150%'><a name="_heading=h.2koq656"></a><span
-                    lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
+                    </v:shape><![endif]-->
+                    <![if !vml]><img border=0 width=625 height=329 src="images/image112.jpg" v:shapes="image38.png">
+                    <![endif]>
+                  </span><span lang=EN style='font-family:"Times New Roman",serif;
+                    mso-fareast-font-family:"Times New Roman"'>
+                    <o:p></o:p>
+                  </span></p>
+
+                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+                    8.0pt;margin-left:0cm;line-height:150%'><a name="_heading=h.2koq656"></a><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
                     "Times New Roman"'>Figure 8.6.4 performance of the Xgboost model with simulated
                     annealing feature selection on cross-validation test, validation, and external
                     test data for coupon recommendation prediction.<o:p></o:p></span></p>
@@ -617,8 +629,19 @@
   <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
   <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
   <script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-  
 
+
+   <script>
+    gitbook.require(["gitbook"], function (gitbook) {
+      gitbook.start({
+        "search": {
+          "engine": "fuse",
+          "options": null
+        },
+        "info": false
+      });
+    });
+  </script>
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>
     (function () {

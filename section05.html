@@ -7,8 +7,8 @@
   <title>Section 5 Special Chapters | Feature Engineering & Selection for Explainable Models A Second Course for Data
     Scientists
   </title>
-  
-  
+
+
   <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
   <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -24,7 +24,7 @@
   <script src="libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
   <!-- Global site tag (gtag.js) - Google Analytics -->
-   
+
 
   <link rel="stylesheet" type="text/css" href="css/cookieconsent.min.css" />
   <script src="javascript/cookieconsent.min.js"></script>
@@ -182,9 +182,9 @@
             <li class="chapter" data-level="2"><a href="chapter0404.html"><i class="fa fa-check"></i>4.4:
                 Conclusion</a></li>
           </ul>
- <li class="chapter" data-level="2"><a href="chapter05.html"><i class="fa fa-check"></i>5: Interaction
-                Effect Feature Engineering</a>
-            </li>
+          <li class="chapter" data-level="2"><a href="chapter05.html"><i class="fa fa-check"></i>5: Interaction
+              Effect Feature Engineering</a>
+          </li>
           <ul>
             <li class="chapter" data-level="2.1"><a href="chapter0501.html"><i class="fa fa-check"></i>5.1:
                 Interaction Plot</a></li>
@@ -329,6 +329,10 @@
     </div>
     <div class="book-body">
       <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+          </h1>
+        </div>
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
 
@@ -336,19 +340,20 @@
               <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
                 <p>&nbsp;</p>
                 <p>&nbsp;</p>
-                <h1 style="font-size: 4em;"><span class="header-section-number">Section V:</span></br> Special Chapters</h1>
+                <h1 style="font-size: 4em;"><span class="header-section-number">Section V:</span></br> Special Chapters
+                </h1>
               </div>
           </div>
           </section>
 
         </div>
       </div>
-    <!-- </div> -->
-    <a href="chapter0906.html" class="navigation navigation-prev " aria-label="Previous page"><i
-        class="fa fa-angle-left"></i></a>
-    <a href="chapter10.html" class="navigation navigation-next " aria-label="Next page"><i
-        class="fa fa-angle-right"></i></a>
-  </div>
+      <!-- </div> -->
+      <a href="chapter0906.html" class="navigation navigation-prev " aria-label="Previous page"><i
+          class="fa fa-angle-left"></i></a>
+      <a href="chapter10.html" class="navigation navigation-next " aria-label="Next page"><i
+          class="fa fa-angle-right"></i></a>
+    </div>
   </div>
   <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
   <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
@@ -358,8 +363,19 @@
   <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
   <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
   <script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-  
 
+
+   <script>
+    gitbook.require(["gitbook"], function (gitbook) {
+      gitbook.start({
+        "search": {
+          "engine": "fuse",
+          "options": null
+        },
+        "info": false
+      });
+    });
+  </script>
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>
     (function () {
