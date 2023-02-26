@@ -59,11 +59,11 @@ gitbook.require(["gitbook", "lodash", "jQuery"], function (gitbook, _, $) {
             },
             _search.opts
         ));
+        console.log(fuse)
     }
 
     // Fetch the search index
     function fetchIndex() {
-        console.log(gitbook.state.basePath);
         return $.getJSON(gitbook.state.basePath + "/search_index.json")
             .then(loadIndex);  // [Yihui] we need to use this object later
     }
@@ -217,7 +217,6 @@ gitbook.require(["gitbook", "lodash", "jQuery"], function (gitbook, _, $) {
 
 
     gitbook.events.bind("start", function (e, config) {
-        console.log(config);
         // [Yihui] disable search
         if (config.search === false) return;
         init(config);
