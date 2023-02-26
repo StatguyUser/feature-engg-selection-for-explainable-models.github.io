@@ -217,6 +217,7 @@ gitbook.require(["gitbook", "lodash", "jQuery"], function (gitbook, _, $) {
 
 
     gitbook.events.bind("start", function (e, config) {
+        console.log(config);
         // [Yihui] disable search
         if (config.search === false) return;
         init(config);
