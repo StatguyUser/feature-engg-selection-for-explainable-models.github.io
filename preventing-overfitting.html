@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Chapter 1.5 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
+    <title>Chapter 1.3 | Feature Engineering & Selection for Explainable Models A Second Course for Data Scientists
     </title>
 
 
@@ -144,16 +144,16 @@
                         <li class="chapter" data-level="2"><a href="training-a-model.html"><i class="fa fa-check"></i>1.2:
                                 Process of
                                 Training a Machine Learning Model</a></li>
-                        <li class="chapter" data-level="2"><a href="chapter0103.html"><i class="fa fa-check"></i>1.3:
+                        <li class="chapter" data-level="2"><a href="preventing-overfitting.html"><i class="fa fa-check"></i>1.3:
                                 Preventing
                                 Overfitting</a></li>
-                        <li class="chapter" data-level="2"><a href="chapter0104.html"><i class="fa fa-check"></i>1.4:
+                        <li class="chapter" data-level="2"><a href="code-conventions.html"><i class="fa fa-check"></i>1.4:
                                 Code
                                 Conventions</a></li>
-                        <li class="chapter" data-level="2"><a href="chapter0105.html"><i class="fa fa-check"></i>1.5:
+                        <li class="chapter" data-level="2"><a href="datasets-used.html"><i class="fa fa-check"></i>1.5:
                                 Datasets
                                 Used</a></li>
-                        <li class="chapter" data-level="2"><a href="chapter0106.html"><i class="fa fa-check"></i>1.6:
+                        <li class="chapter" data-level="2"><a href="chapter1-references.html"><i class="fa fa-check"></i>1.6:
                                 References</a></li>
                     </ul>
                     </li>
@@ -384,207 +384,150 @@
           </h1>
         </div>
 
+
                 <div class="page-wrapper" tabindex="-1" role="main">
                     <div class="page-inner">
 
                         <section class="normal" id="section-">
                             <div id="forward-by-the-author" class="section level1 hasAnchor" number="1">
-                                <h1 style="font-size: 1.78em;"><span class="header-section-number">1.5:</span> Datasets
-                                    Used
+                                <h1 style="font-size: 1.78em;"><span class="header-section-number">1.3:</span>
+                                    Preventing
+                                    Overfitting
                                 </h1>
                                 <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
 8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
-mso-fareast-font-family:"Times New Roman"'>We will use 4 separate datasets
-                                        throughout this book for regression and classification problems. We will
-                                        benchmark model performance and compare the performance of different
-                                        techniques. These datasets are explained in the first four datasets from
-                                        sections 1.5.1 to 1.5.3. We will also use 2 datasets for signal processing in
-                                        chapter 11. These datasets are explained in sections 1.5.4 and 1.5.5.<o:p></o:p>
-                                        </span></p>
-
-                                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
-0cm;line-height:150%'><a name="_heading=h.44sinio"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
-color:windowtext'>1.5.1<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Hotel Booking
-                                            Demand Datasets<o:p></o:p></span></b></h4>
+mso-fareast-font-family:"Times New Roman"'>A dataset can be divided into a
+                                        training dataset, and external test data in an 80:20, 70:30, or even 60:40
+                                        ratio, depending on the availability of data. Then a further split for
+                                        validation data is created from the remaining training data. The remaining
+                                        training dataset can be divided further into train and development test data in
+                                        the same ratio. We then train our model in iterations after performing feature
+                                        engineering and feature selection. At each iteration, we train our model, and
+                                        we test its performance on the development test data and validation data. Once
+                                        we get a model of acceptable performance, we test it on external test data to
+                                        ensure it generalizes well on unseen data.<o:p></o:p></span></p>
 
                                 <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
 8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
-mso-fareast-font-family:"Times New Roman"'>This dataset<sup> [2]</sup> has
-                                        demand data for 2 hotels. Hotel H1 is a resort hotel that attracts customers
-                                        who will like to stay at the hotel for recreation purposes. Hotel H2 is a city
-                                        hotel, that people visit for business purposes.<o:p></o:p></span></p>
+mso-fareast-font-family:"Times New Roman"'>Bias-variance tradeoff tells us that
+                                        by adding additional features, overfitting can happen. Overfitting can also
+                                        happen by doing feature selection. If the model has learned our data in a way
+                                        that
+                                        gives the best predictive power for the dependent variable, it doesn't
+                                        guarantee that it will generalize well on unseen data. What it only guarantees
+                                        is that it can perform well on the development test data and validation data
+                                        for validating our model.<o:p></o:p></span></p>
 
                                 <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
 8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
-mso-fareast-font-family:"Times New Roman"'>We will use data from hotel H1 for
-                                        developing classification models to predict the likelihood of cancellation for
-                                        reservations. The objective of the classification model is to minimize losses
-                                        from cancellations and increase profitability. Many customers cancel their
-                                        reservations. This could mean a loss of revenue. If we know in advance which
-                                        reservation is going to be canceled, we can try to resell the room, even though
-                                        it is not canceled at the moment. However, it can lead to a situation when both
-                                        guests arrive at the hotel and demand the room they have reserved. To avoid
-                                        this situation, our modeling objective is to build a model which can predict
-                                        cancellation with a high degree of accuracy. In other words, 'precision' will
-                                        be our cost function. As a result, we might have a model which has a low
-                                        recall, but high precision. We are fine with such a model, as long as it can
-                                        predict cancellations with a low margin of error. Imagine a hypothetical model
-                                        that has 95 precision and 30 recall. It simply means, for all predictions it
-                                        makes for cancellations, 95 times out of 100 could actually be a cancellation.
-                                        Although the precision is not the ideal 100, 95 precision is a good score for a
-                                        statistician. A low recall of 30 means, out of all cancellations that happened,
-                                        the model could only identify 30 percent of such cancellations. For a
-                                        statistician or machine learning engineer, recall value of 30 is a less than
-                                        ideal situation. However, for business owners, this is an acceptable situation.
-                                        For a hotel revenue manager, recall value of 30 means that the hotel will be
-                                        able to reduce their cancellation losses by 30 percent. This is still better
-                                        than a situation where the hotel cannot save anything without the model. If not
-                                        all, in many cases businesses desire a workable model. A perfect model which
-                                        meets all criteria of theoretical statistics and theoretical machine learning
-                                        is not always desired by real world businesses.<o:p></o:p></span></p>
+mso-fareast-font-family:"Times New Roman"'>One way to overcome this challenge
+                                        is to test your model on multiple development test data to understand how well
+                                        it can generalize. This can be performed by cross-validation.<o:p></o:p></span>
+                                </p>
 
                                 <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
 8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
-mso-fareast-font-family:"Times New Roman"'>Data for hotel H2 will be used for
-                                        developing a regression model to predict the total occupancy for rooms for
-                                        future check-in dates. This dataset was not in the format where it could have
-                                        been used for the regression model. The author has used his domain knowledge in
-                                        the hotel industry to perform preprocessing and data cleaning to bring it into
-                                        a usable format. Hotels have different types of customers. Two major groups are
-                                        'transient' and 'group'. Transient customers often seek short hotel stays, such
-                                        as people who travel to different cities for business purposes, or other
-                                        customers who want short-term stays. We will like to develop a model to predict
-                                        total transient bookings at the check-in date level, at each booking window
-                                        between 0 to 100 days before the date of check-in for the city hotel H2.<o:p>
+mso-fareast-font-family:"Times New Roman"'>Generally, we perform 5-fold
+                                        cross-validation. We obtain the training dataset after separating external test
+                                        data and validation data. The remaining training data is divided into 5 equal
+                                        parts, and 4 parts are used for training. The remaining 1 part is for the
+                                        development test. We also use validation data for measuring model performance.
+                                        We repeat this 5 times and average the model metric across 5 samples for the
+                                        development test data and validation data. Doing this reduces the likelihood of
+                                        overfitting. In addition to cross-validation, we will test the model on
+                                        external test data to ensure that indeed the cross-validation score is
+                                        reliable.<o:p></o:p></span></p>
+
+                                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>If the average of the model metric
+                                        of 5 cross-validations is very different from the model metric of external test
+                                        data, we will need to do further probing in the dataset to check if the data
+                                        distribution is very different in 5-fold cross-validation and validation data
+                                        Vs external test data. The object of the probe should be to ensure that data
+                                        distribution is close to the real-world values in all 3 datasets. i.e. 1)
+                                        training, 2) development test data in all cross-validation samples, 3)
+                                        validation data, as well as in 4) external test data. If any anomaly is
+                                        identified, it should be subject to further investigation.<o:p></o:p></span></p>
+
+                                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>Using 5-fold cross-validation is
+                                        subject to the availability of data. Although used as a universal standard, we
+                                        should use 5-fold only when we have sufficient data. In the absence of volume,
+                                        we can increase cross-validation from 5-fold to 10-fold, to get a more robust
+                                        averaged model metric. 'More' and 'less' are subjective when it comes to
+                                        datasets.
+                                        For example, for the training of the Twitter sentiment classifier, 8000 tweets
+                                        can be considered small, if we compare it against billions of tweets present in
+                                        the Twitter database. If we still have to use such a small number of tweets
+                                        dataset for modeling, it will be wise to use 10-fold cross-validation. However,
+                                        while modeling the average lifespan of endangered species, 8000 observations
+                                        can be considered voluminous data and we can limit cross-validation to 5-fold.
+                                        <o:p></o:p></span></p>
+
+                                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>If the data has distinct strata, we
+                                        should ensure that train and test samples in cross-validation, as well as
+                                        external hold-out samples, should all be representative of all the strata. We
+                                        should proceed with stratified k-fold cross-validation in such cases. For
+                                        example, if we are developing a model for predicting the likelihood of
+                                        occurrence of a specific disease amongst people living in the US, given all the
+                                        body vitals and characteristics such as blood pressure, sugar level, heartbeat
+                                        rate, sodium level, cholesterol, daily minutes of exercise, body weight,
+                                        height, etc. Such a dataset should be collected from all the states. Overall
+                                        health and well-being might have less impact on a person based on which state
+                                        they belong to. Hence, we cannot use the state as a feature to train our model.
+                                        However, we should ensure that in the training and test samples across all
+                                        cross-validations, each state should have an equal percentage of observations.
+                                        This will ensure that model will generalize well to real-world circumstances.
+                                        <o:p></o:p></span></p>
+
+                                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>While doing train vs test split and
+                                        even for external test data, we should give due regard to the unit of data.
+                                        Most often one single observation is a unit of data. We can split such a
+                                        dataset into cross-validation samples. However, when a data observation belongs
+                                        to a distinguishable group of similar observations, as a single unit, we will
+                                        consider it as a unit of data.<o:p></o:p></span></p>
+
+                                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>For example, if we are evaluating
+                                        the effectiveness of new medicine in regulating the blood pressure of
+                                        individual patients, we will record the dosage amount and resultant blood
+                                        pressure for multiple days. In this case, data recorded for all days for a
+                                        specific patient will be a unit of data. While splitting data into the training
+                                        set, external test data, and development test data, we should ensure that a
+                                        patient's data is present entirely either in training, external test data,
+                                        validation data, or development test data. In no case, a patient's data should
+                                        be present in more than one group from training, external test data, or
+                                        development test data. If a patient's data is present in both training and test
+                                        data simultaneously, then the results could be biased, as it will lead to
+                                        over-optimistic results for the same patient, as the model is already familiar
+                                        with similar values for the patient in training data. At an aggregate level, it
+                                        can give us overoptimistic model performance. Hence, we should identify units
+                                        of data and should ensure that data from a single unit is not present in
+                                        training, test, and/or external test data simultaneously.<o:p></o:p></span></p>
+
+                                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
+8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
+mso-fareast-font-family:"Times New Roman"'>If cross-validation is done right,
+                                        feature engineering and feature selection can help us identify a smaller set of
+                                        features that give the best performance for predicting the target variable.<o:p>
                                         </o:p></span></p>
 
-                                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
-8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
-mso-fareast-font-family:"Times New Roman"'>Booking day is the day when
-                                        customers book the room for the check-in date in advance. For example, if you
-                                        want to visit Hawaii on Christmas of 2022 and you are reserving the room on the
-                                        1st of October, 2022, then October 1st, 2022 will be the booking date and
-                                        December 25th, 2022, the day of Christmas will be the check-in date. The number
-                                        of days between these two dates is called lead time.<o:p></o:p></span></p>
-
-                                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
-8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
-mso-fareast-font-family:"Times New Roman"'>Sometimes customers book rooms, but
-                                        they do not show up. We will remove these customers from our modeling problem,
-                                        as these are very negligible. ADR is the average daily rate, for any check-in
-                                        date it represents total revenue from bookings divided by total rooms sold. We
-                                        will remove records for ADR which seem outliers, as we cannot get any
-                                        explanation from the original authors about the nature of outliers.<o:p></o:p>
-                                        </span></p>
-
-                                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
-8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
-mso-fareast-font-family:"Times New Roman"'>We will use ADR between the bottom
-                                        5th percentile and the top 99.99 percentile. There were transactions for which
-                                        no value was specified for the number of adults and children as guests. These
-                                        will also be removed.<o:p></o:p></span></p>
-
-                                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
-8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
-mso-fareast-font-family:"Times New Roman"'>Some customers buy rooms for
-                                        continuous stay. If a customer is reserving on the 1st of January for staying
-                                        at the H2 hotel on the 7th and 8th of January, the lead time for the 7th of
-                                        January will be 6 days and for the 8th of January will be 7 days.<o:p></o:p>
-                                        </span></p>
-
-                                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
-8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
-mso-fareast-font-family:"Times New Roman"'>We assume that one room can
-                                        accommodate 2 adults and 2 kids in a hotel. If a transaction has 2 adults and 2
-                                        kids, it will be considered as 1 room. If a transaction has 1 adult and 2 kids,
-                                        2 adults, and 1 kid, or 1 adult and 1 kid, it will be considered as 1 room.<o:p>
-                                        </o:p></span></p>
-
-                                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
-8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
-mso-fareast-font-family:"Times New Roman"'>If there are more than 2 adults, the
-                                        number of rooms will be calculated as the number of adults divided by 2. If the
-                                        result is a decimal, it will be rounded to a higher number. For example, if
-                                        there are 3 adults, 3 divided by 2 is 1.5. We will round 1.5 to a higher
-                                        ceiling of 2. Hence concluding that 3 adults can stay in 2 rooms. Similarly,
-                                        children are also considered for calculating the number of rooms.<o:p></o:p>
-                                        </span></p>
-
-                                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
-0cm;line-height:150%'><a name="_heading=h.2jxsxqh"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
-color:windowtext'>1.5.2<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Car Sales</span></b><b><span lang=EN
-                                            style='font-family:"Times New Roman",serif;mso-fareast-font-family:
-"Times New Roman"'>
-                                            <o:p></o:p>
-                                        </span></b></h4>
-
-                                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
-8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
-mso-fareast-font-family:"Times New Roman"'>This is sourced from Kaggle<sup> [3]</sup>
-                                        and has information about the attributes of used cars and its price in India.
-                                        It will be used for developing regression models. We will use the 'Car details
-                                        v3.csv' file from version 3 of the dataset. The original file has details of
-                                        8128 cars. We have removed certain records which had inadequate data or missing
-                                        data. These are mileage features for values of 0.0kmpl or left blank. Engine,
-                                        torque, or seats are left blank. max_power as 0, 'bhp' or blank. km_driven as
-                                        1. After removing these observations, 7905 observations remain. Mileage,
-                                        engine, and max_power were converted to numeric features after removing string
-                                        suffixes.<o:p></o:p></span></p>
-
-                                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
-0cm;line-height:150%'><a name="_heading=h.z337ya"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
-color:windowtext'>1.5.3<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Coupon
-                                            Recommendation</span></b><b><span lang=EN style='font-family:"Times New Roman",serif;
-mso-fareast-font-family:"Times New Roman"'>
-                                            <o:p></o:p>
-                                        </span></b></h4>
-
-                                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
-8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
-mso-fareast-font-family:"Times New Roman"'>In-vehicle coupon recommendation
-                                        Data Set <sup>[4]</sup> studies the behavior of individuals and whether they
-                                        will accept or not accept coupons. This dataset was generated through a survey.
-                                        This survey describes different driving scenarios and asks the person if they
-                                        will accept the coupon.<o:p></o:p></span></p>
-
-                                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
-0cm;line-height:150%'><a name="_heading=h.3j2qqm3"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
-color:windowtext'>1.5.4<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Raman
-                                            Spectroscopy of Skimmed Milk Samples</span></b><b><span lang=EN
-                                            style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman"'>
-                                            <o:p></o:p>
-                                        </span></b></h4>
-
-                                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
-8.0pt;margin-left:0cm;line-height:150%'><span lang=EN style='font-family:"Times New Roman",serif;
-mso-fareast-font-family:"Times New Roman"'>This dataset <sup>[5]</sup> has a
-                                        Matrix of quantitative whole spectrum analysis of 45 spectra on 21451 on
-                                        skimmed milk samples. We will use this for discussing Raman spectra in chapter
-                                        11.<o:p></o:p></span></p>
-
-                                <h4 style='margin-top:16.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:
-0cm;line-height:150%'><a name="_heading=h.1y810tw"></a><b><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";
-color:windowtext'>1.5.5<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp; </span>Beaver Body
-                                            Temperatures</span></b><b><span lang=EN style='font-family:"Times New Roman",serif;
-mso-fareast-font-family:"Times New Roman"'>
-                                            <o:p></o:p>
-                                        </span></b></h4>
-
-                                <p class=MsoNormal style='margin-top:16.0pt;margin-right:0cm;margin-bottom:
-8.0pt;margin-left:0cm;line-height:150%'><a name="_heading=h.4i7ojhp"></a><span lang=EN style='font-family:"Times New Roman",serif;mso-fareast-font-family:
-"Times New Roman"'>This dataset has body temperature of 2 beavers <sup>[6]</sup>,
-                                        measured every 10 minutes by telemetry. This has data for less than a day for
-                                        each of the two beavers. We will discuss this in chapter 11 for filtering
-                                        method. <o:p></o:p></span></p>
                             </div>
                         </section>
 
                     </div>
                 </div>
             </div>
-            <a href="chapter0104.html" class="navigation navigation-prev " aria-label="Previous page"><i
+            <a href="training-a-model.html" class="navigation navigation-prev " aria-label="Previous page"><i
                     class="fa fa-angle-left"></i></a>
-            <a href="chapter0106.html" class="navigation navigation-next " aria-label="Next page"><i
+            <a href="code-conventions.html" class="navigation navigation-next " aria-label="Next page"><i
                     class="fa fa-angle-right"></i></a>
         </div>
     </div>
